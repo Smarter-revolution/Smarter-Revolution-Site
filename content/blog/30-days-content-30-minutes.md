@@ -49,5 +49,5 @@ The impossible math is only impossible if you're doing content the old way. With
 
 ---
 
-**Ready to see the content operations demo?** [Book Your Free Strategy Session](/strategy) and discover how to create 30 days of content in 30 minutes.
+**Ready to see the content operations demo?** [Book Your Free Strategy Session](https://smarterrevolution.com/strategy/) and discover how to create 30 days of content in 30 minutes.
 

@@ -353,7 +353,9 @@ export default function SolutionsPage() {
           </div>
           <div className="pt-4">
             <a
-              href="/strategy"
+              href="https://smarterrevolution.com/strategy/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full bg-sky-400 px-6 py-3 text-sm font-semibold text-slate-900 shadow-lg shadow-sky-500/30 transition hover:bg-sky-300"
             >
               Book Your Free Strategy Session – Find Your Starting Point

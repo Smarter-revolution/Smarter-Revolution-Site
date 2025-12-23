@@ -46,5 +46,5 @@ Your competitors are either figuring this out or falling behind. Which will you 
 
 ---
 
-**Ready to improve your AI visibility?** [Book Your Free Strategy Session](/strategy) and get your free AI visibility audit.
+**Ready to improve your AI visibility?** [Book Your Free Strategy Session](https://smarterrevolution.com/strategy/) and get your free AI visibility audit.
 

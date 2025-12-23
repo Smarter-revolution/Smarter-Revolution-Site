@@ -43,5 +43,5 @@ Your content isn't competing against other corporate content. It's competing aga
 
 ---
 
-**Want to hear the difference?** [Book Your Free Strategy Session](/strategy) and listen to our cinematic audio demo.
+**Want to hear the difference?** [Book Your Free Strategy Session](https://smarterrevolution.com/strategy/) and listen to our cinematic audio demo.
 

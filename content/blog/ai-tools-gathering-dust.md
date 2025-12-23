@@ -45,5 +45,5 @@ AI tools don't create transformation. Transformation creates AI tool adoption. S
 
 ---
 
-**Ready to transform your team's AI adoption?** [Book Your Free Strategy Session](/strategy) and get your team empowerment assessment.
+**Ready to transform your team's AI adoption?** [Book Your Free Strategy Session](https://smarterrevolution.com/strategy/) and get your team empowerment assessment.
 

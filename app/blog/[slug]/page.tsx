@@ -141,12 +141,14 @@ export default function BlogPostPage() {
               <p className="text-gray-300 mb-6">
                 Book a free strategy session and discover how AI can revolutionize your operations.
               </p>
-              <Link
-                href="/strategy"
+              <a
+                href="https://smarterrevolution.com/strategy/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-block bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors shadow-lg"
               >
                 Book Your Free Strategy Session
-              </Link>
+              </a>
             </div>
           </div>
         </article>
