@@ -35,9 +35,9 @@ The problem isn't the tools. It's the approach.
 
 ## What This Looks Like in Practice
 
-A marketing coordinator opens their task management system. They see a content assignment. Instead of starting from scratch, they click a button that activates their custom AI workflow. The AI drafts content using brand voice guidelines, required key points, and optimal format. The coordinator edits, refines, and publishes—what used to take two hours now takes twenty minutes.
+A marketing coordinator opens their task management system. They see a content assignment. Instead of starting from scratch, they click a button that activates their custom AI workflow. The AI drafts content using brand voice guidelines, required key points, and optimal format. The coordinator edits, refines, and publishes - what used to take two hours now takes twenty minutes.
 
-That's what real AI adoption looks like. Not separate tools that require extra work—integrated systems that make everything faster.
+That's what real AI adoption looks like. Not separate tools that require extra work - integrated systems that make everything faster.
 
 ## The Bottom Line
 
@@ -45,5 +45,5 @@ AI tools don't create transformation. Transformation creates AI tool adoption. S
 
 ---
 
-**Ready to transform your team's AI adoption?** [Book Your Free Strategy Session](https://smarterrevolution.com/strategy/) and get your team empowerment assessment.
+**Ready to transform your team's AI adoption?** [Book Your Free Strategy Session](/strategy) and get your team empowerment assessment.
 

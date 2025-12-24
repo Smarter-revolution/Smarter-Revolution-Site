@@ -88,14 +88,12 @@ export default function Footer() {
             </h4>
             <ul className="mt-3 space-y-2 text-sm text-gray-400">
               <li>
-                <a
-                  href="https://smarterrevolution.com/strategy/"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/strategy"
                   className="hover:text-red-600 transition-colors"
                 >
                   Free Strategy Session
-                </a>
+                </Link>
               </li>
               <li>
                 <a

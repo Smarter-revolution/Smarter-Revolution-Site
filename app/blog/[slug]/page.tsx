@@ -129,7 +129,7 @@ export default function BlogPostPage() {
             </div>
 
             <div
-              className="prose prose-lg max-w-none prose-invert prose-headings:text-white prose-p:text-gray-300 prose-strong:text-white prose-a:text-red-600 prose-a:no-underline hover:prose-a:underline prose-ul:text-gray-300 prose-ol:text-gray-300 prose-li:text-gray-300 prose-blockquote:text-gray-400 prose-blockquote:border-red-600"
+              className="prose prose-lg max-w-none"
               dangerouslySetInnerHTML={{ __html: post.contentHtml }}
             />
 
@@ -141,14 +141,12 @@ export default function BlogPostPage() {
               <p className="text-gray-300 mb-6">
                 Book a free strategy session and discover how AI can revolutionize your operations.
               </p>
-              <a
-                href="https://smarterrevolution.com/strategy/"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/strategy"
                 className="inline-block bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors shadow-lg"
               >
                 Book Your Free Strategy Session
-              </a>
+              </Link>
             </div>
           </div>
         </article>

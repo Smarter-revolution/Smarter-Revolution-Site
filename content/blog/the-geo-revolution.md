@@ -20,11 +20,11 @@ Then AI changed everything.
 
 Today, a growing percentage of business searches bypass Google entirely. Decision-makers are asking AI assistants for recommendations. They're using Perplexity for research. They're getting answers from Claude and ChatGPT before they ever type into a search bar.
 
-This is the GEO revolution—Generative Engine Optimization. And it requires a fundamentally different approach than traditional SEO.
+This is the GEO revolution: Generative Engine Optimization. And it requires a fundamentally different approach than traditional SEO.
 
 ## How GEO Differs from SEO
 
-**Content Structure:** While SEO optimizes for keyword density and backlinks, GEO optimizes for clear, authoritative answers that AI can confidently cite. It's not about ranking—it's about being recommendable.
+**Content Structure:** While SEO optimizes for keyword density and backlinks, GEO optimizes for clear, authoritative answers that AI can confidently cite. It's not about ranking - it's about being recommendable.
 
 **Authority Signals:** AI systems don't just count backlinks. They evaluate expertise signals across your entire digital presence. Consistency, accuracy, and depth matter more than link quantity.
 
@@ -46,5 +46,5 @@ Your competitors are either figuring this out or falling behind. Which will you 
 
 ---
 
-**Ready to improve your AI visibility?** [Book Your Free Strategy Session](https://smarterrevolution.com/strategy/) and get your free AI visibility audit.
+**Ready to improve your AI visibility?** [Book Your Free Strategy Session](/strategy) and get your free AI visibility audit.
 

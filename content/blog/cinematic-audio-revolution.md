@@ -19,7 +19,7 @@ Standard corporate audio features monotone narration, zero production value, fla
 
 Is it any wonder completion rates hover around 20%?
 
-Meanwhile, the podcast industry has figured out how to keep people listening for hours. True crime shows, business narratives, educational content—all using techniques that corporate communications ignore.
+Meanwhile, the podcast industry has figured out how to keep people listening for hours. True crime shows, business narratives, educational content - all using techniques that corporate communications ignore.
 
 ## The Cinematic Difference
 
@@ -43,5 +43,5 @@ Your content isn't competing against other corporate content. It's competing aga
 
 ---
 
-**Want to hear the difference?** [Book Your Free Strategy Session](https://smarterrevolution.com/strategy/) and listen to our cinematic audio demo.
+**Want to hear the difference?** [Book Your Free Strategy Session](/strategy) and listen to our cinematic audio demo.
 

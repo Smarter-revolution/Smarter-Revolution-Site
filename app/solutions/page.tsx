@@ -53,7 +53,7 @@ export default function SolutionsPage() {
           </p>
           <p className="text-slate-300">
             <strong className="font-semibold">The Solution:</strong> We
-            don&apos;t just train your team on AI—we transform how they work.
+            don&apos;t just train your team on AI - we transform how they work.
             Through our BUILD-ENABLE-OPERATE-EVOLVE framework, we
             systematically upgrade every department&apos;s capabilities,
             creating compound productivity gains that grow quarter over quarter.
@@ -66,7 +66,7 @@ export default function SolutionsPage() {
               <ul className="list-disc space-y-1 pl-5 text-sm text-slate-300">
                 <li>
                   <strong>Custom AI Training by Department:</strong> Marketing,
-                  sales, HR, operations—each gets training tailored to their
+                  sales, HR, operations: each gets training tailored to their
                   actual workflows
                 </li>
                 <li>
@@ -130,7 +130,7 @@ export default function SolutionsPage() {
             <strong className="font-semibold">The Solution:</strong> Story
             Institute transforms corporate content into cinematic experiences.
             We&apos;re not talking about &quot;better production
-            values&quot;—we&apos;re talking about content that competes with
+            values&quot; - we&apos;re talking about content that competes with
             Netflix for attention. Audio that employees choose over podcasts.
             Videos that spread without paid promotion.
           </p>
@@ -203,7 +203,7 @@ export default function SolutionsPage() {
           <p className="text-slate-300">
             <strong className="font-semibold">The Solution:</strong> We design
             intelligent automation that runs 24/7, freeing your people to do the
-            work only humans can do. Not just simple automations—sophisticated
+            work only humans can do. Not just simple automations: sophisticated
             AI agents that think, adapt, and improve over time.
           </p>
           <div className="grid gap-4 md:grid-cols-2">
@@ -265,8 +265,7 @@ export default function SolutionsPage() {
             of buyers.
           </p>
           <p className="text-slate-300">
-            <strong className="font-semibold">The Solution:</strong> GEO—
-            Generative Engine Optimization—is the new SEO. We optimize your
+            <strong className="font-semibold">The Solution:</strong> GEO (Generative Engine Optimization) is the new SEO. We optimize your
             entire digital presence to ensure AI systems understand who you are,
             what you do, and why you&apos;re the best choice in your industry.
           </p>
@@ -353,9 +352,7 @@ export default function SolutionsPage() {
           </div>
           <div className="pt-4">
             <a
-              href="https://smarterrevolution.com/strategy/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/strategy"
               className="inline-flex items-center justify-center rounded-full bg-sky-400 px-6 py-3 text-sm font-semibold text-slate-900 shadow-lg shadow-sky-500/30 transition hover:bg-sky-300"
             >
               Book Your Free Strategy Session – Find Your Starting Point

@@ -52,7 +52,7 @@ export default function Team() {
                 Over three decades, Wolf has navigated every digital transformation: the dot-com boom, the rise of search, social media's explosion, mobile-first design, and now artificial intelligence. He's founded multiple ventures, including a digital marketing agency that evolved through every technological revolution, and even ventured into custom home construction in South Florida.
               </p>
               <p>
-                But it's his foundation in healthcare that sets Wolf apart. As a physical therapist at the Hospital for People with Disabilities in Berlin, Germany (1988-1990), Wolf learned to see systems holistically—developing personalized treatment plans, collaborating across disciplines, and focusing on building patient capability rather than creating dependency. This "wellness approach" now informs how Smarter Revolution approaches business transformation.
+                But it's his foundation in healthcare that sets Wolf apart. As a physical therapist at the Hospital for People with Disabilities in Berlin, Germany (1988-1990), Wolf learned to see systems holistically: developing personalized treatment plans, collaborating across disciplines, and focusing on building patient capability rather than creating dependency. This "wellness approach" now informs how Smarter Revolution approaches business transformation.
               </p>
             </div>
 
@@ -95,13 +95,13 @@ export default function Team() {
                 Mark's career launched in 1995 at IBM, where he cut his teeth as a sales specialist competing head-to-head with industry giants like Compaq. His talent for understanding customer needs and closing deals quickly earned him promotion to IBM's business partner channel, where he mastered the art of strategic partnerships.
               </p>
               <p>
-                But the structured corporate environment couldn't contain Mark's entrepreneurial drive. The dot-com boom called, and Mark answered—joining NQL in Santa Ana, California, where he managed high-profile OEM engagements and navigated the volatile world of tech startups. The dot-com crash, while challenging, proved to be his greatest teacher in resilience and adaptability.
+                But the structured corporate environment couldn't contain Mark's entrepreneurial drive. The dot-com boom called, and Mark answered, joining NQL in Santa Ana, California, where he managed high-profile OEM engagements and navigated the volatile world of tech startups. The dot-com crash, while challenging, proved to be his greatest teacher in resilience and adaptability.
               </p>
               <p>
                 Mark's defining achievement came with P1 Technologies, a company he co-founded and built from startup to a multi-million dollar acquisition. Along the way, he pioneered distributed teams across multiple countries, developed CRM implementations that transformed sales processes, and created systems that scaled.
               </p>
               <p>
-                Today, Mark brings that same strategic thinking to Smarter Revolution. His experience building and selling companies gives him unique insight into what mid-market businesses actually need—not just tools, but transformation strategies that drive measurable results.
+                Today, Mark brings that same strategic thinking to Smarter Revolution. His experience building and selling companies gives him unique insight into what mid-market businesses actually need: not just tools, but transformation strategies that drive measurable results.
               </p>
             </div>
 
@@ -136,7 +136,7 @@ export default function Team() {
             <h3 className="text-2xl font-bold mb-4 text-white">The Engine Behind the Revolution</h3>
             <div className="text-gray-300 leading-relaxed space-y-4">
               <p>
-                Faizan serves as the operational backbone of Smarter Revolution, ensuring that strategic vision translates into flawless execution. While the founders architect transformation strategies, Faizan makes them real—managing implementations, coordinating projects, and keeping every moving part synchronized.
+                Faizan serves as the operational backbone of Smarter Revolution, ensuring that strategic vision translates into flawless execution. While the founders architect transformation strategies, Faizan makes them real: managing implementations, coordinating projects, and keeping every moving part synchronized.
               </p>
               <p>
                 In a company dedicated to AI automation, Faizan embodies the human element that makes technology work. He bridges the gap between high-level strategy and day-to-day delivery, ensuring clients receive not just plans, but results.
