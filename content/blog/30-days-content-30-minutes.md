@@ -4,7 +4,7 @@ description: "It sounds like marketing hype, but AI-powered content operations a
 pubDate: 2024-02-05
 author: "Emily Johnson"
 tags: ["Content Strategy", "Team Empowerment"]
-image: "/images/blog/30-days-content-30-minutes.jpg"
+image: "/images/blog/30-days-content-30-minutes.png"
 imageAlt: "30 Days of Content in 30 Minutes - AI Content Operations"
 featured: false
 category: "content-strategy"

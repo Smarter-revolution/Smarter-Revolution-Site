@@ -4,7 +4,8 @@ description: "Most companies buy AI tools and never use them effectively. Here's
 pubDate: 2024-01-22
 author: "Wolf Krammel"
 tags: ["Team Empowerment", "AI Transformation"]
-image: "/images/blog/ai-tools.jpg"
+image: "/images/blog/ai-tools-gathering-dust.png"
+imageAlt: "Why Your AI Tools Are Gathering Dust (And How to Fix It)"
 ---
 
 You bought the enterprise AI subscription. You sent the team to training. You shared the best practice guides. And six months later, most of your people are still doing things the old way. Sound familiar?

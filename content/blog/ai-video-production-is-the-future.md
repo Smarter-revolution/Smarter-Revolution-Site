@@ -4,7 +4,7 @@ description: "A practical look at why AI-driven video creation will dominate mar
 pubDate: 2024-12-19
 author: "Wolf Krammel"
 tags: ["AI", "Video Production", "Marketing", "Automation"]
-image: "/images/blog/ai-video-production-is-the-future.jpg"
+image: "/images/blog/ai-video-production-is-the-future.png"
 imageAlt: "AI Video Production Is the Future - The Next Decade of Content Creation"
 featured: true
 category: "industry-trends"
