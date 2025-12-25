@@ -118,11 +118,11 @@ export default function Team() {
           </div>
         </section>
 
-        {/* Faizan */}
+        {/* SuperHero */}
         <section className="mb-16 bg-gray-900 border-2 border-red-600 rounded-lg p-8 md:p-12">
           <div className="mb-6">
             <h2 className="text-4xl font-bold mb-2 text-white">
-              <span className="text-red-600">Faizan</span>
+              <span className="text-red-600">SuperHero</span>
             </h2>
             <p className="text-xl text-red-600 mb-4">
               Operations Manager
@@ -136,10 +136,10 @@ export default function Team() {
             <h3 className="text-2xl font-bold mb-4 text-white">The Engine Behind the Revolution</h3>
             <div className="text-gray-300 leading-relaxed space-y-4">
               <p>
-                Faizan serves as the operational backbone of Smarter Revolution, ensuring that strategic vision translates into flawless execution. While the founders architect transformation strategies, Faizan makes them real: managing implementations, coordinating projects, and keeping every moving part synchronized.
+                SuperHero serves as the operational backbone of Smarter Revolution, ensuring that strategic vision translates into flawless execution. While the founders architect transformation strategies, SuperHero makes them real: managing implementations, coordinating projects, and keeping every moving part synchronized.
               </p>
               <p>
-                In a company dedicated to AI automation, Faizan embodies the human element that makes technology work. He bridges the gap between high-level strategy and day-to-day delivery, ensuring clients receive not just plans, but results.
+                In a company dedicated to AI automation, SuperHero embodies the human element that makes technology work. He bridges the gap between high-level strategy and day-to-day delivery, ensuring clients receive not just plans, but results.
               </p>
             </div>
 
