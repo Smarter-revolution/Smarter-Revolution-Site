@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function SolutionsPage() {
   return (
-    <div className="min-h-screen bg-transparent py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-black py-12 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl space-y-12">
         {/* Hero */}
         <section className="space-y-4 text-center">

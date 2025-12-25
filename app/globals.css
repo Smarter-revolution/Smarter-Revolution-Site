@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ffffff;
 }
 
 @theme inline {
@@ -14,14 +14,19 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
+    --foreground: #ffffff;
   }
 }
 
+html {
+  background-color: #000000;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: #000000 !important;
+  background: #000000 !important;
+  color: #ffffff;
   font-family: Arial, Helvetica, sans-serif;
   /* Prevent horizontal scrolling on mobile */
   overflow-x: hidden;
@@ -32,6 +37,7 @@ body {
 html {
   overflow-x: hidden;
   width: 100%;
+  background-color: #000000;
 }
 
 /* Mobile-first responsive typography */
@@ -113,6 +119,24 @@ select {
   max-width: 100%;
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+/* Ensure all page containers have black background by default */
+main > div,
+main > section {
+  background-color: #000000;
+}
+
+/* Override any white backgrounds on mobile */
+@media (max-width: 768px) {
+  body,
+  html,
+  main,
+  main > div,
+  main > section {
+    background-color: #000000 !important;
+    background: #000000 !important;
+  }
 }
 
 /* Prose typography styles for blog content */
