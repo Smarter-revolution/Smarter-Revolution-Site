@@ -109,17 +109,20 @@ select {
   overflow-wrap: break-word;
 }
 
-/* Ensure containers don't overflow */
-.container,
-.max-w-7xl,
-.max-w-6xl,
-.max-w-5xl,
-.max-w-4xl,
-.max-w-3xl {
-  max-width: 100%;
-  padding-left: 1rem;
-  padding-right: 1rem;
+/* Ensure containers have proper padding on mobile only */
+@media (max-width: 768px) {
+  .container,
+  .max-w-7xl,
+  .max-w-6xl,
+  .max-w-5xl,
+  .max-w-4xl,
+  .max-w-3xl {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
+
+/* Ensure max-width containers work properly on desktop - Tailwind handles this by default */
 
 /* Ensure all page containers have black background by default */
 main > div,
