@@ -3,11 +3,11 @@ export default function Team() {
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-black">
       <div className="max-w-6xl mx-auto">
         {/* Hero Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-white">
+        <div className="text-center mb-12 md:mb-16 px-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">
             The Architects Behind the <span className="text-red-600">Revolution</span>
           </h1>
-          <p className="text-xl text-gray-300">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300">
             Three decades of digital evolution. One mission: empowering businesses through AI.
           </p>
         </div>
@@ -15,13 +15,13 @@ export default function Team() {
         {/* Wolf Krammel */}
         <section className="mb-16 bg-gray-900 border-2 border-red-600 rounded-lg p-8 md:p-12">
           <div className="mb-6">
-            <h2 className="text-4xl font-bold mb-2 text-white">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-white">
               Wolf <span className="text-red-600">Krammel</span>
             </h2>
-            <p className="text-xl text-red-600 mb-4">
+            <p className="text-lg sm:text-xl text-red-600 mb-4">
               Co-Founder & AI Strategist
             </p>
-            <p className="text-lg text-gray-300 mb-4">
+            <p className="text-base sm:text-lg text-gray-300 mb-4">
               AI Automation Pioneer | Digital Transformation Strategist
             </p>
             <div className="flex flex-wrap gap-4 text-gray-400 text-sm">
@@ -72,7 +72,7 @@ export default function Team() {
         {/* Mark Alouf */}
         <section className="mb-16 bg-gray-900 border-2 border-red-600 rounded-lg p-8 md:p-12">
           <div className="mb-6">
-            <h2 className="text-4xl font-bold mb-2 text-white">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-white">
               Mark <span className="text-red-600">Alouf</span>
             </h2>
             <p className="text-xl text-red-600 mb-4">
@@ -121,7 +121,7 @@ export default function Team() {
         {/* SuperHero */}
         <section className="mb-16 bg-gray-900 border-2 border-red-600 rounded-lg p-8 md:p-12">
           <div className="mb-6">
-            <h2 className="text-4xl font-bold mb-2 text-white">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-white">
               <span className="text-red-600">SuperHero</span>
             </h2>
             <p className="text-xl text-red-600 mb-4">

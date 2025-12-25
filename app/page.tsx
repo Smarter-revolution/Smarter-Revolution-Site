@@ -8,24 +8,24 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative bg-gradient-to-b from-black via-gray-900 to-black py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6">
             <span className="text-white">Transform Your Business with</span>
             <br />
             <span className="text-red-600">AI-Powered Marketing</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto px-4">
             We leverage cutting-edge artificial intelligence to revolutionize your digital marketing strategy and drive unprecedented growth.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
-              className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-colors shadow-lg text-lg"
+              className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-colors shadow-lg text-lg min-h-[44px] flex items-center justify-center"
             >
               Get Started Today
             </Link>
             <Link
               href="/service"
-              className="border-2 border-red-600 text-red-600 px-8 py-4 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-colors text-lg"
+              className="border-2 border-red-600 text-red-600 px-8 py-4 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-colors text-lg min-h-[44px] flex items-center justify-center"
             >
               Our Services
             </Link>
@@ -36,7 +36,7 @@ export default function Home() {
       {/* Features Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12 text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-white px-4">
             Why Choose <span className="text-red-600">AI Marketing Pro</span>?
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -68,22 +68,22 @@ export default function Home() {
       {/* Stats Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
             <div>
-              <div className="text-5xl font-bold text-red-600 mb-2">500+</div>
-              <div className="text-gray-300">Clients Served</div>
+              <div className="text-3xl md:text-5xl font-bold text-red-600 mb-2">500+</div>
+              <div className="text-sm md:text-base text-gray-300">Clients Served</div>
             </div>
             <div>
-              <div className="text-5xl font-bold text-red-600 mb-2">98%</div>
-              <div className="text-gray-300">Client Satisfaction</div>
+              <div className="text-3xl md:text-5xl font-bold text-red-600 mb-2">98%</div>
+              <div className="text-sm md:text-base text-gray-300">Client Satisfaction</div>
             </div>
             <div>
-              <div className="text-5xl font-bold text-red-600 mb-2">250%</div>
-              <div className="text-gray-300">Average ROI Increase</div>
+              <div className="text-3xl md:text-5xl font-bold text-red-600 mb-2">250%</div>
+              <div className="text-sm md:text-base text-gray-300">Average ROI Increase</div>
             </div>
             <div>
-              <div className="text-5xl font-bold text-red-600 mb-2">24/7</div>
-              <div className="text-gray-300">AI Monitoring</div>
+              <div className="text-3xl md:text-5xl font-bold text-red-600 mb-2">24/7</div>
+              <div className="text-sm md:text-base text-gray-300">AI Monitoring</div>
             </div>
           </div>
         </div>
@@ -92,15 +92,15 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6 text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-white px-4">
             Ready to <span className="text-red-600">Transform</span> Your Marketing?
           </h2>
-          <p className="text-xl text-gray-300 mb-8">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-8 px-4">
             Join hundreds of successful businesses that have revolutionized their marketing with AI technology.
           </p>
           <Link
             href="/contact"
-            className="inline-block bg-red-600 text-white px-10 py-4 rounded-lg font-semibold hover:bg-red-700 transition-colors shadow-lg text-lg"
+            className="inline-block bg-red-600 text-white px-10 py-4 rounded-lg font-semibold hover:bg-red-700 transition-colors shadow-lg text-lg min-h-[44px] flex items-center justify-center"
           >
             Schedule a Free Consultation
           </Link>

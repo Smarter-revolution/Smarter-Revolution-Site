@@ -3,26 +3,26 @@ export default function About() {
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold mb-4 text-white">
+        <div className="text-center mb-12 px-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">
             About <span className="text-red-600">AI Marketing Pro</span>
           </h1>
-          <p className="text-xl text-gray-300">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300">
             Pioneering the future of digital marketing with artificial intelligence
           </p>
         </div>
 
         {/* Mission Section */}
         <section className="mb-12 bg-gray-900 border-2 border-red-600 rounded-lg p-8">
-          <h2 className="text-3xl font-bold mb-4 text-red-600">Our Mission</h2>
-          <p className="text-gray-300 leading-relaxed text-lg">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-red-600">Our Mission</h2>
+          <p className="text-gray-300 leading-relaxed text-base sm:text-lg">
             At AI Marketing Pro, we believe that the future of marketing lies in the seamless integration of artificial intelligence and human creativity. Our mission is to empower businesses of all sizes to leverage cutting-edge AI technology to create more effective, efficient, and personalized marketing campaigns that drive real results.
           </p>
         </section>
 
         {/* Story Section */}
         <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-white">Our Story</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-white">Our Story</h2>
           <div className="space-y-4 text-gray-300 leading-relaxed">
             <p>
               Founded in 2020 by a team of marketing veterans and AI engineers, AI Marketing Pro emerged from a simple observation: traditional marketing methods were becoming increasingly inefficient in an ever-evolving digital landscape. We saw an opportunity to bridge the gap between innovative AI technology and practical marketing solutions.
@@ -38,7 +38,7 @@ export default function About() {
 
         {/* Values Section */}
         <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-white">Our Core Values</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-white">Our Core Values</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-gray-900 border-l-4 border-red-600 p-6">
               <h3 className="text-xl font-bold mb-2 text-red-600">Innovation First</h3>
