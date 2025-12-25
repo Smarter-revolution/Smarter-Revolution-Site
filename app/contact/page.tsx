@@ -211,8 +211,8 @@ export default function Contact() {
                 <div>
                   <h3 className="text-red-600 font-semibold mb-2">Email</h3>
                   <p className="text-gray-300">
-                    <a href="mailto:hello@smarterrevolution.com" className="hover:text-red-600 transition-colors">
-                      hello@smarterrevolution.com
+                    <a href="mailto:info@smarterrevolution.com" className="hover:text-red-600 transition-colors">
+                      info@smarterrevolution.com
                     </a>
                     <br />
                     <a href="mailto:wolf@smarterrevolution.com" className="hover:text-red-600 transition-colors">

@@ -107,10 +107,10 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:hello@smarterrevolution.com"
+                  href="mailto:info@smarterrevolution.com"
                   className="hover:text-red-600 transition-colors"
                 >
-                  hello@smarterrevolution.com
+                  info@smarterrevolution.com
                 </a>
               </li>
               <li>
