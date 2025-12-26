@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
 
           // Process the stream
           for await (const chunk of messageStream) {
-            if (chunk.type === 'content_block_delta') {
+            if (chunk.type === 'content_block_delta' && 'text' in chunk.delta) {
               const text = chunk.delta.text;
               if (text) {
                 controller.enqueue(new TextEncoder().encode(text));
