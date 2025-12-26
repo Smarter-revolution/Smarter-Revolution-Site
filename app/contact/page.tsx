@@ -48,11 +48,11 @@ export default function Contact() {
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12 px-4">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold mb-4 text-white">
             Start Your <span className="text-red-600">Revolution</span>
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-300">
+          <p className="text-xl text-gray-300">
             Whether you're ready to transform or just curious about what's possible, we're here to help.
           </p>
         </div>
@@ -78,7 +78,7 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-black border-2 border-gray-700 rounded-lg focus:border-red-600 focus:outline-none text-white min-h-[44px]"
+                    className="w-full px-4 py-2 bg-black border-2 border-gray-700 rounded-lg focus:border-red-600 focus:outline-none text-white"
                   />
                 </div>
 
@@ -93,7 +93,7 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-black border-2 border-gray-700 rounded-lg focus:border-red-600 focus:outline-none text-white min-h-[44px]"
+                    className="w-full px-4 py-2 bg-black border-2 border-gray-700 rounded-lg focus:border-red-600 focus:outline-none text-white"
                   />
                 </div>
 
@@ -108,7 +108,7 @@ export default function Contact() {
                     value={formData.company}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-black border-2 border-gray-700 rounded-lg focus:border-red-600 focus:outline-none text-white min-h-[44px]"
+                    className="w-full px-4 py-2 bg-black border-2 border-gray-700 rounded-lg focus:border-red-600 focus:outline-none text-white"
                   />
                 </div>
 
@@ -121,7 +121,7 @@ export default function Contact() {
                     name="companySize"
                     value={formData.companySize}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-black border-2 border-gray-700 rounded-lg focus:border-red-600 focus:outline-none text-white min-h-[44px]"
+                    className="w-full px-4 py-2 bg-black border-2 border-gray-700 rounded-lg focus:border-red-600 focus:outline-none text-white"
                   >
                     <option value="">Select company size</option>
                     <option value="1-50">1-50</option>
@@ -141,7 +141,7 @@ export default function Contact() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-black border-2 border-gray-700 rounded-lg focus:border-red-600 focus:outline-none text-white min-h-[44px]"
+                    className="w-full px-4 py-2 bg-black border-2 border-gray-700 rounded-lg focus:border-red-600 focus:outline-none text-white"
                   />
                 </div>
 
@@ -154,7 +154,7 @@ export default function Contact() {
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-black border-2 border-gray-700 rounded-lg focus:border-red-600 focus:outline-none text-white min-h-[44px]"
+                    className="w-full px-4 py-2 bg-black border-2 border-gray-700 rounded-lg focus:border-red-600 focus:outline-none text-white"
                   >
                     <option value="">Select an option</option>
                     <option value="empower">Team Empowerment</option>
@@ -175,7 +175,7 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className="w-full px-4 py-3 bg-black border-2 border-gray-700 rounded-lg focus:border-red-600 focus:outline-none text-white resize-none min-h-[120px]"
+                    className="w-full px-4 py-2 bg-black border-2 border-gray-700 rounded-lg focus:border-red-600 focus:outline-none text-white resize-none"
                   />
                 </div>
 
@@ -189,13 +189,13 @@ export default function Contact() {
                     name="hearAbout"
                     value={formData.hearAbout}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-black border-2 border-gray-700 rounded-lg focus:border-red-600 focus:outline-none text-white min-h-[44px]"
+                    className="w-full px-4 py-2 bg-black border-2 border-gray-700 rounded-lg focus:border-red-600 focus:outline-none text-white"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors min-h-[44px]"
+                  className="w-full bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors"
                 >
                   Send Message
                 </button>

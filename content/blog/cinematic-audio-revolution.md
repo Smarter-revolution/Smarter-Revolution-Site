@@ -4,8 +4,7 @@ description: "Why does corporate audio content have completion rates under 25%? 
 pubDate: 2024-01-29
 author: "Mark Alouf"
 tags: ["Content Strategy", "Case Studies"]
-image: "/images/blog/cinematic-audio-revolution.png"
-imageAlt: "The Cinematic Audio Revolution - Why Your Corporate Content Sounds Like a Conference Call"
+image: "/images/blog/cinematic-audio-revolution/hero.png"
 ---
 
 Your employees spend hours listening to podcasts during their commute. They binge audiobooks. They consume audio content voluntarily, enthusiastically, consistently.

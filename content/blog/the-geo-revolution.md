@@ -4,7 +4,7 @@ description: "AI search is changing how customers find businesses. Learn why GEO
 pubDate: 2024-01-15
 author: "Wolf Krammel"
 tags: ["AI Transformation", "Industry Trends"]
-image: "/images/blog/the-geo-revolution.png"
+image: "/images/blog/the-geo-revolution/hero.png"
 imageAlt: "The GEO Revolution - AI Search Optimization"
 featured: true
 category: "industry-trends"

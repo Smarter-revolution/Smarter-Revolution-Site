@@ -58,11 +58,11 @@ export default function BlogPage() {
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-black">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12 px-4">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold mb-4 text-white">
             The Revolution <span className="text-red-600">Journal</span>
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-300">
+          <p className="text-xl text-gray-300">
             Insights, strategies, and stories from the front lines of AI transformation.
           </p>
         </div>

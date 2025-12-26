@@ -3,6 +3,18 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
+/**
+ * Image Slot Map
+ * 
+ * Documents the intended image usage for this page.
+ * All images are located in: public/images/pages/about/
+ * 
+ * - hero-21x9.png → page hero (top of page)
+ * - mission-9x16.png → mission section (text + vertical image)
+ * - story-16x9.png → story / narrative section
+ * - team-1x1.png → leadership / team avatar
+ */
+
 function TeamAvatar({ src, alt, initials }: { src: string; alt: string; initials: string }) {
   const [imageError, setImageError] = useState(false);
 

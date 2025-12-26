@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
 @theme inline {
@@ -14,141 +14,21 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #000000;
-    --foreground: #ffffff;
+    --background: #0a0a0a;
+    --foreground: #ededed;
   }
-}
-
-html {
-  background-color: #000000;
 }
 
 body {
-  background-color: #000000 !important;
-  background: #000000 !important;
-  color: #ffffff;
+  background: var(--background);
+  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-  /* Prevent horizontal scrolling on mobile */
-  overflow-x: hidden;
-  width: 100%;
-}
-
-/* Ensure all containers respect viewport width */
-html {
-  overflow-x: hidden;
-  width: 100%;
-  background-color: #000000;
-}
-
-/* Mobile-first responsive typography */
-@media (max-width: 640px) {
-  body {
-    font-size: 16px;
-    line-height: 1.6;
-  }
-  
-  h1 {
-    font-size: 2rem;
-    line-height: 1.2;
-  }
-  
-  h2 {
-    font-size: 1.75rem;
-    line-height: 1.3;
-  }
-  
-  h3 {
-    font-size: 1.5rem;
-    line-height: 1.4;
-  }
-  
-  h4 {
-    font-size: 1.25rem;
-    line-height: 1.5;
-  }
-}
-
-/* Ensure images and media are responsive */
-img,
-video,
-iframe {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Ensure tap targets are at least 44px */
-button,
-a,
-input[type="button"],
-input[type="submit"],
-input[type="checkbox"],
-input[type="radio"],
-select {
-  min-height: 44px;
-  min-width: 44px;
-}
-
-/* Improve form inputs on mobile */
-@media (max-width: 640px) {
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="number"],
-  input[type="password"],
-  textarea,
-  select {
-    font-size: 16px; /* Prevents zoom on iOS */
-    width: 100%;
-    box-sizing: border-box;
-  }
-}
-
-/* Prevent text overflow */
-* {
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-/* Ensure containers have proper padding on mobile only */
-@media (max-width: 768px) {
-  .container,
-  .max-w-7xl,
-  .max-w-6xl,
-  .max-w-5xl,
-  .max-w-4xl,
-  .max-w-3xl {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
-
-/* Ensure max-width containers work properly on desktop - Tailwind handles this by default */
-
-/* Ensure all page containers have black background by default */
-main > div,
-main > section {
-  background-color: #000000;
-}
-
-/* Override any white backgrounds on mobile */
-@media (max-width: 768px) {
-  body,
-  html,
-  main,
-  main > div,
-  main > section {
-    background-color: #000000 !important;
-    background: #000000 !important;
-  }
 }
 
 /* Prose typography styles for blog content */
 .prose {
   color: rgb(209 213 219); /* gray-300 */
   max-width: 65ch;
-  width: 100%;
-  padding: 0 1rem;
-  box-sizing: border-box;
 }
 
 .prose > * + * {
@@ -189,42 +69,6 @@ main > section {
   margin-top: 1.5em;
   margin-bottom: 0.75em;
   color: white;
-}
-
-/* Mobile responsive prose typography */
-@media (max-width: 640px) {
-  .prose {
-    padding: 0 0.75rem;
-  }
-  
-  .prose h1 {
-    font-size: 1.875em;
-    margin-top: 1.5em;
-    margin-bottom: 0.75em;
-  }
-  
-  .prose h2 {
-    font-size: 1.5em;
-    margin-top: 1.5em;
-    margin-bottom: 0.75em;
-  }
-  
-  .prose h3 {
-    font-size: 1.25em;
-    margin-top: 1.25em;
-    margin-bottom: 0.5em;
-  }
-  
-  .prose h4 {
-    font-size: 1.125em;
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-  }
-  
-  .prose p {
-    font-size: 1em;
-    line-height: 1.7;
-  }
 }
 
 .prose p {

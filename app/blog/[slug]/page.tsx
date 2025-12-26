@@ -23,9 +23,11 @@ export default function BlogPostPage() {
   const params = useParams();
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     if (params.slug) {
+      setImageError(false); // Reset image error when slug changes
       fetchPost(params.slug as string);
     }
   }, [params.slug]);
@@ -43,6 +45,9 @@ export default function BlogPostPage() {
       setLoading(false);
     }
   };
+
+  // Automatically derive hero image path from slug
+  const heroImagePath = params.slug ? `/images/blog/${params.slug}/hero.png` : null;
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -90,15 +95,16 @@ export default function BlogPostPage() {
         </div>
 
         <article className="bg-gray-900 border-2 border-red-600 rounded-lg overflow-hidden">
-          {post.image && (
+          {heroImagePath && !imageError && (
             <div className="relative w-full h-96 border-b-2 border-red-600 overflow-hidden">
               <Image
-                src={post.image}
+                src={heroImagePath}
                 alt={post.imageAlt || post.title}
                 fill
                 className="object-cover"
                 priority
                 sizes="100vw"
+                onError={() => setImageError(true)}
               />
             </div>
           )}

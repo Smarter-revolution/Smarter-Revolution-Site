@@ -72,11 +72,11 @@ export default function Service() {
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12 px-4">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold mb-4 text-white">
             Our <span className="text-red-600">Services</span>
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Comprehensive AI-powered marketing solutions designed to drive growth and maximize ROI
           </p>
         </div>
@@ -107,10 +107,10 @@ export default function Service() {
 
         {/* Process Section */}
         <section className="bg-gray-900 border-2 border-red-600 rounded-lg p-8 mb-12">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-white px-4">
+          <h2 className="text-3xl font-bold mb-6 text-center text-white">
             How We <span className="text-red-600">Work</span>
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
                 1
