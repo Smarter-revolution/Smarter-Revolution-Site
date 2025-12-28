@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function Team() {
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-black">
@@ -14,106 +16,182 @@ export default function Team() {
 
         {/* Wolf Krammel */}
         <section className="mb-16 bg-gray-900 border-2 border-red-600 rounded-lg p-8 md:p-12">
-          <div className="mb-6">
-            <h2 className="text-4xl font-bold mb-2 text-white">
-              Wolf <span className="text-red-600">Krammel</span>
-            </h2>
-            <p className="text-xl text-red-600 mb-4">
-              Co-Founder & AI Strategist
-            </p>
-            <p className="text-lg text-gray-300 mb-4">
-              AI Automation Pioneer | Digital Transformation Strategist
-            </p>
-            <div className="flex flex-wrap gap-4 text-gray-400 text-sm">
-              <a href="mailto:wolf@smarterrevolution.com" className="hover:text-red-600 transition-colors">
-                wolf@smarterrevolution.com
-              </a>
-              <span>|</span>
-              <a href="tel:+12133028260" className="hover:text-red-600 transition-colors">
-                (213) 302-8260
-              </a>
-              <span>|</span>
-              <a href="https://linkedin.com/in/krammel" target="_blank" rel="noopener noreferrer" className="hover:text-red-600 transition-colors">
-                LinkedIn
-              </a>
-            </div>
-          </div>
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Left Column - Content */}
+            <div className="flex-1">
+              {/* Header with Headshot */}
+              <div className="flex flex-col md:flex-row gap-6 mb-8">
+                {/* Headshot */}
+                <div className="flex-shrink-0">
+                  <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-red-600 mx-auto md:mx-0">
+                    <Image
+                      src="/images/pages/team/wolf_krammel.png"
+                      alt="Wolf Krammel"
+                      fill
+                      className="object-cover"
+                      sizes="192px"
+                      priority
+                    />
+                  </div>
+                </div>
+                
+                {/* Header Info */}
+                <div className="flex-1">
+                  <h2 className="text-4xl font-bold mb-2 text-white">
+                    Wolf <span className="text-red-600">Krammel</span>
+                  </h2>
+                  <p className="text-xl text-red-600 mb-4">
+                    Co-Founder & AI Strategist
+                  </p>
+                  <p className="text-lg text-gray-300 mb-4">
+                    AI Automation Pioneer | Digital Transformation Strategist
+                  </p>
+                  <div className="flex flex-wrap gap-4 text-gray-400 text-sm">
+                    <a href="mailto:wolf@smarterrevolution.com" className="hover:text-red-600 transition-colors">
+                      wolf@smarterrevolution.com
+                    </a>
+                    <span>|</span>
+                    <a href="tel:+12133028260" className="hover:text-red-600 transition-colors">
+                      (213) 302-8260
+                    </a>
+                    <span>|</span>
+                    <a href="https://linkedin.com/in/krammel" target="_blank" rel="noopener noreferrer" className="hover:text-red-600 transition-colors">
+                      LinkedIn
+                    </a>
+                  </div>
+                </div>
+              </div>
 
-          <div className="prose prose-lg max-w-none">
-            <h3 className="text-2xl font-bold mb-4 text-white">The Pioneer's Journey</h3>
-            <div className="text-gray-300 leading-relaxed space-y-4">
-              <p>
-                Wolf's digital journey began in 1993 on the 34th floor of the Empire State Building, crafting websites when the web didn't even have background colors. As a self-taught developer at Ingrid Communications, he was building internet infrastructure for Fortune 500 companies before most businesses knew they needed a website.
-              </p>
-              <p className="italic text-gray-400 border-l-4 border-red-600 pl-4">
-                "I still remember a seminar attendee telling me, 'The internet is just a fad. It won't be around next year,'" Wolf recalls. "That moment taught me something important: the biggest opportunities live in the gap between what skeptics dismiss and what visionaries embrace."
-              </p>
-              <p>
-                Over three decades, Wolf has navigated every digital transformation: the dot-com boom, the rise of search, social media's explosion, mobile-first design, and now artificial intelligence. He's founded multiple ventures, including a digital marketing agency that evolved through every technological revolution, and even ventured into custom home construction in South Florida.
-              </p>
-              <p>
-                But it's his foundation in healthcare that sets Wolf apart. As a physical therapist at the Hospital for People with Disabilities in Berlin, Germany (1988-1990), Wolf learned to see systems holistically: developing personalized treatment plans, collaborating across disciplines, and focusing on building patient capability rather than creating dependency. This "wellness approach" now informs how Smarter Revolution approaches business transformation.
-              </p>
+              {/* Content */}
+              <div className="prose prose-lg max-w-none">
+                <h3 className="text-2xl font-bold mb-4 text-white">The Pioneer's Journey</h3>
+                <div className="text-gray-300 leading-relaxed space-y-4">
+                  <p>
+                    Wolf's digital journey began in 1993 on the 34th floor of the Empire State Building, crafting websites when the web didn't even have background colors. As a self-taught developer at Ingrid Communications, he was building internet infrastructure for Fortune 500 companies before most businesses knew they needed a website.
+                  </p>
+                  <p className="italic text-gray-400 border-l-4 border-red-600 pl-4">
+                    "I still remember a seminar attendee telling me, 'The internet is just a fad. It won't be around next year,'" Wolf recalls. "That moment taught me something important: the biggest opportunities live in the gap between what skeptics dismiss and what visionaries embrace."
+                  </p>
+                  <p>
+                    Over three decades, Wolf has navigated every digital transformation: the dot-com boom, the rise of search, social media's explosion, mobile-first design, and now artificial intelligence. He's founded multiple ventures, including a digital marketing agency that evolved through every technological revolution, and even ventured into custom home construction in South Florida.
+                  </p>
+                  <p>
+                    But it's his foundation in healthcare that sets Wolf apart. As a physical therapist at the Hospital for People with Disabilities in Berlin, Germany (1988-1990), Wolf learned to see systems holistically: developing personalized treatment plans, collaborating across disciplines, and focusing on building patient capability rather than creating dependency. This "wellness approach" now informs how Smarter Revolution approaches business transformation.
+                  </p>
+                </div>
+
+                <div className="mt-8">
+                  <h4 className="text-xl font-bold mb-4 text-red-600">Key Achievements:</h4>
+                  <ul className="list-disc list-inside space-y-2 text-gray-300">
+                    <li>30+ years pioneering digital transformation from early web to AI</li>
+                    <li>Published author on AI business applications and technology integration</li>
+                    <li>Developed the AI Business Accelerator framework used by SMBs nationwide</li>
+                    <li>Healthcare background bringing unique perspective to business wellness</li>
+                    <li>Cross-industry expertise spanning tech, healthcare, e-commerce, and hospitality</li>
+                  </ul>
+                </div>
+              </div>
             </div>
 
-          <div className="mt-8">
-            <h4 className="text-xl font-bold mb-4 text-red-600">Key Achievements:</h4>
-            <ul className="list-disc list-inside space-y-2 text-gray-300">
-              <li>30+ years pioneering digital transformation from early web to AI</li>
-              <li>Published author on AI business applications and technology integration</li>
-              <li>Developed the AI Business Accelerator framework used by SMBs nationwide</li>
-              <li>Healthcare background bringing unique perspective to business wellness</li>
-              <li>Cross-industry expertise spanning tech, healthcare, e-commerce, and hospitality</li>
-            </ul>
-          </div>
+            {/* Right Column - Info Image */}
+            <div className="flex-shrink-0 lg:w-80 xl:w-96 self-start">
+              <div className="relative w-full">
+                <Image
+                  src="/images/pages/team/wolf-info2.png"
+                  alt="Wolf Krammel Information"
+                  width={400}
+                  height={600}
+                  className="w-full h-auto object-contain"
+                  sizes="(max-width: 1024px) 100vw, 384px"
+                />
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Mark Alouf */}
         <section className="mb-16 bg-gray-900 border-2 border-red-600 rounded-lg p-8 md:p-12">
-          <div className="mb-6">
-            <h2 className="text-4xl font-bold mb-2 text-white">
-              Mark <span className="text-red-600">Alouf</span>
-            </h2>
-            <p className="text-xl text-red-600 mb-4">
-              Co-Founder & Business Strategist
-            </p>
-            <p className="text-lg text-gray-300 mb-4">
-              Serial Entrepreneur | Technology Business Strategist
-            </p>
-            <div className="flex flex-wrap gap-4 text-gray-400 text-sm">
-              <a href="mailto:mark@smarterrevolution.com" className="hover:text-red-600 transition-colors">
-                mark@smarterrevolution.com
-              </a>
-            </div>
-          </div>
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Left Column - Content */}
+            <div className="flex-1">
+              {/* Header with Headshot */}
+              <div className="flex flex-col md:flex-row gap-6 mb-8">
+                {/* Headshot */}
+                <div className="flex-shrink-0">
+                  <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-red-600 mx-auto md:mx-0">
+                    <Image
+                      src="/images/pages/team/mark_alouf.png"
+                      alt="Mark Alouf"
+                      fill
+                      className="object-cover"
+                      sizes="192px"
+                      priority
+                    />
+                  </div>
+                </div>
+                
+                {/* Header Info */}
+                <div className="flex-1">
+                  <h2 className="text-4xl font-bold mb-2 text-white">
+                    Mark <span className="text-red-600">Alouf</span>
+                  </h2>
+                  <p className="text-xl text-red-600 mb-4">
+                    Co-Founder & Business Strategist
+                  </p>
+                  <p className="text-lg text-gray-300 mb-4">
+                    Serial Entrepreneur | Technology Business Strategist
+                  </p>
+                  <div className="flex flex-wrap gap-4 text-gray-400 text-sm">
+                    <a href="mailto:mark@smarterrevolution.com" className="hover:text-red-600 transition-colors">
+                      mark@smarterrevolution.com
+                    </a>
+                  </div>
+                </div>
+              </div>
 
-          <div className="prose prose-lg max-w-none">
-            <h3 className="text-2xl font-bold mb-4 text-white">From IBM to Building Empires</h3>
-            <div className="text-gray-300 leading-relaxed space-y-4">
-              <p>
-                Mark's career launched in 1995 at IBM, where he cut his teeth as a sales specialist competing head-to-head with industry giants like Compaq. His talent for understanding customer needs and closing deals quickly earned him promotion to IBM's business partner channel, where he mastered the art of strategic partnerships.
-              </p>
-              <p>
-                But the structured corporate environment couldn't contain Mark's entrepreneurial drive. The dot-com boom called, and Mark answered, joining NQL in Santa Ana, California, where he managed high-profile OEM engagements and navigated the volatile world of tech startups. The dot-com crash, while challenging, proved to be his greatest teacher in resilience and adaptability.
-              </p>
-              <p>
-                Mark's defining achievement came with P1 Technologies, a company he co-founded and built from startup to a multi-million dollar acquisition. Along the way, he pioneered distributed teams across multiple countries, developed CRM implementations that transformed sales processes, and created systems that scaled.
-              </p>
-              <p>
-                Today, Mark brings that same strategic thinking to Smarter Revolution. His experience building and selling companies gives him unique insight into what mid-market businesses actually need: not just tools, but transformation strategies that drive measurable results.
-              </p>
+              {/* Content */}
+              <div className="prose prose-lg max-w-none">
+                <h3 className="text-2xl font-bold mb-4 text-white">From IBM to Building Empires</h3>
+                <div className="text-gray-300 leading-relaxed space-y-4">
+                  <p>
+                    Mark's career launched in 1995 at IBM, where he cut his teeth as a sales specialist competing head-to-head with industry giants like Compaq. His talent for understanding customer needs and closing deals quickly earned him promotion to IBM's business partner channel, where he mastered the art of strategic partnerships.
+                  </p>
+                  <p>
+                    But the structured corporate environment couldn't contain Mark's entrepreneurial drive. The dot-com boom called, and Mark answered, joining NQL in Santa Ana, California, where he managed high-profile OEM engagements and navigated the volatile world of tech startups. The dot-com crash, while challenging, proved to be his greatest teacher in resilience and adaptability.
+                  </p>
+                  <p>
+                    Mark's defining achievement came with P1 Technologies, a company he co-founded and built from startup to a multi-million dollar acquisition. Along the way, he pioneered distributed teams across multiple countries, developed CRM implementations that transformed sales processes, and created systems that scaled.
+                  </p>
+                  <p>
+                    Today, Mark brings that same strategic thinking to Smarter Revolution. His experience building and selling companies gives him unique insight into what mid-market businesses actually need: not just tools, but transformation strategies that drive measurable results.
+                  </p>
+                </div>
+
+                <div className="mt-8">
+                  <h4 className="text-xl font-bold mb-4 text-red-600">Key Achievements:</h4>
+                  <ul className="list-disc list-inside space-y-2 text-gray-300">
+                    <li>Co-founded and led P1 Technologies to successful acquisition</li>
+                    <li>Built and managed distributed teams across multiple countries</li>
+                    <li>Developed enterprise sales strategies for Fortune 500 and SMB markets</li>
+                    <li>Pioneered CRM implementation and sales process automation</li>
+                    <li>Deep expertise in podcasting, AI integration, and business development</li>
+                  </ul>
+                </div>
+              </div>
             </div>
 
-            <div className="mt-8">
-              <h4 className="text-xl font-bold mb-4 text-red-600">Key Achievements:</h4>
-              <ul className="list-disc list-inside space-y-2 text-gray-300">
-                <li>Co-founded and led P1 Technologies to successful acquisition</li>
-                <li>Built and managed distributed teams across multiple countries</li>
-                <li>Developed enterprise sales strategies for Fortune 500 and SMB markets</li>
-                <li>Pioneered CRM implementation and sales process automation</li>
-                <li>Deep expertise in podcasting, AI integration, and business development</li>
-              </ul>
+            {/* Right Column - Info Image */}
+            <div className="flex-shrink-0 lg:w-80 xl:w-96 self-start">
+              <div className="relative w-full">
+                <Image
+                  src="/images/pages/team/mark-info2.png"
+                  alt="Mark Alouf Information"
+                  width={400}
+                  height={600}
+                  className="w-full h-auto object-contain"
+                  sizes="(max-width: 1024px) 100vw, 384px"
+                />
+              </div>
             </div>
           </div>
         </section>
