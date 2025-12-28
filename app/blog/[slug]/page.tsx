@@ -94,9 +94,14 @@ export async function generateMetadata({
     ? post.image.replace(/https?:\/\/[^\/]+/, siteUrl) // Replace any domain with production domain
     : `${siteUrl}${post.image || `/images/blog/${slug}/hero.png`}`;
 
-  // Format dates properly - full ISO for OpenGraph, YYYY-MM-DD for JSON-LD
-  const publishedDateISO = formatDateToISO(post.pubDate);
-  const modifiedDateISO = formatDateToISO(post.pubDate); // Use published date if no modified date
+  // Format dates properly - Use YYYY-MM-DD for article meta tags
+  // Next.js converts openGraph.publishedTime to article:published_time, so use YYYY-MM-DD format
+  const publishedDateYYYYMMDD = String(formatDateToYYYYMMDD(post.pubDate));
+  const modifiedDateYYYYMMDD = String(formatDateToYYYYMMDD(post.pubDate));
+  
+  // For OpenGraph, we can use full ISO, but for article tags, YYYY-MM-DD is safer
+  const publishedDateISO = String(formatDateToISO(post.pubDate));
+  const modifiedDateISO = String(formatDateToISO(post.pubDate));
 
   return {
     title: `${post.title} | Smarter Revolution`,
@@ -110,8 +115,10 @@ export async function generateMetadata({
       url: canonical,
       siteName: 'Smarter Revolution',
       type: 'article',
-      publishedTime: publishedDateISO,
-      modifiedTime: modifiedDateISO,
+      // Use YYYY-MM-DD format to prevent Next.js from creating [object Object]
+      // Next.js auto-generates article:published_time from this value
+      publishedTime: publishedDateYYYYMMDD,
+      modifiedTime: modifiedDateYYYYMMDD,
       authors: [post.author],
       tags: post.tags,
       images: [
@@ -132,6 +139,15 @@ export async function generateMetadata({
     robots: {
       index: true,
       follow: true,
+    },
+    // Explicitly add article meta tags to ensure they're strings
+    // Next.js auto-generates article:published_time from openGraph.publishedTime
+    // but may convert it incorrectly, so we override it here with explicit string
+    // Note: article:tag tags are auto-generated from openGraph.tags array
+    other: {
+      'article:published_time': String(publishedDateYYYYMMDD),
+      'article:modified_time': String(modifiedDateYYYYMMDD),
+      'article:author': String(post.author),
     },
   };
 }
