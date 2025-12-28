@@ -15,8 +15,23 @@ function getAuthorJobTitle(author: string): string {
   return 'Content Creator';
 }
 
-// Helper function to format date to ISO string
+// Helper function to format date to ISO string (full format for OpenGraph)
 function formatDateToISO(dateString: string): string {
+  // Parse the date string
+  const date = new Date(dateString);
+  if (!isNaN(date.getTime())) {
+    return date.toISOString();
+  }
+  // If parsing fails, try to construct from YYYY-MM-DD format
+  if (/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+    const date = new Date(dateString + 'T00:00:00.000Z');
+    return date.toISOString();
+  }
+  return dateString;
+}
+
+// Helper function to format date to YYYY-MM-DD (for JSON-LD)
+function formatDateToYYYYMMDD(dateString: string): string {
   // If already in YYYY-MM-DD format, return as is
   if (/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
     return dateString;
@@ -72,14 +87,16 @@ export async function generateMetadata({
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://smarterrevolution.com';
+  // Always use production domain for consistency
+  const siteUrl = 'https://smarterrevolution.com';
   const canonical = `${siteUrl}/blog/${slug}`;
   const ogImage = post.image?.startsWith('http') 
-    ? post.image 
+    ? post.image.replace(/https?:\/\/[^\/]+/, siteUrl) // Replace any domain with production domain
     : `${siteUrl}${post.image || `/images/blog/${slug}/hero.png`}`;
 
-  // Format date properly
-  const publishedDate = formatDateToISO(post.pubDate);
+  // Format dates properly - full ISO for OpenGraph, YYYY-MM-DD for JSON-LD
+  const publishedDateISO = formatDateToISO(post.pubDate);
+  const modifiedDateISO = formatDateToISO(post.pubDate); // Use published date if no modified date
 
   return {
     title: `${post.title} | Smarter Revolution`,
@@ -93,7 +110,8 @@ export async function generateMetadata({
       url: canonical,
       siteName: 'Smarter Revolution',
       type: 'article',
-      publishedTime: publishedDate,
+      publishedTime: publishedDateISO,
+      modifiedTime: modifiedDateISO,
       authors: [post.author],
       tags: post.tags,
       images: [
@@ -130,12 +148,17 @@ export default async function BlogPostPage({
     return <BlogPostClient />;
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://smarterrevolution.com';
+  // Always use production domain for consistency
+  const siteUrl = 'https://smarterrevolution.com';
   const canonical = `${siteUrl}/blog/${slug}`;
   const ogImage = post.image?.startsWith('http') 
-    ? post.image 
+    ? post.image.replace(/https?:\/\/[^\/]+/, siteUrl) // Replace any domain with production domain
     : `${siteUrl}${post.image || `/images/blog/${slug}/hero.png`}`;
-  const publishedDate = formatDateToISO(post.pubDate);
+  
+  // Format dates - YYYY-MM-DD for JSON-LD
+  const publishedDateYYYYMMDD = formatDateToYYYYMMDD(post.pubDate);
+  const modifiedDateYYYYMMDD = formatDateToYYYYMMDD(post.pubDate); // Use published date if no modified date
+  
   const authorJobTitle = getAuthorJobTitle(post.author);
   const faqs = extractFAQs(post.content);
 
@@ -165,8 +188,8 @@ export default async function BlogPostPage({
         url: 'https://smarterrevolution.com/images/logo.png',
       },
     },
-    datePublished: publishedDate,
-    dateModified: publishedDate,
+    datePublished: publishedDateYYYYMMDD,
+    dateModified: modifiedDateYYYYMMDD,
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': canonical,
