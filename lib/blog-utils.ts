@@ -36,11 +36,18 @@ export function getAllBlogPosts(): BlogPost[] {
       const fileContents = fs.readFileSync(fullPath, 'utf8');
       const { data, content } = matter(fileContents);
 
+      // Ensure pubDate is always a string (gray-matter might parse it as Date)
+      const pubDate = data.pubDate 
+        ? (data.pubDate instanceof Date 
+            ? data.pubDate.toISOString().split('T')[0] 
+            : String(data.pubDate))
+        : '';
+
       return {
         slug,
         title: data.title || '',
         description: data.description || '',
-        pubDate: data.pubDate || '',
+        pubDate,
         author: data.author || '',
         tags: data.tags || [],
         image: data.image || '',
@@ -77,11 +84,18 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
     .process(content);
   const contentHtml = String(file);
 
+  // Ensure pubDate is always a string (gray-matter might parse it as Date)
+  const pubDate = data.pubDate 
+    ? (data.pubDate instanceof Date 
+        ? data.pubDate.toISOString().split('T')[0] 
+        : String(data.pubDate))
+    : '';
+
   return {
     slug,
     title: data.title || '',
     description: data.description || '',
-    pubDate: data.pubDate || '',
+    pubDate,
     author: data.author || '',
     tags: data.tags || [],
     image: data.image || '',

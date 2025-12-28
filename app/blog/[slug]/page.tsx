@@ -94,14 +94,24 @@ export async function generateMetadata({
     ? post.image.replace(/https?:\/\/[^\/]+/, siteUrl) // Replace any domain with production domain
     : `${siteUrl}${post.image || `/images/blog/${slug}/hero.png`}`;
 
-  // Format dates properly - Use YYYY-MM-DD for article meta tags
-  // Next.js converts openGraph.publishedTime to article:published_time, so use YYYY-MM-DD format
-  const publishedDateYYYYMMDD = String(formatDateToYYYYMMDD(post.pubDate));
-  const modifiedDateYYYYMMDD = String(formatDateToYYYYMMDD(post.pubDate));
+  // Format dates properly - Use YYYY-MM-DD format as plain strings
+  // Ensure we're working with the raw string from frontmatter, not Date objects
+  let publishedDateYYYYMMDD: string;
+  let modifiedDateYYYYMMDD: string;
   
-  // For OpenGraph, we can use full ISO, but for article tags, YYYY-MM-DD is safer
-  const publishedDateISO = String(formatDateToISO(post.pubDate));
-  const modifiedDateISO = String(formatDateToISO(post.pubDate));
+  // If pubDate is already in YYYY-MM-DD format, use it directly
+  if (typeof post.pubDate === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(post.pubDate)) {
+    publishedDateYYYYMMDD = post.pubDate;
+    modifiedDateYYYYMMDD = post.pubDate;
+  } else {
+    // Otherwise format it
+    publishedDateYYYYMMDD = formatDateToYYYYMMDD(post.pubDate);
+    modifiedDateYYYYMMDD = formatDateToYYYYMMDD(post.pubDate);
+  }
+  
+  // Ensure they are definitely strings, not Date objects
+  publishedDateYYYYMMDD = String(publishedDateYYYYMMDD);
+  modifiedDateYYYYMMDD = String(modifiedDateYYYYMMDD);
 
   return {
     title: `${post.title} | Smarter Revolution`,
@@ -115,10 +125,10 @@ export async function generateMetadata({
       url: canonical,
       siteName: 'Smarter Revolution',
       type: 'article',
-      // Use YYYY-MM-DD format to prevent Next.js from creating [object Object]
-      // Next.js auto-generates article:published_time from this value
-      publishedTime: publishedDateYYYYMMDD,
-      modifiedTime: modifiedDateYYYYMMDD,
+      // Use YYYY-MM-DD format as string - Next.js converts this to article:published_time
+      // The format must be exactly YYYY-MM-DD to prevent [object Object] issue
+      publishedTime: publishedDateYYYYMMDD as string,
+      modifiedTime: modifiedDateYYYYMMDD as string,
       authors: [post.author],
       tags: post.tags,
       images: [
