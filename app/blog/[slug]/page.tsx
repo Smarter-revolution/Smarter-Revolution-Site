@@ -3,6 +3,10 @@ import { getBlogPost } from '@/lib/blog-utils';
 import BlogPostClient from './BlogPostClient';
 import Script from 'next/script';
 
+// Force dynamic rendering to avoid cache issues with metadata
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // Helper function to get author job title
 function getAuthorJobTitle(author: string): string {
   if (author === 'Wolf Krammel') {
