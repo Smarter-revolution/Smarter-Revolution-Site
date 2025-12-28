@@ -24,7 +24,7 @@ But here's the thing: the math actually works when you approach it correctly.
 
 1. **Content Pillars Pre-Defined:** Before any AI touches your content, you've identified your core themes, messaging points, and brand voice. This foundation makes everything else possible.
 
-2. **Custom Prompt Libraries:** Not generic prompts - prompts specifically engineered for your brand, industry, and audience. These produce consistent quality because they encode your standards.
+2. **Custom Prompt Libraries:** Not generic prompts - prompts specifically engineered for your brand, industry, and audience. These produce consistent quality because they encode your standards. (This is the same approach we recommend for [AI tool adoption](/blog/ai-tools-gathering-dust)—building role-specific resources that actually get used.)
 
 3. **Batch Processing Workflows:** Instead of creating one post at a time, the system generates variations across platforms simultaneously. One concept becomes LinkedIn, Twitter, Instagram, and email versions in a single operation.
 
@@ -46,11 +46,11 @@ That's it. A month of content, ready to publish, with human oversight throughout
 
 When content creation takes hours, teams ration it. They post inconsistently. They choose between quality and quantity.
 
-When content creation takes minutes, everything shifts. You can test more ideas. Respond to trends immediately. Maintain presence across every platform that matters.
+When content creation takes minutes, everything shifts. You can test more ideas. Respond to trends immediately. Maintain presence across every platform that matters. This same principle applies to [video production](/blog/ai-video-production-is-the-future), where AI is making it possible to create professional video content at scale.
 
 ## The Bottom Line
 
-The impossible math is only impossible if you're doing content the old way. With the right systems, your team's creative energy goes into strategy and refinement - not production.
+The impossible math is only impossible if you're doing content the old way. With the right systems, your team's creative energy goes into strategy and refinement - not production. And as [AI search changes how customers discover businesses](/blog/the-geo-revolution), having a steady stream of quality content becomes even more critical for visibility.
 
 ---
 

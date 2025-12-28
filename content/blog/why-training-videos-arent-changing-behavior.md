@@ -152,6 +152,8 @@ Video genuinely helps when:
 - **Reinforcement is built in** with spaced repetition, not one-time viewing
 - **Practice is integrated** with video as reference, not replacement
 
+The same strategic thinking applies to [product demo videos](/blog/product-demo-videos-that-close-deals)—you need the right type of demo for the right buyer stage, not just any video.
+
 Video fails when organizations use it as a checkbox, a visible deliverable, or a way to prove they "did training" without investigating whether training was ever the right solution.
 
 > "The great end of learning is not knowledge but action."
@@ -159,9 +161,9 @@ Video fails when organizations use it as a checkbox, a visible deliverable, or a
 
 ## The Bigger Picture
 
-Training video is one tool in a performance improvement toolkit. Companies that treat it as the only tool—or even the default tool—waste resources and erode credibility. Employees notice when training doesn't help. They stop taking it seriously. They complete modules to satisfy requirements while scrolling their phones.
+Training video is one tool in a performance improvement toolkit. Companies that treat it as the only tool—or even the default tool—waste resources and erode credibility. Employees notice when training doesn't help. They stop taking it seriously. They complete modules to satisfy requirements while scrolling their phones. This is the same problem companies face with [AI tools that gather dust](/blog/ai-tools-gathering-dust)—the tools work, but only when integrated into actual workflows.
 
-Companies that diagnose accurately, match solutions to actual problems, and build video into systems that include practice, reinforcement, and environmental support—those companies see training that actually changes behavior.
+Companies that diagnose accurately, match solutions to actual problems, and build video into systems that include practice, reinforcement, and environmental support—those companies see training that actually changes behavior. And with [AI video production making video creation faster and more affordable](/blog/ai-video-production-is-the-future), companies can now create the multiple variations and updates that effective training requires.
 
 The difference isn't production quality. It's strategic clarity about what problem you're actually solving.
 
@@ -171,7 +173,7 @@ The difference isn't production quality. It's strategic clarity about what probl
 
 If your training videos aren't producing the results you expected, the problem probably isn't the videos themselves. It's what comes before and after them.
 
-We help companies build video capabilities that actually change performance—starting with the diagnosis that most organizations skip.
+We help companies build video capabilities that actually change performance—starting with the diagnosis that most organizations skip. This systematic approach applies across all video use cases, from [sales demo videos](/blog/product-demo-videos-that-close-deals) to [audio content production](/blog/cinematic-audio-revolution).
 
 **Let's figure out what's really blocking the behavior you need.**
 

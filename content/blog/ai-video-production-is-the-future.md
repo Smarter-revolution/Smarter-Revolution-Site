@@ -115,11 +115,11 @@ This changes everything about how businesses communicate.
 
 - **Customer onboarding:** Instead of static documentation, companies create personalized video tutorials for each customer segment.
 
-- **Sales enablement:** Sales teams have video libraries covering every objection, use case, and customer scenario—all generated and updated in real-time.
+- **Sales enablement:** Sales teams have video libraries covering every objection, use case, and customer scenario—all generated and updated in real-time. This is especially powerful for [product demo videos](/blog/product-demo-videos-that-close-deals), where different buyer stages require different types of demos.
 
 - **Content marketing:** Marketing teams produce video content at the same pace they produce blog posts, creating comprehensive multimedia campaigns.
 
-- **Internal training:** HR and operations teams create training videos for new processes, policies, and tools without waiting for production resources.
+- **Internal training:** HR and operations teams create training videos for new processes, policies, and tools without waiting for production resources. But as we've learned, [training videos only work when they solve the right problem](/blog/why-training-videos-arent-changing-behavior)—video production speed doesn't matter if you're addressing a motivation gap instead of a knowledge gap.
 
 ## Risks and How to Mitigate Them (Quality, Authenticity, Brand Safety)
 
@@ -222,7 +222,7 @@ A: For most business use cases, yes—in the same way that word processors repla
 
 **Q: How do I ensure AI-generated video maintains my brand voice?**
 
-A: Brand voice comes from clear guidelines, consistent review processes, and human oversight. Use AI for production, not strategy. Maintain brand style guides, review all customer-facing content, and continuously refine your prompts and processes based on output quality.
+A: Brand voice comes from clear guidelines, consistent review processes, and human oversight. Use AI for production, not strategy. Maintain brand style guides, review all customer-facing content, and continuously refine your prompts and processes based on output quality. This is the same challenge companies face with [AI tool adoption](/blog/ai-tools-gathering-dust)—the tools work, but only when you build the right systems around them.
 
 **Q: What's the learning curve for AI video tools?**
 
@@ -246,7 +246,7 @@ A: Start small. Pick one use case (like personalized sales outreach or social me
 
 ## Next Steps
 
-The future of video production is here, and it's AI-powered. The question isn't whether this shift will happen—it's whether you'll lead it or follow it.
+The future of video production is here, and it's AI-powered. The question isn't whether this shift will happen—it's whether you'll lead it or follow it. And just as [AI search is changing how customers find businesses](/blog/the-geo-revolution), AI video is changing how businesses communicate with customers.
 
 **Here's your action plan:**
 

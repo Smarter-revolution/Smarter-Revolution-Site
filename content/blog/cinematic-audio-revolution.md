@@ -19,7 +19,7 @@ Standard corporate audio features monotone narration, zero production value, fla
 
 Is it any wonder completion rates hover around 20%?
 
-Meanwhile, the podcast industry has figured out how to keep people listening for hours. True crime shows, business narratives, educational content - all using techniques that corporate communications ignore.
+Meanwhile, the podcast industry has figured out how to keep people listening for hours. True crime shows, business narratives, educational content - all using techniques that corporate communications ignore. This is part of a broader shift toward [content operations that scale](/blog/30-days-content-30-minutes), where quality and quantity aren't trade-offs.
 
 ## The Cinematic Difference
 
@@ -31,7 +31,7 @@ The result? Content that people actually want to consume. Completion rates that 
 
 **Employee Handbooks:** Transform the document nobody reads into an audio experience with character voices for different scenarios, dramatic examples, and memorable storytelling.
 
-**Training Materials:** Replace click-through modules with immersive audio that employees complete during commutes and exercise.
+**Training Materials:** Replace click-through modules with immersive audio that employees complete during commutes and exercise. But remember: [training content only works when it addresses the right performance gap](/blog/why-training-videos-arent-changing-behavior)—even the most engaging audio won't change behavior if the problem is motivation or environment, not knowledge.
 
 **Brand Stories:** Create founder narratives and company histories that sound like documentary series.
 
@@ -39,7 +39,7 @@ The result? Content that people actually want to consume. Completion rates that 
 
 ## The Bottom Line
 
-Your content isn't competing against other corporate content. It's competing against everything else your audience could be listening to. If it can't hold attention against their favorite podcast, it won't get consumed. Period.
+Your content isn't competing against other corporate content. It's competing against everything else your audience could be listening to. If it can't hold attention against their favorite podcast, it won't get consumed. Period. The same production quality principles apply to [AI video production](/blog/ai-video-production-is-the-future), where professional quality at scale becomes possible.
 
 ---
 

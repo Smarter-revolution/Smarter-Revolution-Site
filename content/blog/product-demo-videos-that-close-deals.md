@@ -88,7 +88,7 @@ The traditional answer was cost. Producing multiple versions of demo content mea
 
 So companies made compromises. One demo that tried to serve all purposes (and served none of them well). Or a marketing demo and a functional demo, with nothing for implementation. Or outdated demos that no longer reflect the current product because updates weren't worth the production investment.
 
-This is one area where the economics have genuinely shifted. AI-powered production has made it practical to create multiple demo versions, variations for different audiences, and updates when products change. Content that was previously too expensive to justify is now within reach for companies serious about their sales process.
+This is one area where the economics have genuinely shifted. AI-powered production has made it practical to create multiple demo versions, variations for different audiences, and updates when products change. Content that was previously too expensive to justify is now within reach for companies serious about their sales process. This is part of the broader [AI video production revolution](/blog/ai-video-production-is-the-future) that's making professional video accessible at scale.
 
 That doesn't mean you should produce dozens of demos tomorrow. But it does mean the old constraints around volume and updates have loosened significantly. The question shifts from "can we afford to make this?" to "what demos would actually serve our sales process?"
 
@@ -125,7 +125,7 @@ Your demo isn't just showing a product. It's showing prospects that you understa
 
 ## The Bigger Picture
 
-Demo videos are one piece of sales enablement, which is one piece of a broader video capability. Companies that think systematically about video, rather than producing content ad hoc, build libraries that compound over time. Each piece supports other pieces. Sales has what it needs for every conversation. Marketing can attract attention while sales converts it.
+Demo videos are one piece of sales enablement, which is one piece of a broader video capability. Companies that think systematically about video, rather than producing content ad hoc, build libraries that compound over time. Each piece supports other pieces. Sales has what it needs for every conversation. Marketing can attract attention while sales converts it. This systematic approach is the same one that works for [AI tool adoption](/blog/ai-tools-gathering-dust)—building integrated systems rather than isolated tools.
 
 The alternative is what most companies experience: scattered content that sort of helps, gaps that nobody fills because production is too slow, and sales teams who eventually give up on video because it's never quite right for their situation.
 
@@ -137,7 +137,7 @@ Building demo content with intention, matching types to buyer stages, and making
 
 If your demos aren't moving deals forward, the gap probably isn't production quality. It's strategy.
 
-We help companies build video capabilities that actually support how their buyers decide. That includes demos, but it extends to training, enablement, and every other place video can drive business results.
+We help companies build video capabilities that actually support how their buyers decide. That includes demos, but it extends to training, enablement, and every other place video can drive business results. The key is understanding when video is the right solution—which is why [diagnosing performance gaps before creating training videos](/blog/why-training-videos-arent-changing-behavior) matters just as much for demos as it does for training.
 
 **Let's figure out where your video strategy is leaving money on the table.**
 

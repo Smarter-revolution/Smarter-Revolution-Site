@@ -25,9 +25,9 @@ The problem isn't the tools. It's the approach.
 
 ## The BUILD-ENABLE-OPERATE-EVOLVE Framework
 
-**BUILD:** Create role-specific prompt libraries. Your marketing team needs different prompts than your sales team. Build once, use forever.
+**BUILD:** Create role-specific prompt libraries. Your marketing team needs different prompts than your sales team. Build once, use forever. This same systematic approach works for [content operations](/blog/30-days-content-30-minutes), where custom prompt libraries enable teams to produce a month of content in 30 minutes.
 
-**ENABLE:** Train on actual workflows, not theoretical capabilities. Show people how AI fits into what they're already doing.
+**ENABLE:** Train on actual workflows, not theoretical capabilities. Show people how AI fits into what they're already doing. This is why [most training videos fail](/blog/why-training-videos-arent-changing-behavior)—they teach generic concepts instead of role-specific applications.
 
 **OPERATE:** Integrate AI into daily operations so completely that NOT using it feels like extra work.
 
@@ -37,7 +37,7 @@ The problem isn't the tools. It's the approach.
 
 A marketing coordinator opens their task management system. They see a content assignment. Instead of starting from scratch, they click a button that activates their custom AI workflow. The AI drafts content using brand voice guidelines, required key points, and optimal format. The coordinator edits, refines, and publishes - what used to take two hours now takes twenty minutes.
 
-That's what real AI adoption looks like. Not separate tools that require extra work - integrated systems that make everything faster.
+That's what real AI adoption looks like. Not separate tools that require extra work - integrated systems that make everything faster. The same principle applies to [AI video production](/blog/ai-video-production-is-the-future), where the goal isn't just faster video—it's video that integrates seamlessly into your sales and marketing workflows.
 
 ## The Bottom Line
 
