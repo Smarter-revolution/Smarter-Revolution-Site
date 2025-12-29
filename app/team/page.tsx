@@ -93,8 +93,8 @@ export default function Team() {
               </div>
             </div>
 
-            {/* Right Column - Info Image */}
-            <div className="flex-shrink-0 lg:w-80 xl:w-96 self-start">
+            {/* Right Column - Info Image (Desktop only) */}
+            <div className="hidden lg:block flex-shrink-0 lg:w-80 xl:w-96 self-start">
               <div className="relative w-full">
                 <Image
                   src="/images/pages/team/wolf-info2.png"
@@ -105,6 +105,20 @@ export default function Team() {
                   sizes="(max-width: 1024px) 100vw, 384px"
                 />
               </div>
+            </div>
+          </div>
+
+          {/* Mobile Info Image - Full width container after content */}
+          <div className="lg:hidden mt-8 w-full">
+            <div className="relative w-full">
+              <Image
+                src="/images/pages/team/wolf-info2.png"
+                alt="Wolf Krammel Information"
+                width={400}
+                height={711}
+                className="w-full h-auto object-contain"
+                sizes="100vw"
+              />
             </div>
           </div>
         </section>
@@ -180,8 +194,8 @@ export default function Team() {
               </div>
             </div>
 
-            {/* Right Column - Info Image */}
-            <div className="flex-shrink-0 lg:w-80 xl:w-96 self-start">
+            {/* Right Column - Info Image (Desktop only) */}
+            <div className="hidden lg:block flex-shrink-0 lg:w-80 xl:w-96 self-start">
               <div className="relative w-full">
                 <Image
                   src="/images/pages/team/mark-info2.png"
@@ -192,6 +206,20 @@ export default function Team() {
                   sizes="(max-width: 1024px) 100vw, 384px"
                 />
               </div>
+            </div>
+          </div>
+
+          {/* Mobile Info Image - Full width container after content */}
+          <div className="lg:hidden mt-8 w-full">
+            <div className="relative w-full">
+              <Image
+                src="/images/pages/team/mark-info2.png"
+                alt="Mark Alouf Information"
+                width={400}
+                height={711}
+                className="w-full h-auto object-contain"
+                sizes="100vw"
+              />
             </div>
           </div>
         </section>
