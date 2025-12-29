@@ -100,7 +100,7 @@ export default function Team() {
                   src="/images/pages/team/wolf-info2.png"
                   alt="Wolf Krammel Information"
                   width={400}
-                  height={600}
+                  height={711}
                   className="w-full h-auto object-contain"
                   sizes="(max-width: 1024px) 100vw, 384px"
                 />
@@ -187,7 +187,7 @@ export default function Team() {
                   src="/images/pages/team/mark-info2.png"
                   alt="Mark Alouf Information"
                   width={400}
-                  height={600}
+                  height={711}
                   className="w-full h-auto object-contain"
                   sizes="(max-width: 1024px) 100vw, 384px"
                 />
