@@ -1,12 +1,17 @@
-import type { SmartSitesConfig } from 'smart-sites-admin'
+// import type { SmartSitesConfig } from 'smart-sites-admin'
 
 /**
  * Smart Sites Admin Configuration
  * 
  * Copy this file to your project root as `smart-sites.config.ts`
  * and customize the settings for your specific project.
+ * 
+ * Uncomment the import above after installing smart-sites-admin:
+ * npm install smart-sites-admin
  */
-const config: SmartSitesConfig = {
+
+// @ts-ignore - This is a template file
+const config = {
   // Site display name (shown in admin header)
   siteName: '{{SITE_NAME}}',
   
