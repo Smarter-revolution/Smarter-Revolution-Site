@@ -210,18 +210,34 @@ export function isBlobConfigured(): boolean {
 // --------------------------------------------
 
 /**
- * Load configuration from smart-sites.config.ts file
- * This is used when integrating into a client project
+ * Load configuration from environment variables
+ * This is the recommended way to configure the admin system
  */
-export async function loadConfigFile(): Promise<SmartSitesConfig | null> {
-  try {
-    // Try to import the config file
-    const configModule = await import('../../../smart-sites.config')
-    return initConfig(configModule.default)
-  } catch {
-    // Config file doesn't exist, use defaults
-    return null
-  }
+export function loadConfigFromEnv(): SmartSitesConfig {
+  const env = getEnvConfig()
+  
+  return initConfig({
+    siteName: process.env.NEXT_PUBLIC_SITE_NAME || 'My Website',
+    
+    storage: {
+      type: env.githubToken ? 'github' : 'local',
+      github: env.githubToken ? {
+        owner: env.githubOwner || '',
+        repo: env.githubRepo || '',
+        branch: env.githubBranch,
+        contentPath: 'content',
+      } : undefined,
+      local: {
+        basePath: './content',
+      },
+    },
+    
+    images: {
+      type: 'vercel-blob',
+      maxSize: 5 * 1024 * 1024,
+      allowedTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/gif'],
+    },
+  })
 }
 
 // --------------------------------------------
