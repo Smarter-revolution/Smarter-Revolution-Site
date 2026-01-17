@@ -1,0 +1,56 @@
+{
+  "pageSlug": "team",
+  "pageTitle": "Team",
+  "seo": {
+    "title": "Our Team | Smarter Revolution",
+    "description": "Meet the talented team behind Smarter Revolution. Experts in AI, machine learning, and business transformation."
+  },
+  "blocks": [
+    {
+      "id": "hero-team",
+      "type": "hero",
+      "data": {
+        "headline": "Meet the People Behind the Innovation",
+        "subheadline": "Our diverse team brings together expertise in AI, business strategy, and human-centered design.",
+        "buttonText": "Join Our Team",
+        "buttonLink": "/contact",
+        "backgroundImage": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=1080&fit=crop",
+        "overlayOpacity": 0.5
+      }
+    },
+    {
+      "id": "team-1",
+      "type": "team",
+      "data": {
+        "headline": "Leadership Team",
+        "subheadline": "Experienced professionals committed to your success",
+        "members": [
+          {
+            "name": "Wolf Krammel",
+            "title": "Founder & CEO",
+            "bio": "Visionary leader with 15+ years of experience in technology and business transformation. Passionate about making AI accessible to all.",
+            "photo": "/images/pages/team/wolf_krammel.png"
+          },
+          {
+            "name": "Mark Alouf",
+            "title": "Chief Technology Officer",
+            "bio": "Expert in machine learning and AI systems with a track record of delivering innovative solutions for Fortune 500 companies.",
+            "photo": "/images/pages/team/mark_alouf.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cta-team",
+      "type": "cta",
+      "data": {
+        "headline": "Want to Join Our Team?",
+        "body": "We're always looking for talented individuals who share our passion for AI and innovation.",
+        "buttonText": "View Open Positions",
+        "buttonLink": "/contact",
+        "backgroundColor": "#6b21a8",
+        "textColor": "#ffffff"
+      }
+    }
+  ]
+}

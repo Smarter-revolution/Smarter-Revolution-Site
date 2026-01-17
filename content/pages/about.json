@@ -1,0 +1,56 @@
+{
+  "pageSlug": "about",
+  "pageTitle": "About",
+  "seo": {
+    "title": "About Us | Smarter Revolution",
+    "description": "Learn about Smarter Revolution's mission to democratize AI and empower businesses of all sizes with intelligent solutions."
+  },
+  "blocks": [
+    {
+      "id": "hero-about",
+      "type": "hero",
+      "data": {
+        "headline": "Making AI Accessible for Everyone",
+        "subheadline": "We're on a mission to democratize artificial intelligence, making powerful AI tools accessible to businesses of all sizes.",
+        "buttonText": "Meet Our Team",
+        "buttonLink": "/team",
+        "backgroundImage": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=1080&fit=crop",
+        "overlayOpacity": 0.5
+      }
+    },
+    {
+      "id": "text-image-story",
+      "type": "textImage",
+      "data": {
+        "headline": "Our Story",
+        "body": "Smarter Revolution was founded with a simple belief: AI should be a tool for empowerment, not intimidation.\n\nWe saw too many businesses struggling to understand and implement AI, often getting lost in jargon and overly complex solutions. We knew there had to be a better way.\n\nToday, we're proud to work with companies across industries, helping them harness AI in ways that are practical, impactful, and human-centered.",
+        "image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop",
+        "imageAlt": "Our team at work",
+        "imagePosition": "left"
+      }
+    },
+    {
+      "id": "text-image-mission",
+      "type": "textImage",
+      "data": {
+        "headline": "Our Mission",
+        "body": "We exist to bridge the gap between cutting-edge AI technology and real-world business needs.\n\nOur approach is different: we start with your challenges, not our technology. We listen, understand, and then craft solutions that actually solve problems rather than create new ones.\n\nEvery project we take on is guided by three principles: simplicity, impact, and sustainability.",
+        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+        "imageAlt": "Strategic planning session",
+        "imagePosition": "right"
+      }
+    },
+    {
+      "id": "cta-about",
+      "type": "cta",
+      "data": {
+        "headline": "Let's Build Something Great Together",
+        "body": "Discover how our expertise can accelerate your business goals.",
+        "buttonText": "Get in Touch",
+        "buttonLink": "/contact",
+        "backgroundColor": "#166534",
+        "textColor": "#ffffff"
+      }
+    }
+  ]
+}

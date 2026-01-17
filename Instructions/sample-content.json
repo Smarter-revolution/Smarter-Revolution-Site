@@ -1,0 +1,362 @@
+// ============================================
+// /content/site.json
+// ============================================
+
+{
+  "siteName": "Meridian Consulting",
+  "logo": "",
+  "navigation": [
+    { "label": "Home", "href": "/" },
+    { "label": "About", "href": "/about" },
+    { "label": "Services", "href": "/services" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "footer": {
+    "copyright": "© 2025 Meridian Consulting. All rights reserved.",
+    "phone": "(555) 123-4567",
+    "email": "hello@meridianconsulting.com",
+    "address": "123 Business Ave, Suite 400, New York, NY 10001"
+  }
+}
+
+
+// ============================================
+// /content/pages/home.json
+// ============================================
+
+{
+  "pageSlug": "home",
+  "pageTitle": "Home",
+  "seo": {
+    "title": "Meridian Consulting | Strategic Business Solutions",
+    "description": "Transform your business with strategic consulting services. We help companies achieve sustainable growth through data-driven insights and proven methodologies."
+  },
+  "blocks": [
+    {
+      "id": "hero-1",
+      "type": "hero",
+      "data": {
+        "headline": "Transform Your Business Vision Into Reality",
+        "subheadline": "Strategic consulting services that drive measurable results. Partner with experts who understand your industry and share your ambition.",
+        "buttonText": "Start Your Journey",
+        "buttonLink": "/contact",
+        "backgroundImage": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=1080&fit=crop",
+        "overlayOpacity": 0.6
+      }
+    },
+    {
+      "id": "text-image-1",
+      "type": "textImage",
+      "data": {
+        "headline": "Your Partner in Strategic Growth",
+        "body": "For over a decade, Meridian Consulting has helped businesses navigate complex challenges and seize new opportunities.\n\nOur team of experienced consultants brings deep industry knowledge and a commitment to delivering actionable strategies that drive real results. We don't just advise—we partner with you every step of the way.",
+        "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+        "imageAlt": "Team collaborating on strategy",
+        "imagePosition": "right"
+      }
+    },
+    {
+      "id": "services-1",
+      "type": "servicesGrid",
+      "data": {
+        "headline": "How We Help You Succeed",
+        "subheadline": "Comprehensive solutions tailored to your unique challenges",
+        "services": [
+          {
+            "title": "Strategic Planning",
+            "description": "Develop clear roadmaps that align your team and resources toward ambitious yet achievable goals.",
+            "icon": "target"
+          },
+          {
+            "title": "Operational Excellence",
+            "description": "Streamline processes and optimize performance to reduce costs and improve quality.",
+            "icon": "zap"
+          },
+          {
+            "title": "Digital Transformation",
+            "description": "Leverage technology to modernize operations and create competitive advantages.",
+            "icon": "trending"
+          },
+          {
+            "title": "Change Management",
+            "description": "Guide your organization through transitions with minimal disruption and maximum adoption.",
+            "icon": "users"
+          },
+          {
+            "title": "Market Analysis",
+            "description": "Gain deep insights into your market, competitors, and customers to inform better decisions.",
+            "icon": "lightbulb"
+          },
+          {
+            "title": "Leadership Development",
+            "description": "Build stronger leaders who can inspire teams and drive sustainable success.",
+            "icon": "award"
+          }
+        ]
+      }
+    },
+    {
+      "id": "testimonials-1",
+      "type": "testimonials",
+      "data": {
+        "headline": "Trusted by Industry Leaders",
+        "testimonials": [
+          {
+            "quote": "Meridian helped us completely reimagine our go-to-market strategy. Within 18 months, we doubled our market share in key segments.",
+            "author": "Sarah Chen",
+            "company": "TechVenture Inc.",
+            "photo": ""
+          },
+          {
+            "quote": "Their operational excellence program saved us $2.4M in the first year alone. The ROI was immediate and substantial.",
+            "author": "Michael Rodriguez",
+            "company": "Pacific Manufacturing",
+            "photo": ""
+          },
+          {
+            "quote": "The strategic clarity they brought to our leadership team transformed how we make decisions. Highly recommended.",
+            "author": "Jennifer Walsh",
+            "company": "Horizon Healthcare",
+            "photo": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "cta-1",
+      "type": "cta",
+      "data": {
+        "headline": "Ready to Accelerate Your Growth?",
+        "body": "Schedule a complimentary consultation to discuss your challenges and explore how we can help.",
+        "buttonText": "Book a Consultation",
+        "buttonLink": "/contact",
+        "backgroundColor": "#1a1a1a",
+        "textColor": "#ffffff"
+      }
+    }
+  ]
+}
+
+
+// ============================================
+// /content/pages/about.json
+// ============================================
+
+{
+  "pageSlug": "about",
+  "pageTitle": "About",
+  "seo": {
+    "title": "About Us | Meridian Consulting",
+    "description": "Learn about Meridian Consulting's mission, values, and the experienced team behind our strategic business solutions."
+  },
+  "blocks": [
+    {
+      "id": "hero-about",
+      "type": "hero",
+      "data": {
+        "headline": "Built on Expertise, Driven by Results",
+        "subheadline": "We're a team of strategists, operators, and problem-solvers dedicated to helping businesses reach their full potential.",
+        "buttonText": "Meet Our Team",
+        "buttonLink": "#team",
+        "backgroundImage": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=1080&fit=crop",
+        "overlayOpacity": 0.5
+      }
+    },
+    {
+      "id": "text-image-story",
+      "type": "textImage",
+      "data": {
+        "headline": "Our Story",
+        "body": "Meridian Consulting was founded in 2012 with a simple belief: every business deserves access to world-class strategic guidance.\n\nStarting with just three consultants and a shared vision, we've grown into a trusted partner for companies across industries. Today, our team brings together diverse expertise in strategy, operations, technology, and leadership development.\n\nWhat sets us apart is our commitment to practical, implementable solutions. We don't deliver shelf-ware reports—we partner with you to drive real change.",
+        "image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop",
+        "imageAlt": "Our office and team",
+        "imagePosition": "left"
+      }
+    },
+    {
+      "id": "team-1",
+      "type": "team",
+      "data": {
+        "headline": "Leadership Team",
+        "subheadline": "Experienced professionals committed to your success",
+        "members": [
+          {
+            "name": "Alexandra Kim",
+            "title": "Founder & CEO",
+            "bio": "Former McKinsey partner with 20+ years of experience in corporate strategy and transformation.",
+            "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop"
+          },
+          {
+            "name": "David Thompson",
+            "title": "Managing Partner",
+            "bio": "Operations expert who has led efficiency initiatives for Fortune 500 companies across manufacturing and logistics.",
+            "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
+          },
+          {
+            "name": "Maria Santos",
+            "title": "Head of Digital Strategy",
+            "bio": "Technology strategist specializing in digital transformation and AI-powered business solutions.",
+            "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cta-about",
+      "type": "cta",
+      "data": {
+        "headline": "Let's Build Something Great Together",
+        "body": "Discover how our expertise can accelerate your business goals.",
+        "buttonText": "Get in Touch",
+        "buttonLink": "/contact",
+        "backgroundColor": "#166534",
+        "textColor": "#ffffff"
+      }
+    }
+  ]
+}
+
+
+// ============================================
+// /content/pages/services.json
+// ============================================
+
+{
+  "pageSlug": "services",
+  "pageTitle": "Services",
+  "seo": {
+    "title": "Our Services | Meridian Consulting",
+    "description": "Explore Meridian Consulting's comprehensive business services including strategic planning, operational excellence, and digital transformation."
+  },
+  "blocks": [
+    {
+      "id": "hero-services",
+      "type": "hero",
+      "data": {
+        "headline": "Solutions That Drive Real Results",
+        "subheadline": "From strategy development to implementation, we provide end-to-end consulting services tailored to your needs.",
+        "buttonText": "Explore Services",
+        "buttonLink": "#services",
+        "backgroundImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&h=1080&fit=crop",
+        "overlayOpacity": 0.6
+      }
+    },
+    {
+      "id": "services-detail",
+      "type": "servicesGrid",
+      "data": {
+        "headline": "Our Expertise",
+        "subheadline": "Comprehensive services to address every aspect of your business",
+        "services": [
+          {
+            "title": "Strategic Planning",
+            "description": "Develop comprehensive strategic plans that align your organization around clear priorities and measurable objectives.",
+            "icon": "target"
+          },
+          {
+            "title": "Operational Excellence",
+            "description": "Identify inefficiencies, streamline processes, and implement systems that improve quality while reducing costs.",
+            "icon": "zap"
+          },
+          {
+            "title": "Digital Transformation",
+            "description": "Modernize your technology infrastructure and leverage data analytics to gain competitive advantages.",
+            "icon": "trending"
+          },
+          {
+            "title": "M&A Advisory",
+            "description": "Navigate mergers, acquisitions, and integrations with confidence through expert guidance and due diligence.",
+            "icon": "shield"
+          },
+          {
+            "title": "Market Entry",
+            "description": "Expand into new markets with strategies informed by deep research and local expertise.",
+            "icon": "lightbulb"
+          },
+          {
+            "title": "Organizational Design",
+            "description": "Structure your organization for agility, accountability, and sustained high performance.",
+            "icon": "users"
+          }
+        ]
+      }
+    },
+    {
+      "id": "faq-services",
+      "type": "faq",
+      "data": {
+        "headline": "Frequently Asked Questions",
+        "questions": [
+          {
+            "question": "How long does a typical engagement last?",
+            "answer": "Engagement length varies based on scope and complexity. Strategic assessments typically take 4-8 weeks, while implementation projects may span 3-12 months. We'll provide a clear timeline during our initial consultation."
+          },
+          {
+            "question": "Do you work with companies of all sizes?",
+            "answer": "We primarily work with mid-market companies ($10M-$500M revenue) and enterprise organizations. Our solutions are scalable and can be tailored to your specific size and needs."
+          },
+          {
+            "question": "What industries do you specialize in?",
+            "answer": "Our team has deep expertise in manufacturing, healthcare, technology, financial services, and professional services. However, our methodologies are applicable across industries."
+          },
+          {
+            "question": "How do you measure success?",
+            "answer": "We establish clear KPIs at the start of every engagement and track progress throughout. Our goal is to deliver measurable ROI, whether that's revenue growth, cost reduction, or operational improvements."
+          }
+        ]
+      }
+    },
+    {
+      "id": "cta-services",
+      "type": "cta",
+      "data": {
+        "headline": "Ready to Transform Your Business?",
+        "body": "Let's discuss which services are right for your organization.",
+        "buttonText": "Schedule a Call",
+        "buttonLink": "/contact",
+        "backgroundColor": "#1e40af",
+        "textColor": "#ffffff"
+      }
+    }
+  ]
+}
+
+
+// ============================================
+// /content/pages/contact.json
+// ============================================
+
+{
+  "pageSlug": "contact",
+  "pageTitle": "Contact",
+  "seo": {
+    "title": "Contact Us | Meridian Consulting",
+    "description": "Get in touch with Meridian Consulting. Schedule a consultation to discuss your business challenges and explore how we can help."
+  },
+  "blocks": [
+    {
+      "id": "hero-contact",
+      "type": "hero",
+      "data": {
+        "headline": "Let's Start a Conversation",
+        "subheadline": "Whether you're facing a specific challenge or exploring strategic options, we're here to help.",
+        "buttonText": "",
+        "buttonLink": "",
+        "backgroundImage": "https://images.unsplash.com/photo-1497215842964-222b430dc094?w=1920&h=1080&fit=crop",
+        "overlayOpacity": 0.6
+      }
+    },
+    {
+      "id": "contact-1",
+      "type": "contact",
+      "data": {
+        "headline": "Get In Touch",
+        "body": "Fill out the form and we'll get back to you within one business day. Or reach out directly using the contact information provided.",
+        "email": "hello@meridianconsulting.com",
+        "phone": "(555) 123-4567",
+        "address": "123 Business Ave, Suite 400\nNew York, NY 10001",
+        "showForm": true
+      }
+    }
+  ]
+}

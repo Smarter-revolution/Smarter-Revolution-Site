@@ -1,0 +1,34 @@
+{
+  "pageSlug": "contact",
+  "pageTitle": "Contact",
+  "seo": {
+    "title": "Contact Us | Smarter Revolution",
+    "description": "Get in touch with Smarter Revolution. Schedule a consultation to discuss your AI needs and explore how we can help transform your business."
+  },
+  "blocks": [
+    {
+      "id": "hero-contact",
+      "type": "hero",
+      "data": {
+        "headline": "Let's Start a Conversation",
+        "subheadline": "Whether you're exploring AI possibilities or ready to implement, we're here to help you take the next step.",
+        "buttonText": "",
+        "buttonLink": "",
+        "backgroundImage": "https://images.unsplash.com/photo-1497215842964-222b430dc094?w=1920&h=1080&fit=crop",
+        "overlayOpacity": 0.6
+      }
+    },
+    {
+      "id": "contact-1",
+      "type": "contact",
+      "data": {
+        "headline": "Get In Touch",
+        "body": "Fill out the form and we'll get back to you within one business day. Or reach out directly using the contact information provided.",
+        "email": "hello@smarterrevolution.com",
+        "phone": "(555) 123-4567",
+        "address": "123 Innovation Way\nTech City, CA 94000",
+        "showForm": true
+      }
+    }
+  ]
+}

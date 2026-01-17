@@ -1,0 +1,99 @@
+{
+  "pageSlug": "service",
+  "pageTitle": "Services",
+  "seo": {
+    "title": "Our Services | Smarter Revolution",
+    "description": "Explore Smarter Revolution's comprehensive AI services including strategy, development, automation, and training."
+  },
+  "blocks": [
+    {
+      "id": "hero-services",
+      "type": "hero",
+      "data": {
+        "headline": "AI Solutions That Drive Results",
+        "subheadline": "From strategy to implementation, we provide end-to-end AI services tailored to your unique business needs.",
+        "buttonText": "Explore Services",
+        "buttonLink": "#services",
+        "backgroundImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop",
+        "overlayOpacity": 0.6
+      }
+    },
+    {
+      "id": "services-detail",
+      "type": "servicesGrid",
+      "data": {
+        "headline": "Our Expertise",
+        "subheadline": "Comprehensive services to address every aspect of your AI journey",
+        "services": [
+          {
+            "title": "AI Strategy Consulting",
+            "description": "Develop a comprehensive AI roadmap aligned with your business objectives. We identify opportunities, assess readiness, and create actionable plans.",
+            "icon": "target"
+          },
+          {
+            "title": "Custom AI Development",
+            "description": "Build bespoke AI solutions tailored to your specific challenges. From machine learning models to intelligent automation systems.",
+            "icon": "zap"
+          },
+          {
+            "title": "Natural Language Processing",
+            "description": "Implement chatbots, sentiment analysis, document processing, and other NLP solutions that understand human language.",
+            "icon": "trending"
+          },
+          {
+            "title": "Computer Vision",
+            "description": "Deploy image recognition, video analysis, and visual inspection systems that see and understand the world.",
+            "icon": "shield"
+          },
+          {
+            "title": "Predictive Analytics",
+            "description": "Leverage historical data to forecast trends, identify risks, and make data-driven decisions with confidence.",
+            "icon": "lightbulb"
+          },
+          {
+            "title": "AI Integration",
+            "description": "Seamlessly integrate AI capabilities into your existing systems and workflows without disruption.",
+            "icon": "users"
+          }
+        ]
+      }
+    },
+    {
+      "id": "faq-services",
+      "type": "faq",
+      "data": {
+        "headline": "Frequently Asked Questions",
+        "questions": [
+          {
+            "question": "How long does a typical AI project take?",
+            "answer": "Project timelines vary based on complexity. A proof-of-concept can be delivered in 4-6 weeks, while full production implementations typically take 3-6 months. We'll provide a detailed timeline during our initial consultation."
+          },
+          {
+            "question": "Do we need a large dataset to get started with AI?",
+            "answer": "Not necessarily. While more data generally leads to better results, we can work with smaller datasets and use techniques like transfer learning to achieve meaningful results. We'll assess your data situation and recommend the best approach."
+          },
+          {
+            "question": "How do you ensure AI solutions are ethical and unbiased?",
+            "answer": "Ethics is central to our approach. We conduct bias audits, implement fairness metrics, and ensure transparency in how AI decisions are made. We also provide documentation and training so your team understands how the AI works."
+          },
+          {
+            "question": "What ongoing support do you provide?",
+            "answer": "We offer flexible support packages including monitoring, maintenance, model retraining, and continuous optimization. Our goal is to ensure your AI solutions deliver lasting value, not just initial results."
+          }
+        ]
+      }
+    },
+    {
+      "id": "cta-services",
+      "type": "cta",
+      "data": {
+        "headline": "Ready to Transform Your Business?",
+        "body": "Let's discuss which services are right for your organization.",
+        "buttonText": "Schedule a Call",
+        "buttonLink": "/contact",
+        "backgroundColor": "#1e40af",
+        "textColor": "#ffffff"
+      }
+    }
+  ]
+}

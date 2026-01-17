@@ -1,0 +1,19 @@
+{
+  "siteName": "Smarter Revolution",
+  "logo": "",
+  "navigation": [
+    { "label": "Home", "href": "/" },
+    { "label": "About", "href": "/about" },
+    { "label": "Services", "href": "/service" },
+    { "label": "Solutions", "href": "/solutions" },
+    { "label": "Team", "href": "/team" },
+    { "label": "Blog", "href": "/blog" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "footer": {
+    "copyright": "© 2025 Smarter Revolution. All rights reserved.",
+    "phone": "(555) 123-4567",
+    "email": "hello@smarterrevolution.com",
+    "address": "123 Innovation Way, Tech City, CA 94000"
+  }
+}
