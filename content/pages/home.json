@@ -2,109 +2,63 @@
   "pageSlug": "home",
   "pageTitle": "Home",
   "seo": {
-    "title": "Smarter Revolution | AI-Powered Business Solutions",
-    "description": "Transform your business with cutting-edge AI solutions. We help companies leverage artificial intelligence to drive growth, efficiency, and innovation."
+    "title": "Welcome to Smart Sites Demo",
+    "description": "Experience the power of client-editable websites with Smart Sites Admin."
   },
   "blocks": [
     {
       "id": "hero-1",
       "type": "hero",
       "data": {
-        "headline": "Revolutionize Your Business with AI",
-        "subheadline": "We help forward-thinking companies harness the power of artificial intelligence to transform operations, enhance customer experiences, and drive unprecedented growth.",
+        "headline": "Build Editable Websites in Minutes",
+        "subheadline": "Smart Sites Admin gives your clients the power to edit their own content, while you maintain full control over design and structure.",
         "buttonText": "Get Started",
         "buttonLink": "/contact",
-        "backgroundImage": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1920&h=1080&fit=crop",
-        "overlayOpacity": 0.6
-      }
-    },
-    {
-      "id": "text-image-1",
-      "type": "textImage",
-      "data": {
-        "headline": "Your Partner in Digital Transformation",
-        "body": "At Smarter Revolution, we believe that AI isn't just about technology—it's about empowering people and businesses to achieve more.\n\nOur team of experts combines deep technical knowledge with strategic business acumen to deliver solutions that actually work. We don't just implement AI; we transform how you think about and use technology.",
-        "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
-        "imageAlt": "Team collaborating on AI solutions",
-        "imagePosition": "right"
+        "backgroundImage": "",
+        "overlayOpacity": 0.6,
+        "textAlignment": "center"
       }
     },
     {
       "id": "services-1",
       "type": "servicesGrid",
       "data": {
-        "headline": "How We Help You Succeed",
-        "subheadline": "Comprehensive AI solutions tailored to your unique challenges",
+        "headline": "Why Choose Smart Sites?",
+        "subheadline": "Everything you need for client-editable websites",
         "services": [
           {
-            "title": "AI Strategy",
-            "description": "Develop a clear roadmap for AI adoption that aligns with your business goals and maximizes ROI.",
-            "icon": "target"
-          },
-          {
-            "title": "Custom AI Development",
-            "description": "Build tailored AI solutions that solve your specific challenges and integrate seamlessly with existing systems.",
+            "title": "Block-Based Editing",
+            "description": "8 pre-built content blocks that clients can easily customize without breaking your design.",
             "icon": "zap"
           },
           {
-            "title": "Process Automation",
-            "description": "Streamline operations and reduce costs with intelligent automation powered by machine learning.",
-            "icon": "trending"
+            "title": "GitHub Integration",
+            "description": "Content changes auto-commit to GitHub, triggering instant Vercel rebuilds.",
+            "icon": "code"
           },
           {
-            "title": "Data Analytics",
-            "description": "Transform raw data into actionable insights that drive smarter business decisions.",
-            "icon": "lightbulb"
+            "title": "Image Uploads",
+            "description": "Drag-and-drop uploads to Vercel Blob with automatic optimization.",
+            "icon": "rocket"
           },
           {
-            "title": "AI Training",
-            "description": "Empower your team with the knowledge and skills to leverage AI effectively in their daily work.",
-            "icon": "users"
-          },
-          {
-            "title": "Ongoing Support",
-            "description": "Continuous optimization and support to ensure your AI solutions deliver lasting value.",
-            "icon": "shield"
+            "title": "Easy Integration",
+            "description": "Install via NPM or CLI into any Next.js project in minutes.",
+            "icon": "check"
           }
-        ]
-      }
-    },
-    {
-      "id": "testimonials-1",
-      "type": "testimonials",
-      "data": {
-        "headline": "Trusted by Industry Leaders",
-        "testimonials": [
-          {
-            "quote": "Smarter Revolution transformed how we approach customer service. Their AI chatbot reduced response times by 80% while improving satisfaction scores.",
-            "author": "Sarah Chen",
-            "company": "TechVenture Inc.",
-            "photo": ""
-          },
-          {
-            "quote": "The team's strategic approach to AI implementation saved us months of trial and error. They delivered a solution that worked from day one.",
-            "author": "Michael Rodriguez",
-            "company": "Pacific Manufacturing",
-            "photo": ""
-          },
-          {
-            "quote": "Working with Smarter Revolution was a game-changer. They didn't just build us a tool—they helped us reimagine our entire workflow.",
-            "author": "Jennifer Walsh",
-            "company": "Horizon Healthcare",
-            "photo": ""
-          }
-        ]
+        ],
+        "columns": 4
       }
     },
     {
       "id": "cta-1",
       "type": "cta",
       "data": {
-        "headline": "Ready to Start Your AI Journey?",
-        "body": "Schedule a free consultation to discover how AI can transform your business.",
-        "buttonText": "Book a Consultation",
-        "buttonLink": "/contact",
-        "backgroundColor": "#1a1a1a",
+        "headline": "Ready to Empower Your Clients?",
+        "body": "Start building client-editable websites today with Smart Sites Admin.",
+        "buttonText": "View Documentation",
+        "buttonLink": "/docs",
+        "backgroundColor": "#2563eb",
         "textColor": "#ffffff"
       }
     }

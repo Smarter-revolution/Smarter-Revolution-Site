@@ -1,35 +1,75 @@
 {
-  "name": "he",
-  "version": "0.1.0",
-  "private": true,
+  "name": "smart-sites-admin",
+  "version": "1.0.0",
+  "description": "Standalone client-editable CMS admin system for Next.js websites",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./components": {
+      "import": "./dist/components/index.mjs",
+      "require": "./dist/components/index.js",
+      "types": "./dist/components/index.d.ts"
+    },
+    "./adapters": {
+      "import": "./dist/adapters/index.mjs",
+      "require": "./dist/adapters/index.js",
+      "types": "./dist/adapters/index.d.ts"
+    }
+  },
+  "bin": {
+    "smart-sites-admin": "./bin/cli.js"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:package": "tsup",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint .",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "cms",
+    "admin",
+    "nextjs",
+    "client-editable",
+    "content-management",
+    "smart-sites"
+  ],
+  "author": "Smarter Revolution",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Smarter-revolution/smart-sites-admin"
+  },
+  "peerDependencies": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.71.2",
     "@octokit/rest": "^22.0.1",
-    "@tailwindcss/typography": "^0.5.19",
-    "@vercel/blob": "^2.0.0",
-    "gray-matter": "^4.0.3",
-    "lucide-react": "^0.562.0",
-    "next": "16.1.0",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
-    "remark": "^15.0.1",
-    "remark-html": "^16.0.1",
-    "unified": "^11.0.5"
+    "@vercel/blob": "^0.23.0",
+    "lucide-react": "^0.460.0",
+    "next": "14.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.1.0",
-    "tailwindcss": "^4",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "tsup": "^8.0.0",
     "typescript": "^5"
   }
 }

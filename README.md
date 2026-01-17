@@ -1,36 +1,248 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Smart Sites Admin
 
-## Getting Started
+A standalone, reusable admin system for client-editable websites built with Next.js.
 
-First, run the development server:
+![Smart Sites Admin](https://via.placeholder.com/800x400?text=Smart+Sites+Admin)
+
+## Features
+
+- 🎯 **Block-Based Editing** - 8 pre-built content blocks (Hero, Text+Image, Services Grid, Testimonials, CTA, Team, Contact, FAQ)
+- 📝 **JSON Content Storage** - Simple, Git-friendly content format
+- 🔗 **GitHub Integration** - Auto-commits trigger Vercel rebuilds
+- 🖼️ **Image Uploads** - Drag-and-drop to Vercel Blob storage
+- 🔐 **Simple Auth** - Password-protected admin panel
+- 📦 **Easy Integration** - NPM package or CLI setup
+
+## Quick Start
+
+### Option 1: NPM Package
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install smart-sites-admin
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```tsx
+// app/admin/layout.tsx
+import { AdminLayout } from 'smart-sites-admin/components'
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+export default function Layout({ children }) {
+  return <AdminLayout>{children}</AdminLayout>
+}
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Option 2: CLI Setup
 
-## Learn More
+```bash
+npx smart-sites-admin init
+```
 
-To learn more about Next.js, take a look at the following resources:
+This will:
+1. Create the necessary directory structure
+2. Generate a configuration file
+3. Set up sample content
+4. Create environment variable templates
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Configuration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Create `smart-sites.config.ts` in your project root:
 
-## Deploy on Vercel
+```typescript
+import type { SmartSitesConfig } from 'smart-sites-admin'
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+const config: SmartSitesConfig = {
+  siteName: 'My Website',
+  
+  storage: {
+    type: 'github',
+    github: {
+      owner: 'your-username',
+      repo: 'your-repo',
+      branch: 'main',
+      contentPath: 'content',
+    },
+  },
+  
+  images: {
+    type: 'vercel-blob',
+    maxSize: 5 * 1024 * 1024,
+    allowedTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/gif'],
+  },
+  
+  blocks: {
+    enabled: ['hero', 'textImage', 'servicesGrid', 'testimonials', 'cta', 'team', 'contact', 'faq'],
+    custom: [],
+  },
+  
+  auth: {
+    type: 'password',
+    sessionDuration: 7 * 24 * 60 * 60 * 1000, // 7 days
+  },
+}
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+export default config
+```
+
+## Environment Variables
+
+```env
+# Required
+ADMIN_PASSWORD=your-secure-password
+
+# GitHub Storage
+GITHUB_TOKEN=your-github-token
+GITHUB_OWNER=your-username
+GITHUB_REPO=your-repo
+GITHUB_BRANCH=main
+
+# Image Uploads
+BLOB_READ_WRITE_TOKEN=your-vercel-blob-token
+```
+
+## Content Structure
+
+```
+content/
+├── site.json          # Global site configuration
+└── pages/
+    ├── home.json      # Home page content
+    ├── about.json     # About page content
+    └── contact.json   # Contact page content
+```
+
+### Page JSON Format
+
+```json
+{
+  "pageSlug": "home",
+  "pageTitle": "Home",
+  "seo": {
+    "title": "Welcome to My Website",
+    "description": "A brief description for search engines."
+  },
+  "blocks": [
+    {
+      "id": "hero-1",
+      "type": "hero",
+      "data": {
+        "headline": "Welcome",
+        "subheadline": "Your tagline here",
+        "buttonText": "Get Started",
+        "buttonLink": "/contact"
+      }
+    }
+  ]
+}
+```
+
+## Block Types
+
+| Type | Description |
+|------|-------------|
+| `hero` | Full-width hero section with headline, subheadline, and CTA |
+| `textImage` | Text content with image (left or right aligned) |
+| `servicesGrid` | Grid of services/features with icons |
+| `testimonials` | Customer testimonials with ratings |
+| `cta` | Call-to-action section with customizable colors |
+| `team` | Team member profiles with photos and social links |
+| `contact` | Contact information with optional form |
+| `faq` | Frequently asked questions (accordion or grid) |
+
+## Integration Modes
+
+### Same Codebase
+Admin panel lives inside your Next.js project:
+```
+your-project/
+├── app/
+│   ├── admin/        # Admin pages
+│   └── api/          # API routes
+├── content/          # JSON content files
+└── smart-sites.config.ts
+```
+
+### Separate Deployment
+Admin hosted separately, connects to your site's GitHub repo:
+1. Deploy this admin system to its own Vercel project
+2. Configure it to point to your main site's GitHub repository
+3. Changes made in admin auto-commit to your main site's repo
+
+## API Reference
+
+### Components
+
+```tsx
+import {
+  // Admin Components
+  LoginForm,
+  AdminSidebar,
+  SaveButton,
+  ImageUploader,
+  BlockEditor,
+  AddBlockModal,
+  
+  // Block Display Components
+  HeroBlock,
+  TextImageBlock,
+  ServicesGridBlock,
+  TestimonialsBlock,
+  CTABlock,
+  TeamBlock,
+  ContactBlock,
+  FAQBlock,
+  BlockRenderer,
+  PageRenderer,
+} from 'smart-sites-admin'
+```
+
+### Adapters
+
+```tsx
+import {
+  createStorageAdapter,
+  createImageAdapter,
+  GitHubAdapter,
+  LocalAdapter,
+  VercelBlobAdapter,
+} from 'smart-sites-admin'
+```
+
+### API Handlers
+
+```tsx
+import {
+  createAuthHandler,
+  createSaveHandler,
+  createUploadHandler,
+  createContentHandler,
+} from 'smart-sites-admin'
+```
+
+## Development
+
+```bash
+# Clone the repository
+git clone https://github.com/Smarter-revolution/smart-sites-admin.git
+
+# Install dependencies
+npm install
+
+# Create .env.local
+cp env.example .env.local
+# Edit .env.local with your values
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## License
+
+MIT © Smarter Revolution
+
+## Support
+
+- 📖 [Documentation](https://github.com/Smarter-revolution/smart-sites-admin)
+- 🐛 [Issue Tracker](https://github.com/Smarter-revolution/smart-sites-admin/issues)
+- 💬 [Discussions](https://github.com/Smarter-revolution/smart-sites-admin/discussions)

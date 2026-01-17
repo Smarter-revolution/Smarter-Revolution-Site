@@ -1,58 +1,76 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { LoginForm } from './components/LoginForm'
-import { AdminSidebar } from './components/AdminSidebar'
-import type { PageListItem } from '@/lib/types'
+import { useRouter } from 'next/navigation'
+import { LoginForm } from '@/src/components/admin/LoginForm'
+import { AdminSidebar } from '@/src/components/admin/AdminSidebar'
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  const [authenticated, setAuthenticated] = useState<boolean | null>(null)
-  const [pages, setPages] = useState<PageListItem[]>([])
-  const [siteName, setSiteName] = useState('Site Admin')
-  
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const router = useRouter()
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
-    // Check authentication status
-    fetch('/api/admin/auth')
-      .then(r => r.json())
-      .then(data => setAuthenticated(data.authenticated))
-      .catch(() => setAuthenticated(false))
-    
-    // Load pages list
-    fetch('/api/content/pages')
-      .then(r => r.json())
-      .then(data => {
-        if (Array.isArray(data)) {
-          setPages(data)
-        }
-      })
-      .catch(() => setPages([]))
-    
-    // Load site config for name
-    fetch('/api/content/site')
-      .then(r => r.json())
-      .then(data => setSiteName(data.siteName || 'Site Admin'))
-      .catch(() => {})
+    checkAuth()
   }, [])
-  
+
+  const checkAuth = async () => {
+    try {
+      const response = await fetch('/api/admin/auth')
+      const data = await response.json()
+      setIsAuthenticated(data.authenticated)
+    } catch (error) {
+      console.error('Auth check failed:', error)
+      setIsAuthenticated(false)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true)
+  }
+
+  const handleLogout = () => {
+    setIsAuthenticated(false)
+    router.push('/admin')
+  }
+
   // Loading state
-  if (authenticated === null) {
+  if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="animate-pulse text-gray-500">Loading...</div>
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-slate-400">Loading...</p>
+        </div>
       </div>
     )
   }
-  
-  // Not authenticated
-  if (!authenticated) {
-    return <LoginForm onSuccess={() => setAuthenticated(true)} />
+
+  // Not authenticated - show login
+  if (!isAuthenticated) {
+    return (
+      <LoginForm 
+        onSuccess={handleLoginSuccess}
+        title="Smart Sites Admin"
+        subtitle="Enter your password to manage content"
+      />
+    )
   }
-  
-  // Authenticated - show admin interface
+
+  // Authenticated - show admin layout
   return (
-    <div className="min-h-screen bg-gray-50">
-      <AdminSidebar pages={pages} siteName={siteName} />
-      <main className="ml-64 p-8">
+    <div className="flex min-h-screen bg-gray-100">
+      <AdminSidebar 
+        siteName="Smart Sites"
+        onLogout={handleLogout}
+      />
+      <main className="flex-1 overflow-auto">
         {children}
       </main>
     </div>

@@ -1,19 +1,16 @@
 {
-  "siteName": "Smarter Revolution",
+  "siteName": "Smart Sites Demo",
   "logo": "",
   "navigation": [
     { "label": "Home", "href": "/" },
     { "label": "About", "href": "/about" },
-    { "label": "Services", "href": "/service" },
-    { "label": "Solutions", "href": "/solutions" },
-    { "label": "Team", "href": "/team" },
-    { "label": "Blog", "href": "/blog" },
+    { "label": "Services", "href": "/services" },
     { "label": "Contact", "href": "/contact" }
   ],
   "footer": {
-    "copyright": "© 2025 Smarter Revolution. All rights reserved.",
-    "phone": "(555) 123-4567",
-    "email": "hello@smarterrevolution.com",
-    "address": "123 Innovation Way, Tech City, CA 94000"
+    "copyright": "© 2026 Smart Sites Demo. All rights reserved.",
+    "phone": "+1 (555) 123-4567",
+    "email": "hello@smartsites.demo",
+    "address": "123 Demo Street, City, Country"
   }
 }
