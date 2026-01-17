@@ -37,8 +37,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   // Loading state
   if (authenticated === null) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="animate-pulse text-gray-500">Loading...</div>
+      <div className="fixed inset-0 flex items-center justify-center bg-slate-900">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-10 h-10 border-4 border-red-600 border-t-transparent rounded-full animate-spin" />
+          <span className="text-slate-400 text-sm">Loading admin...</span>
+        </div>
       </div>
     )
   }
@@ -50,10 +53,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   
   // Authenticated - show admin interface
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="fixed inset-0 flex bg-slate-100">
       <AdminSidebar pages={pages} siteName={siteName} />
-      <main className="ml-64 p-8">
-        {children}
+      <main className="flex-1 ml-72 overflow-auto">
+        <div className="p-8 max-w-6xl">
+          {children}
+        </div>
       </main>
     </div>
   )
