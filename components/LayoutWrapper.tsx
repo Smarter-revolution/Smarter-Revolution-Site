@@ -4,13 +4,14 @@ import { usePathname } from 'next/navigation'
 import Navbar from './Navbar'
 import Footer from './Footer'
 
-export function LayoutWrapper({ children }: { children: React.ReactNode }) {
+export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   
   // Don't show navbar/footer on admin pages
   const isAdminPage = pathname?.startsWith('/admin')
   
   if (isAdminPage) {
+    // Admin pages get no wrapper - they have their own layout
     return <>{children}</>
   }
   
@@ -24,3 +25,6 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
     </div>
   )
 }
+
+// Also export as named export for compatibility
+export { LayoutWrapper }
