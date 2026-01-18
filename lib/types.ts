@@ -320,12 +320,23 @@ export function createNewBlock(type: BlockType): Block {
 export const blockTypeLabels: Record<BlockType, string> = {
   hero: 'Hero Section',
   textImage: 'Text & Image',
-  servicesGrid: 'Services Grid',
+  servicesGrid: 'Features / Services Grid',
   testimonials: 'Testimonials',
   cta: 'Call to Action',
   team: 'Team Members',
   contact: 'Contact Info',
   faq: 'FAQ'
+}
+
+export const blockTypeDescriptions: Record<BlockType, string> = {
+  hero: 'The main banner at the top of the page with headline, subheadline, and call-to-action button',
+  textImage: 'A section with text content alongside an image',
+  servicesGrid: 'A grid of features or services with icons and descriptions',
+  testimonials: 'Customer quotes and reviews',
+  cta: 'A prominent call-to-action section to drive conversions',
+  team: 'Display team members with photos and bios',
+  contact: 'Contact information and optional contact form',
+  faq: 'Frequently asked questions with expandable answers'
 }
 
 export const blockTypeIcons: Record<BlockType, string> = {

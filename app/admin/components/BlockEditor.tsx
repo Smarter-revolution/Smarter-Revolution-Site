@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { ChevronDown, Trash2, GripVertical, Layout, Type, Image, Users, MessageSquare, Phone, HelpCircle, Megaphone, Grid3X3 } from 'lucide-react'
 import type { Block, BlockData, BlockType } from '@/lib/types'
-import { blockTypeLabels } from '@/lib/types'
+import { blockTypeLabels, blockTypeDescriptions } from '@/lib/types'
 import { getEditorForBlockType } from './editors'
 
 interface BlockEditorProps {
@@ -30,6 +30,7 @@ export function BlockEditor({ block, index, onChange, onDelete }: BlockEditorPro
   
   const EditorComponent = getEditorForBlockType(block.type)
   const label = blockTypeLabels[block.type] || block.type
+  const description = blockTypeDescriptions[block.type] || ''
   const icon = blockIcons[block.type] || <Type className="w-5 h-5" />
   
   const handleDelete = () => {
@@ -68,7 +69,7 @@ export function BlockEditor({ block, index, onChange, onDelete }: BlockEditorPro
           </div>
           <div>
             <span className="font-semibold text-slate-900">{label}</span>
-            <p className="text-xs text-slate-500">Click to {expanded ? 'collapse' : 'expand'}</p>
+            <p className="text-xs text-slate-500">{expanded ? description : `Click to edit ${label.toLowerCase()}`}</p>
           </div>
         </div>
         
