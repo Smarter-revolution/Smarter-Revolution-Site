@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { requireAuth } from '@/lib/auth'
-import { commitContentFile, isGitHubConfigured } from '@/lib/github'
+import { commitContentFile, isGitHubConfigured, getGitHubConfigStatus } from '@/lib/github'
 import { savePageContent, validatePageContent } from '@/lib/content'
 import type { PageContent } from '@/lib/types'
 
@@ -42,8 +42,19 @@ export async function POST(request: Request) {
       const result = await commitContentFile(filePath, jsonContent, commitMessage)
       
       if (!result.success) {
+        // Return detailed error information for debugging
         return NextResponse.json(
-          { success: false, error: result.error || 'Failed to save to GitHub' },
+          { 
+            success: false, 
+            error: result.error || 'Failed to save to GitHub',
+            errorDetails: result.errorDetails,
+            // Include config status (without sensitive data) for debugging
+            configStatus: {
+              ...getGitHubConfigStatus(),
+              // Mask the token presence for security
+              tokenSet: getGitHubConfigStatus().tokenSet
+            }
+          },
           { status: 500 }
         )
       }
@@ -65,8 +76,17 @@ export async function POST(request: Request) {
     
   } catch (error) {
     console.error('Save error:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     return NextResponse.json(
-      { success: false, error: 'Failed to save content' },
+      { 
+        success: false, 
+        error: `Failed to save content: ${errorMessage}`,
+        errorDetails: {
+          type: 'unknown',
+          message: errorMessage,
+          fix: 'Check the server logs for more details.'
+        }
+      },
       { status: 500 }
     )
   }
