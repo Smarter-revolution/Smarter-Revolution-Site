@@ -4,34 +4,6 @@ import { commitContentFile, isGitHubConfigured, getGitHubConfigStatus } from '@/
 import { savePageContent, validatePageContent } from '@/lib/content'
 import type { PageContent } from '@/lib/types'
 
-// Trigger Vercel deploy hook to rebuild the site
-async function triggerVercelDeploy(): Promise<{ success: boolean; error?: string }> {
-  const deployHookUrl = process.env.VERCEL_DEPLOY_HOOK
-  
-  if (!deployHookUrl) {
-    console.log('[Deploy] No VERCEL_DEPLOY_HOOK configured, skipping deploy trigger')
-    return { success: true } // Not an error, just not configured
-  }
-  
-  try {
-    console.log('[Deploy] Triggering Vercel deploy hook...')
-    const response = await fetch(deployHookUrl, { method: 'POST' })
-    
-    if (!response.ok) {
-      const errorText = await response.text()
-      console.error('[Deploy] Failed to trigger deploy:', response.status, errorText)
-      return { success: false, error: `Deploy trigger failed: ${response.status}` }
-    }
-    
-    const data = await response.json()
-    console.log('[Deploy] Deploy triggered successfully:', data)
-    return { success: true }
-  } catch (error) {
-    console.error('[Deploy] Error triggering deploy:', error)
-    return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
-  }
-}
-
 export async function POST(request: Request) {
   // Check authentication
   const auth = await requireAuth()
@@ -66,6 +38,7 @@ export async function POST(request: Request) {
     const commitMessage = `Update ${content.pageTitle} page content`
     
     // If GitHub is configured, commit to repo
+    // Vercel will auto-deploy when the commit is pushed (via GitHub integration)
     if (isGitHubConfigured()) {
       const result = await commitContentFile(filePath, jsonContent, commitMessage)
       
@@ -87,20 +60,11 @@ export async function POST(request: Request) {
         )
       }
       
-      // Trigger Vercel deploy after successful GitHub commit
-      const deployResult = await triggerVercelDeploy()
-      
-      // Even if deploy trigger fails, the content was saved to GitHub
-      // So we still return success but note the deploy status
-      const deployMessage = deployResult.success 
-        ? 'Saved! Your changes will be live in about 60 seconds.'
-        : 'Saved to GitHub! Auto-deploy may be delayed.'
-      
+      // GitHub commit successful - Vercel will auto-deploy via GitHub integration
       return NextResponse.json({
         success: true,
-        message: deployMessage,
-        commitUrl: result.commitUrl,
-        deployTriggered: deployResult.success
+        message: 'Saved! Your changes will be live in about 60 seconds.',
+        commitUrl: result.commitUrl
       })
     }
     
