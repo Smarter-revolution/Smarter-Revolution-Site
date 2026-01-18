@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import { SpotlightCard, Magnet, ShinyText, GradientText, BlurText } from '@/components/reactbits';
-import { ArrowRight, Blocks, Github, Image as ImageIcon, Terminal, Shield, Zap, Code2 } from 'lucide-react';
+import { SpotlightCard, ShinyText, GradientText, BlurText } from '@/components/reactbits';
+import { ArrowRight, Blocks, Image as ImageIcon, Terminal, Shield, Zap, Code2, Github } from 'lucide-react';
 
 // Dynamic imports for heavy components
 const Aurora = dynamic(() => import('@/components/reactbits/Aurora'), { ssr: false });
@@ -114,28 +114,15 @@ export default function HomePage() {
               direction="bottom"
             />
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Magnet magnetStrength={3} padding={80}>
-                <Link
-                  href="/admin"
-                  className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold rounded-xl hover:from-violet-500 hover:to-indigo-500 transition-all duration-300 shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 hover:scale-105"
-                >
-                  Open Admin Panel
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Magnet>
-              
-              <Magnet magnetStrength={3} padding={80}>
-                <Link
-                  href="https://github.com/Smarter-revolution/smart-sites-admin"
-                  target="_blank"
-                  className="group inline-flex items-center gap-2 px-8 py-4 bg-white/5 backdrop-blur-sm text-white font-bold rounded-xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105"
-                >
-                  <Github className="w-5 h-5" />
-                  View on GitHub
-                </Link>
-              </Magnet>
+            {/* CTA Button */}
+            <div className="flex justify-center">
+              <Link
+                href="/admin"
+                className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold rounded-xl hover:from-violet-500 hover:to-indigo-500 transition-all duration-300 shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 hover:scale-105"
+              >
+                Open Admin Panel
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </div>
           </div>
 
@@ -267,15 +254,13 @@ export default function HomePage() {
               Transform your static websites into client-editable experiences with Smart Sites Admin.
             </p>
             
-            <Magnet magnetStrength={2} padding={100}>
-              <Link
-                href="/admin"
-                className="group inline-flex items-center gap-3 px-12 py-6 bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 text-white text-xl font-bold rounded-2xl hover:from-violet-500 hover:via-indigo-500 hover:to-cyan-500 transition-all duration-300 shadow-2xl shadow-violet-500/30 hover:shadow-violet-500/50 hover:scale-105"
-              >
-                Launch Admin Panel
-                <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
-              </Link>
-            </Magnet>
+            <Link
+              href="/admin"
+              className="group inline-flex items-center gap-3 px-12 py-6 bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 text-white text-xl font-bold rounded-2xl hover:from-violet-500 hover:via-indigo-500 hover:to-cyan-500 transition-all duration-300 shadow-2xl shadow-violet-500/30 hover:shadow-violet-500/50 hover:scale-105"
+            >
+              Launch Admin Panel
+              <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+            </Link>
           </div>
         </section>
 

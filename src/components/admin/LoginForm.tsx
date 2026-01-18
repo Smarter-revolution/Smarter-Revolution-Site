@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { Lock, Eye, EyeOff, Fingerprint, Shield, Sparkles } from 'lucide-react'
-import { SpotlightCard, Magnet, ShinyText, GradientText, BlurText } from '@/components/reactbits'
+import { SpotlightCard, ShinyText, GradientText, BlurText } from '@/components/reactbits'
 
 // Dynamic imports for heavy components
 const Aurora = dynamic(() => import('@/components/reactbits/Aurora'), { ssr: false })
@@ -195,61 +195,59 @@ export function LoginForm({
             )}
 
             {/* Submit Button */}
-            <Magnet magnetStrength={2} padding={50}>
-              <button
-                type="submit"
-                disabled={loading || !password}
-                className="group relative w-full overflow-hidden py-4 px-6 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white font-bold rounded-xl transition-all duration-300 hover:shadow-2xl hover:shadow-violet-500/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none"
-              >
-                {/* Animated shine effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                
-                <span className="relative flex items-center justify-center gap-2">
-                  {loading ? (
-                    <>
-                      <svg 
-                        className="animate-spin h-5 w-5 text-white" 
-                        fill="none" 
-                        viewBox="0 0 24 24"
-                      >
-                        <circle 
-                          className="opacity-25" 
-                          cx="12" 
-                          cy="12" 
-                          r="10" 
-                          stroke="currentColor" 
-                          strokeWidth="4"
-                        />
-                        <path 
-                          className="opacity-75" 
-                          fill="currentColor" 
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                        />
-                      </svg>
-                      <GradientText 
-                        colors={['#ffffff', '#e9d5ff', '#ffffff']}
-                        animationSpeed={2}
-                        className="font-bold"
-                      >
-                        Authenticating...
-                      </GradientText>
-                    </>
-                  ) : (
-                    <>
-                      <span>Access Dashboard</span>
-                      <svg 
-                        className="w-5 h-5 group-hover:translate-x-1 transition-transform" 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
-                        stroke="currentColor"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                    </>
-                  )}
-                </span>
-              </button>
-            </Magnet>
+            <button
+              type="submit"
+              disabled={loading || !password}
+              className="group relative w-full overflow-hidden py-4 px-6 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white font-bold rounded-xl transition-all duration-300 hover:shadow-2xl hover:shadow-violet-500/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none"
+            >
+              {/* Animated shine effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              
+              <span className="relative flex items-center justify-center gap-2">
+                {loading ? (
+                  <>
+                    <svg 
+                      className="animate-spin h-5 w-5 text-white" 
+                      fill="none" 
+                      viewBox="0 0 24 24"
+                    >
+                      <circle 
+                        className="opacity-25" 
+                        cx="12" 
+                        cy="12" 
+                        r="10" 
+                        stroke="currentColor" 
+                        strokeWidth="4"
+                      />
+                      <path 
+                        className="opacity-75" 
+                        fill="currentColor" 
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                      />
+                    </svg>
+                    <GradientText 
+                      colors={['#ffffff', '#e9d5ff', '#ffffff']}
+                      animationSpeed={2}
+                      className="font-bold"
+                    >
+                      Authenticating...
+                    </GradientText>
+                  </>
+                ) : (
+                  <>
+                    <span>Access Dashboard</span>
+                    <svg 
+                      className="w-5 h-5 group-hover:translate-x-1 transition-transform" 
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </>
+                )}
+              </span>
+            </button>
           </form>
 
           {/* Footer */}
