@@ -20,8 +20,8 @@ export async function POST(request: Request) {
       )
     }
     
-    // Create session and set cookie
-    const token = createSession()
+    // Create JWT session and set cookie
+    const token = await createSession()
     const cookieConfig = getSessionCookieConfig(token)
     
     const response = NextResponse.json({ success: true })
@@ -71,7 +71,7 @@ export async function GET() {
       return NextResponse.json({ authenticated: false })
     }
     
-    const isValid = verifySession(token)
+    const isValid = await verifySession(token)
     
     return NextResponse.json({ authenticated: isValid })
     

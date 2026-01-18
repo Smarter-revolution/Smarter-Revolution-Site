@@ -1,17 +1,22 @@
-// /lib/auth.ts - Simple admin authentication
+// /lib/auth.ts - JWT-based admin authentication
+// This implementation survives serverless deployments and works across instances
 
 import { cookies } from 'next/headers'
+import { SignJWT, jwtVerify } from 'jose'
 
 // ============================================
 // CONFIGURATION
 // ============================================
 
 const SESSION_COOKIE_NAME = 'admin_session'
-const SESSION_DURATION = 24 * 60 * 60 * 1000 // 24 hours in milliseconds
+const SESSION_DURATION = 24 * 60 * 60 // 24 hours in seconds
 
-// Simple in-memory session store
-// In production with multiple instances, use Redis or similar
-const sessions = new Map<string, { expiresAt: number }>()
+// Get the JWT secret from environment variable
+// Falls back to ADMIN_PASSWORD if JWT_SECRET is not set (for backwards compatibility)
+function getJwtSecret(): Uint8Array {
+  const secret = process.env.JWT_SECRET || process.env.ADMIN_PASSWORD || 'fallback-secret-change-me'
+  return new TextEncoder().encode(secret)
+}
 
 // ============================================
 // PASSWORD VERIFICATION
@@ -30,41 +35,49 @@ export function verifyPassword(password: string): boolean {
 }
 
 // ============================================
-// SESSION MANAGEMENT
+// JWT TOKEN MANAGEMENT
 // ============================================
 
-export function createSession(): string {
-  // Generate random token
-  const token = generateToken()
+export async function createSession(): Promise<string> {
+  const secret = getJwtSecret()
   
-  // Store session with expiration
-  sessions.set(token, {
-    expiresAt: Date.now() + SESSION_DURATION
+  // Create a JWT token with expiration
+  const token = await new SignJWT({ 
+    role: 'admin',
+    iat: Math.floor(Date.now() / 1000)
   })
-  
-  // Clean up expired sessions periodically
-  cleanupExpiredSessions()
+    .setProtectedHeader({ alg: 'HS256' })
+    .setIssuedAt()
+    .setExpirationTime(`${SESSION_DURATION}s`)
+    .sign(secret)
   
   return token
 }
 
-export function verifySession(token: string): boolean {
-  const session = sessions.get(token)
-  
-  if (!session) {
+export async function verifySession(token: string): Promise<boolean> {
+  try {
+    const secret = getJwtSecret()
+    
+    // Verify the JWT token
+    const { payload } = await jwtVerify(token, secret)
+    
+    // Check if token has admin role
+    if (payload.role !== 'admin') {
+      return false
+    }
+    
+    return true
+  } catch (error) {
+    // Token is invalid or expired
+    console.error('JWT verification failed:', error instanceof Error ? error.message : 'Unknown error')
     return false
   }
-  
-  if (Date.now() > session.expiresAt) {
-    sessions.delete(token)
-    return false
-  }
-  
-  return true
 }
 
+// Kept for backwards compatibility but no longer needed with JWT
 export function destroySession(token: string): void {
-  sessions.delete(token)
+  // JWT tokens are stateless - we just need to clear the cookie
+  // The token will be invalid once removed from the client
 }
 
 // ============================================
@@ -80,7 +93,7 @@ export async function getSessionFromCookie(): Promise<string | null> {
 export async function isAuthenticated(): Promise<boolean> {
   const token = await getSessionFromCookie()
   if (!token) return false
-  return verifySession(token)
+  return await verifySession(token)
 }
 
 export function getSessionCookieConfig(token: string) {
@@ -90,7 +103,7 @@ export function getSessionCookieConfig(token: string) {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax' as const,
-    maxAge: SESSION_DURATION / 1000, // Convert to seconds
+    maxAge: SESSION_DURATION, // Already in seconds for JWT
     path: '/'
   }
 }
@@ -108,25 +121,6 @@ export function getClearSessionCookieConfig() {
 }
 
 // ============================================
-// UTILITY FUNCTIONS
-// ============================================
-
-function generateToken(): string {
-  const array = new Uint8Array(32)
-  crypto.getRandomValues(array)
-  return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('')
-}
-
-function cleanupExpiredSessions(): void {
-  const now = Date.now()
-  for (const [token, session] of sessions.entries()) {
-    if (now > session.expiresAt) {
-      sessions.delete(token)
-    }
-  }
-}
-
-// ============================================
 // MIDDLEWARE HELPER
 // ============================================
 
@@ -137,7 +131,8 @@ export async function requireAuth(): Promise<{ authenticated: true } | { authent
     return { authenticated: false, error: 'No session found' }
   }
   
-  if (!verifySession(token)) {
+  const isValid = await verifySession(token)
+  if (!isValid) {
     return { authenticated: false, error: 'Invalid or expired session' }
   }
   
