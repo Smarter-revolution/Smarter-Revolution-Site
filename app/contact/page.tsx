@@ -53,7 +53,7 @@ export default function Contact() {
             Start Your <span className="text-red-600">Revolution</span>
           </h1>
           <p className="text-xl text-gray-300">
-            Whether you're ready to transform or just curious about what's possible, we're here to help.
+            Whether you&apos;re ready to transform or just curious about what&apos;s possible, we&apos;re here to help.
           </p>
         </div>
 
@@ -63,7 +63,7 @@ export default function Contact() {
             <h2 className="text-2xl font-bold mb-6 text-white">Send us a Message</h2>
             {submitted ? (
               <div className="bg-green-600 text-white p-4 rounded-lg text-center">
-                <p className="font-semibold">Thank you! We'll get back to you soon.</p>
+                <p className="font-semibold">Thank you! We&apos;ll get back to you soon.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
