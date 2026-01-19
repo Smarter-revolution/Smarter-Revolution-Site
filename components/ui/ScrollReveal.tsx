@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ReactNode, useRef } from 'react';
 
 interface ScrollRevealProps {
@@ -17,11 +17,6 @@ export default function ScrollReveal({
   delay = 0,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
 
   const getInitialPosition = () => {
     switch (direction) {

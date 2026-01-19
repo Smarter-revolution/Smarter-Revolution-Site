@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
   GridPattern, 
@@ -13,10 +13,16 @@ import {
 } from '@/components/ui';
 
 export default function Team() {
+  const [isMounted, setIsMounted] = useState(false);
+  
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  
   // Parallax effect for hero
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target: heroRef,
+    target: isMounted ? heroRef : undefined,
     offset: ["start start", "end start"]
   });
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 150]);

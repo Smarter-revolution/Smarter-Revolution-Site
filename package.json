@@ -11,6 +11,8 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.2",
     "@gsap/react": "^2.1.2",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
     "@tailwindcss/typography": "^0.5.19",
     "clsx": "^2.1.1",
     "framer-motion": "^12.27.1",
@@ -21,6 +23,7 @@
     "react-dom": "19.2.3",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
+    "three": "^0.182.0",
     "unified": "^11.0.5"
   },
   "devDependencies": {
