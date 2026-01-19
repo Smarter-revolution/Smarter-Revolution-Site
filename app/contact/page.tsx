@@ -10,8 +10,24 @@ import {
   ScrollReveal,
   GradientText,
   AnimatedCard,
-  Particles
+  Particles,
+  CustomSelect
 } from '@/components/ui';
+
+const companySizeOptions = [
+  { value: '1-50', label: '1-50 employees' },
+  { value: '51-200', label: '51-200 employees' },
+  { value: '201-500', label: '201-500 employees' },
+  { value: '500+', label: '500+ employees' },
+];
+
+const serviceOptions = [
+  { value: 'empower', label: 'Team Empowerment' },
+  { value: 'content', label: 'Content Production' },
+  { value: 'automate', label: 'Automation' },
+  { value: 'search', label: 'AI Search' },
+  { value: 'notsure', label: 'Not Sure Yet' },
+];
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -60,7 +76,7 @@ export default function Contact() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({
       ...formData,
@@ -68,7 +84,7 @@ export default function Contact() {
     });
   };
 
-  const inputStyles = "w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-red-500 focus:ring-1 focus:ring-red-500 focus:outline-none text-white placeholder-gray-500 transition-all duration-300 backdrop-blur-sm";
+  const inputStyles = "w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-red-500 focus:ring-1 focus:ring-red-500 focus:outline-none text-white placeholder-gray-500 transition-all duration-300 backdrop-blur-sm hover:border-white/20";
   const labelStyles = "block text-sm font-medium text-gray-300 mb-2";
 
   return (
@@ -196,24 +212,15 @@ export default function Contact() {
                       />
                     </div>
 
-                    <div>
-                      <label htmlFor="companySize" className={labelStyles}>
-                        Company Size
-                      </label>
-                      <select
-                        id="companySize"
-                        name="companySize"
-                        value={formData.companySize}
-                        onChange={handleChange}
-                        className={inputStyles}
-                      >
-                        <option value="" className="bg-gray-900">Select company size</option>
-                        <option value="1-50" className="bg-gray-900">1-50</option>
-                        <option value="51-200" className="bg-gray-900">51-200</option>
-                        <option value="201-500" className="bg-gray-900">201-500</option>
-                        <option value="500+" className="bg-gray-900">500+</option>
-                      </select>
-                    </div>
+                    <CustomSelect
+                      id="companySize"
+                      name="companySize"
+                      label="Company Size"
+                      placeholder="Select company size"
+                      options={companySizeOptions}
+                      value={formData.companySize}
+                      onChange={(value) => setFormData({ ...formData, companySize: value })}
+                    />
 
                     <div>
                       <label htmlFor="phone" className={labelStyles}>
@@ -230,25 +237,15 @@ export default function Contact() {
                       />
                     </div>
 
-                    <div>
-                      <label htmlFor="service" className={labelStyles}>
-                        What brings you here?
-                      </label>
-                      <select
-                        id="service"
-                        name="service"
-                        value={formData.service}
-                        onChange={handleChange}
-                        className={inputStyles}
-                      >
-                        <option value="" className="bg-gray-900">Select an option</option>
-                        <option value="empower" className="bg-gray-900">Team Empowerment</option>
-                        <option value="content" className="bg-gray-900">Content Production</option>
-                        <option value="automate" className="bg-gray-900">Automation</option>
-                        <option value="search" className="bg-gray-900">AI Search</option>
-                        <option value="notsure" className="bg-gray-900">Not Sure Yet</option>
-                      </select>
-                    </div>
+                    <CustomSelect
+                      id="service"
+                      name="service"
+                      label="What brings you here?"
+                      placeholder="Select an option"
+                      options={serviceOptions}
+                      value={formData.service}
+                      onChange={(value) => setFormData({ ...formData, service: value })}
+                    />
 
                     <div>
                       <label htmlFor="message" className={labelStyles}>
@@ -280,25 +277,36 @@ export default function Contact() {
                       />
                     </div>
 
-                    <GlowButton 
-                      variant="primary" 
-                      size="lg" 
-                      className="w-full mt-4"
-                      onClick={() => {}}
+                    <motion.button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full mt-4 relative inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 overflow-hidden group px-8 py-4 text-lg bg-red-600 text-white hover:bg-red-500 shadow-lg shadow-red-600/25 hover:shadow-red-500/40 disabled:opacity-50 disabled:cursor-not-allowed"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      {isSubmitting ? (
-                        <span className="flex items-center justify-center gap-2">
-                          <motion.span
-                            className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                          />
-                          Sending...
-                        </span>
-                      ) : (
-                        'Send Message'
-                      )}
-                    </GlowButton>
+                      {/* Glow effect */}
+                      <span className="absolute inset-0 bg-gradient-to-r from-red-600/0 via-red-400/30 to-red-600/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                      
+                      <span className="relative z-10 flex items-center gap-2">
+                        {isSubmitting ? (
+                          <>
+                            <motion.span
+                              className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                              animate={{ rotate: 360 }}
+                              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                            />
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            Send Message
+                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                          </>
+                        )}
+                      </span>
+                    </motion.button>
                   </form>
                 )}
               </SpotlightCard>

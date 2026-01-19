@@ -189,12 +189,21 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href="/careers"
+              href="/team"
               className={`${navLinkBase} text-white hover:text-red-500 hover:bg-white/5 ${
-                pathname === "/careers" ? "text-red-500 bg-white/5" : ""
+                pathname === "/team" ? "text-red-500 bg-white/5" : ""
               }`}
             >
-              Careers
+              Team
+            </Link>
+
+            <Link
+              href="/blog"
+              className={`${navLinkBase} text-white hover:text-red-500 hover:bg-white/5 ${
+                pathname === "/blog" ? "text-red-500 bg-white/5" : ""
+              }`}
+            >
+              Blog
             </Link>
 
             <Link
@@ -440,13 +449,23 @@ function MobileMenu({
               </Link>
 
               <Link
-                href="/careers"
+                href="/team"
                 onClick={onClose}
                 className={`block px-4 py-3 rounded-lg text-base font-medium text-white hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px] flex items-center ${
-                  pathname === "/careers" ? "bg-white/5 text-red-500" : ""
+                  pathname === "/team" ? "bg-white/5 text-red-500" : ""
                 }`}
               >
-                Careers
+                Team
+              </Link>
+
+              <Link
+                href="/blog"
+                onClick={onClose}
+                className={`block px-4 py-3 rounded-lg text-base font-medium text-white hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px] flex items-center ${
+                  pathname === "/blog" ? "bg-white/5 text-red-500" : ""
+                }`}
+              >
+                Blog
               </Link>
 
               <Link
