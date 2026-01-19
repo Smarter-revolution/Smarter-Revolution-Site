@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smarter Revolution</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #111111; line-height: 1.6; }
+    
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      color: white;
+      padding: 100px 20px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #e53e3e;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    .hero-sub {
+      font-size: 20px;
+      color: #a0aec0;
+      margin-bottom: 40px;
+    }
+    .btn-soft {
+      color: #ffffff;
+      padding: 16px 32px;
+      font-size: 16px;
+      font-weight: 600;
+      border: 2px solid #e53e3e;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      background: transparent;
+    }
+    .btn-soft:hover { background: rgba(229,62,62,0.1); }
+    .btn-primary {
+      background: #e53e3e;
+      color: #ffffff;
+      padding: 16px 32px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: #c53030; }
+    
+    /* Two Paths */
+    .paths {
+      padding: 80px 20px;
+      background: #f7fafc;
+    }
+    .paths-intro {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .paths-intro h2 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+    .paths-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .path-card {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .path-icon {
+      width: 60px;
+      height: 60px;
+      background: #e53e3e;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+    .path-card h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+    .path-card p {
+      color: #718096;
+      margin-bottom: 20px;
+    }
+    .path-card ul {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+    .path-card li {
+      padding: 8px 0;
+      padding-left: 24px;
+      position: relative;
+      color: #4a5568;
+    }
+    .path-card li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #e53e3e;
+      font-weight: bold;
+    }
+    .path-link {
+      color: #e53e3e;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .path-link:hover { text-decoration: underline; }
+    
+    /* Problem Section */
+    .problem {
+      padding: 80px 20px;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .problem h2 {
+      font-size: 36px;
+      margin-bottom: 24px;
+    }
+    .problem p {
+      font-size: 18px;
+      color: #4a5568;
+      margin-bottom: 16px;
+    }
+    .problem .highlight {
+      color: #1a1a2e;
+      font-weight: 600;
+    }
+    
+    /* How It Works */
+    .how-it-works {
+      padding: 80px 20px;
+      background: #0a0a0a;
+      color: white;
+    }
+    .how-it-works h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 60px;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .step {
+      text-align: center;
+    }
+    .step-number {
+      width: 50px;
+      height: 50px;
+      background: #e53e3e;
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0 auto 20px;
+    }
+    .step h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .step p {
+      color: #a0aec0;
+      font-size: 15px;
+    }
+    
+    /* Benefits */
+    .benefits {
+      padding: 80px 20px;
+    }
+    .benefits h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 60px;
+    }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .benefit {
+      text-align: center;
+      padding: 30px;
+    }
+    .benefit-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+    .benefit h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .benefit p {
+      color: #718096;
+      font-size: 14px;
+    }
+    
+    /* Social Proof */
+    .social-proof {
+      padding: 80px 20px;
+      background: #f7fafc;
+    }
+    .social-proof h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 50px;
+    }
+    .logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 60px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+    }
+    .logo-placeholder {
+      width: 120px;
+      height: 50px;
+      background: #e2e8f0;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #a0aec0;
+      font-size: 12px;
+    }
+    .testimonials {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .testimonial {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .testimonial-text {
+      font-style: italic;
+      color: #4a5568;
+      margin-bottom: 16px;
+    }
+    .testimonial-author {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .testimonial-role {
+      color: #a0aec0;
+      font-size: 13px;
+    }
+    
+    /* Final CTA */
+    .final-cta {
+      padding: 100px 20px;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      color: white;
+      text-align: center;
+    }
+    .final-cta h2 {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+    .final-cta p {
+      font-size: 18px;
+      color: #a0aec0;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 32px; }
+      .paths-grid, .steps, .benefits-grid, .testimonials { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-eyebrow">AI-powered video, training, and web infrastructure</div>
+    <h1>Create faster. Perform better.<br>Get discovered everywhere.</h1>
+    <p class="hero-sub">Built for humans. Optimized for AI. Designed to convert.</p>
+    <a href="#how-it-works" class="btn-soft">See How It Works ↓</a>
+  </section>
+
+  <!-- Two Paths Section -->
+  <section class="paths">
+    <div class="paths-intro">
+      <h2>Two ways we help you win.</h2>
+    </div>
+    <div class="paths-grid">
+      <div class="path-card">
+        <div class="path-icon">🎬</div>
+        <h3>AI-Powered Video Production</h3>
+        <p>Training videos, explainers, and sales content—produced faster and more affordably than traditional methods.</p>
+        <ul>
+          <li>Professional quality without agency budgets</li>
+          <li>Weeks, not months</li>
+          <li>Scalable from 5 videos to 500</li>
+          <li>Multilingual options built in</li>
+        </ul>
+        <a href="#" class="path-link">Learn more about Video Production →</a>
+      </div>
+      <div class="path-card">
+        <div class="path-icon">🌐</div>
+        <h3>AI-Ready Web Development</h3>
+        <p>Modern websites and platforms—fast, secure, and built for the AI-driven future.</p>
+        <ul>
+          <li>Replace WordPress, Magento, Squarespace</li>
+          <li>Optimized for AI search visibility</li>
+          <li>Designed to convert, not just exist</li>
+          <li>Ready for AI integrations</li>
+        </ul>
+        <a href="#" class="path-link">Learn more about Web Development →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section class="problem">
+    <h2>The old way isn't working anymore.</h2>
+    <p>Scattered training videos nobody can find. Websites built on technology from 2010. Content that takes months to produce.</p>
+    <p>Your competitors are moving faster—with AI-powered infrastructure that scales.</p>
+    <p class="highlight">The companies that figure this out first will have an advantage that's hard to catch.</p>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works" id="how-it-works">
+    <h2>Simple process. Serious results.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Strategy Call</h3>
+        <p>We learn your goals, challenges, and current setup. You get clarity on what's possible.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Custom Plan</h3>
+        <p>We design a solution—video, web, or both—tailored to your needs and timeline.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Build & Launch</h3>
+        <p>We execute fast. You get modern infrastructure that performs.</p>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 50px;">
+      <a href="#" class="btn-primary">Schedule a Free Strategy Call</a>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="benefits">
+    <h2>What changes when you work with us.</h2>
+    <div class="benefits-grid">
+      <div class="benefit">
+        <div class="benefit-icon">⚡</div>
+        <h3>Speed</h3>
+        <p>Production timelines measured in days and weeks, not months.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">📈</div>
+        <h3>Scale</h3>
+        <p>Create 50 videos or rebuild your entire web presence without proportional cost.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">🎯</div>
+        <h3>Results</h3>
+        <p>Infrastructure designed to convert, track, and prove ROI.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">🔮</div>
+        <h3>Future-Proof</h3>
+        <p>Built on modern technology ready for AI integrations and search.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">🤝</div>
+        <h3>Partnership</h3>
+        <p>Responsive support from people who actually answer emails.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">💰</div>
+        <h3>Value</h3>
+        <p>Enterprise-grade capability without enterprise-grade budgets.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Proof -->
+  <section class="social-proof">
+    <h2>Trusted by companies ready to move forward.</h2>
+    <div class="logos">
+      <div class="logo-placeholder">Logo 1</div>
+      <div class="logo-placeholder">Logo 2</div>
+      <div class="logo-placeholder">Logo 3</div>
+      <div class="logo-placeholder">Logo 4</div>
+    </div>
+    <div class="testimonials">
+      <div class="testimonial">
+        <p class="testimonial-text">"[Placeholder: Testimonial about video production speed, quality, or impact.]"</p>
+        <p class="testimonial-author">[Name]</p>
+        <p class="testimonial-role">[Title, Company]</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">"[Placeholder: Testimonial about web development, AI-readiness, or partnership experience.]"</p>
+        <p class="testimonial-author">[Name]</p>
+        <p class="testimonial-role">[Title, Company]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta">
+    <h2>Ready to build what's next?</h2>
+    <p>Whether you need video content that scales or web infrastructure that performs—let's talk about what's possible.</p>
+    <a href="#" class="btn-primary">Schedule a Free Strategy Call</a>
+  </section>
+
+</body>
+</html>
