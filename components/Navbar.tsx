@@ -207,6 +207,15 @@ export default function Navbar() {
             </Link>
 
             <Link
+              href="/book"
+              className={`${navLinkBase} text-white hover:text-red-500 hover:bg-white/5 ${
+                pathname?.startsWith("/book") ? "text-red-500 bg-white/5" : ""
+              }`}
+            >
+              Book
+            </Link>
+
+            <Link
               href="/contact"
               className={`${navLinkBase} text-white hover:text-red-500 hover:bg-white/5 ${
                 pathname === "/contact" ? "text-red-500 bg-white/5" : ""
@@ -218,7 +227,7 @@ export default function Navbar() {
 
           <div className="flex items-center gap-3">
             <Link
-              href="/contact"
+              href="/book"
               className="hidden lg:inline-flex items-center gap-2 rounded-full bg-red-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-600/25 transition-all hover:bg-red-500 hover:shadow-red-500/30 hover:scale-105"
             >
               <span>Free Strategy Call</span>
@@ -469,6 +478,16 @@ function MobileMenu({
               </Link>
 
               <Link
+                href="/book"
+                onClick={onClose}
+                className={`block px-4 py-3 rounded-lg text-base font-medium text-white hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px] flex items-center ${
+                  pathname?.startsWith("/book") ? "bg-white/5 text-red-500" : ""
+                }`}
+              >
+                Book
+              </Link>
+
+              <Link
                 href="/contact"
                 onClick={onClose}
                 className={`block px-4 py-3 rounded-lg text-base font-medium text-white hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px] flex items-center ${
@@ -481,7 +500,7 @@ function MobileMenu({
               {/* CTA Button */}
               <div className="pt-4">
                 <Link
-                  href="/contact"
+                  href="/book"
                   onClick={onClose}
                   className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-full bg-red-600 text-white text-base font-semibold hover:bg-red-500 transition-colors shadow-lg shadow-red-600/25"
                 >
