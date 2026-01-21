@@ -28,10 +28,16 @@ const resourcesItems = [
   { name: "Blog", href: "/blog" },
 ];
 
+const aboutItems = [
+  { name: "About", href: "/about" },
+  { name: "Team", href: "/team" },
+];
+
 export default function Navbar() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const hamburgerRef = useRef<HTMLButtonElement>(null);
@@ -79,12 +85,14 @@ export default function Navbar() {
     items, 
     isOpen, 
     setIsOpen, 
-    label 
+    label,
+    isActive,
   }: { 
     items: { name: string; href: string }[]; 
     isOpen: boolean; 
     setIsOpen: (open: boolean) => void;
     label: string;
+    isActive?: boolean;
   }) => (
     <div
       className="relative group"
@@ -94,7 +102,9 @@ export default function Navbar() {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`${navLinkBase} flex items-center gap-1 text-white hover:text-red-500 hover:bg-white/5`}
+        className={`${navLinkBase} flex items-center gap-1 text-white hover:text-red-500 hover:bg-white/5 ${
+          isActive ? "text-red-500 bg-white/5" : ""
+        }`}
       >
         {label}
         <motion.span 
@@ -179,23 +189,13 @@ export default function Navbar() {
               label="Resources"
             />
 
-            <Link
-              href="/about"
-              className={`${navLinkBase} text-white hover:text-red-500 hover:bg-white/5 ${
-                pathname === "/about" ? "text-red-500 bg-white/5" : ""
-              }`}
-            >
-              About
-            </Link>
-
-            <Link
-              href="/team"
-              className={`${navLinkBase} text-white hover:text-red-500 hover:bg-white/5 ${
-                pathname === "/team" ? "text-red-500 bg-white/5" : ""
-              }`}
-            >
-              Team
-            </Link>
+            <DropdownMenu 
+              items={aboutItems} 
+              isOpen={aboutOpen} 
+              setIsOpen={setAboutOpen}
+              label="About"
+              isActive={pathname === "/about" || pathname === "/team"}
+            />
 
             <Link
               href="/blog"
@@ -204,15 +204,6 @@ export default function Navbar() {
               }`}
             >
               Blog
-            </Link>
-
-            <Link
-              href="/book"
-              className={`${navLinkBase} text-white hover:text-red-500 hover:bg-white/5 ${
-                pathname?.startsWith("/book") ? "text-red-500 bg-white/5" : ""
-              }`}
-            >
-              Book
             </Link>
 
             <Link
@@ -309,6 +300,7 @@ function MobileMenu({
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
   const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
+  const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
 
   // Close submenus when main menu closes
   useEffect(() => {
@@ -316,6 +308,7 @@ function MobileMenu({
       setMobileServicesOpen(false);
       setMobileSolutionsOpen(false);
       setMobileResourcesOpen(false);
+      setMobileAboutOpen(false);
     }
   }, [isOpen]);
 
@@ -447,25 +440,12 @@ function MobileMenu({
                 setIsOpen={setMobileResourcesOpen}
               />
 
-              <Link
-                href="/about"
-                onClick={onClose}
-                className={`block px-4 py-3 rounded-lg text-base font-medium text-white hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px] flex items-center ${
-                  pathname === "/about" ? "bg-white/5 text-red-500" : ""
-                }`}
-              >
-                About
-              </Link>
-
-              <Link
-                href="/team"
-                onClick={onClose}
-                className={`block px-4 py-3 rounded-lg text-base font-medium text-white hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px] flex items-center ${
-                  pathname === "/team" ? "bg-white/5 text-red-500" : ""
-                }`}
-              >
-                Team
-              </Link>
+              <MobileDropdown
+                label="About"
+                items={aboutItems}
+                isOpen={mobileAboutOpen}
+                setIsOpen={setMobileAboutOpen}
+              />
 
               <Link
                 href="/blog"
@@ -475,16 +455,6 @@ function MobileMenu({
                 }`}
               >
                 Blog
-              </Link>
-
-              <Link
-                href="/book"
-                onClick={onClose}
-                className={`block px-4 py-3 rounded-lg text-base font-medium text-white hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px] flex items-center ${
-                  pathname?.startsWith("/book") ? "bg-white/5 text-red-500" : ""
-                }`}
-              >
-                Book
               </Link>
 
               <Link
