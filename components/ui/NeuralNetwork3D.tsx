@@ -4,6 +4,7 @@ import { useRef, useMemo, useState, useEffect, Suspense } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Float, OrbitControls, Sphere, Line } from '@react-three/drei';
 import * as THREE from 'three';
+import type { Line2, LineMaterial } from 'three-stdlib';
 
 // Types
 interface NodeData {
@@ -204,8 +205,7 @@ function Connection({
   exploded: number;
   type: 'core' | 'primary' | 'secondary' | 'outer';
 }) {
-  const lineRef = useRef<THREE.Line>(null);
-  const [points, setPoints] = useState<THREE.Vector3[]>([start.clone(), end.clone()]);
+  const lineRef = useRef<Line2>(null);
   
   const colors = {
     core: '#ff4444',
@@ -224,28 +224,19 @@ function Connection({
   useFrame(() => {
     // Lines will fade/stretch during explosion
     const opacity = Math.max(0, 1 - exploded * 1.5);
-    if (lineRef.current && lineRef.current.material) {
-      (lineRef.current.material as THREE.LineBasicMaterial).opacity = opacity;
-    }
+    const material = lineRef.current?.material as LineMaterial | undefined;
+    if (material) material.opacity = opacity;
   });
   
   return (
-    <line ref={lineRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={2}
-          array={new Float32Array([...start.toArray(), ...end.toArray()])}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <lineBasicMaterial
-        color={colors[type]}
-        transparent
-        opacity={0.4}
-        linewidth={lineWidth[type]}
-      />
-    </line>
+    <Line
+      ref={lineRef}
+      points={[start, end]}
+      color={colors[type]}
+      transparent
+      opacity={0.4}
+      lineWidth={lineWidth[type]}
+    />
   );
 }
 

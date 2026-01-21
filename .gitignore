@@ -42,3 +42,4 @@ next-env.d.ts
 
 # blog data
 /data
+.env*.local
