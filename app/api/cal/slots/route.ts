@@ -2,15 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 
 const CAL_API_BASE = process.env.CAL_API_BASE_URL ?? "https://api.cal.com";
 
-export async function GET(request: NextRequest) {
-  const apiKey = process.env.CAL_API_KEY?.trim();
-  if (!apiKey) {
-    return NextResponse.json(
-      { error: "CAL_API_KEY is not configured" },
-      { status: 500 }
-    );
+const getApiKeyForUser = (username?: string): string | undefined => {
+  // Mark's events use Mark's API key
+  if (username?.toLowerCase().includes("mark")) {
+    return process.env.CAL_API_KEY_MARK?.trim();
   }
+  // Default to Wolf's API key
+  return process.env.CAL_API_KEY?.trim();
+};
 
+export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const eventTypeSlug = searchParams.get("eventTypeSlug");
   const startTime = searchParams.get("startTime");
@@ -22,6 +23,14 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
       { error: "Missing required query parameters" },
       { status: 400 }
+    );
+  }
+
+  const apiKey = getApiKeyForUser(username ?? undefined);
+  if (!apiKey) {
+    return NextResponse.json(
+      { error: "CAL_API_KEY is not configured" },
+      { status: 500 }
     );
   }
 

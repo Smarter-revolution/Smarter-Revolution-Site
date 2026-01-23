@@ -13,6 +13,15 @@ type BookingPayload = {
   teamSlug?: string;
 };
 
+const getApiKeyForUser = (username?: string): string | undefined => {
+  // Mark's events use Mark's API key
+  if (username?.toLowerCase().includes("mark")) {
+    return process.env.CAL_API_KEY_MARK?.trim();
+  }
+  // Default to Wolf's API key
+  return process.env.CAL_API_KEY?.trim();
+};
+
 const resolveEventTypeId = async (
   apiKey: string,
   eventTypeSlug: string,
@@ -47,14 +56,6 @@ const resolveEventTypeId = async (
 };
 
 export async function POST(request: NextRequest) {
-  const apiKey = process.env.CAL_API_KEY?.trim();
-  if (!apiKey) {
-    return NextResponse.json(
-      { error: "CAL_API_KEY is not configured" },
-      { status: 500 }
-    );
-  }
-
   try {
     const body = (await request.json()) as BookingPayload;
 
@@ -62,6 +63,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: "Missing required booking fields" },
         { status: 400 }
+      );
+    }
+
+    const apiKey = getApiKeyForUser(body.username);
+    if (!apiKey) {
+      return NextResponse.json(
+        { error: "CAL_API_KEY is not configured" },
+        { status: 500 }
       );
     }
 
