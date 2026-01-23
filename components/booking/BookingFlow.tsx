@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import AvailabilityCalendar from "@/components/booking/AvailabilityCalendar";
 import BookingForm from "@/components/booking/BookingForm";
 import {
@@ -27,18 +27,47 @@ const resolveEventTypeId = (
   return eventTypes.find((eventType) => eventType.slug === slug)?.id;
 };
 
+const normalizeSlug = (slug?: string) => {
+  if (!slug) return "";
+  const trimmed = slug.split("?")[0];
+  const segments = trimmed.split("/").filter(Boolean);
+  return segments[segments.length - 1] ?? "";
+};
+
+const getHostLabel = (username?: string) => {
+  if (!username) return "Smarter Revolution";
+  if (username.toLowerCase().includes("wolf")) return "Wolf";
+  if (username.toLowerCase().includes("mark")) return "Mark";
+  return username;
+};
+
+const extractBookingUid = (booking: unknown) => {
+  const record = booking as
+    | { uid?: string; bookingUid?: string; booking?: { uid?: string } }
+    | undefined;
+  return record?.booking?.uid ?? record?.uid ?? record?.bookingUid ?? "";
+};
+
 export default function BookingFlow({ eventTypeSlug }: BookingFlowProps) {
+  const params = useParams();
+  const routeSlug = Array.isArray(params?.eventTypeSlug)
+    ? params?.eventTypeSlug[0]
+    : (params?.eventTypeSlug as string | undefined);
+  const resolvedSlug = normalizeSlug(routeSlug || eventTypeSlug);
   const router = useRouter();
-  const baseConfig = getMeetingType(eventTypeSlug);
+  const baseConfig = getMeetingType(resolvedSlug);
   const [eventType, setEventType] = useState<MeetingTypeConfig | null>(
     baseConfig ?? null
   );
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
   const [eventTypeError, setEventTypeError] = useState<string | null>(null);
+  const [timeZone, setTimeZone] = useState(
+    () => Intl.DateTimeFormat().resolvedOptions().timeZone
+  );
 
   const relatedMeetingTypes = useMemo(
-    () => meetingTypes.filter((type) => type.slug !== eventTypeSlug),
-    [eventTypeSlug]
+    () => meetingTypes.filter((type) => type.slug !== resolvedSlug),
+    [resolvedSlug]
   );
 
   useEffect(() => {
@@ -56,7 +85,7 @@ export default function BookingFlow({ eventTypeSlug }: BookingFlowProps) {
       try {
         const response = await fetch("/api/cal/event-types");
         const data = await response.json();
-        const resolvedId = resolveEventTypeId(data, eventTypeSlug);
+        const resolvedId = resolveEventTypeId(data, baseConfig.calEventTypeSlug);
 
         if (!resolvedId) {
           return;
@@ -69,13 +98,21 @@ export default function BookingFlow({ eventTypeSlug }: BookingFlowProps) {
     };
 
     loadEventTypeId();
-  }, [baseConfig, eventTypeSlug]);
+  }, [baseConfig]);
 
   const handleBookingSuccess = (booking: unknown) => {
     const params = new URLSearchParams({
       eventType: eventType?.title ?? "",
       start: selectedSlot ?? "",
+      host: getHostLabel(eventType?.hostUsername),
+      duration: String(eventType?.durationMinutes ?? ""),
+      timeZone,
     });
+
+    const bookingUid = extractBookingUid(booking);
+    if (bookingUid) {
+      params.set("bookingUid", bookingUid);
+    }
 
     router.push(`/book/confirmation?${params.toString()}`);
     console.log("Booking confirmed", booking);
@@ -113,8 +150,10 @@ export default function BookingFlow({ eventTypeSlug }: BookingFlowProps) {
         </div>
 
         <AvailabilityCalendar
-          eventTypeSlug={eventType.slug}
+          eventTypeSlug={eventType.calEventTypeSlug}
           hostUsername={eventType.hostUsername}
+          timeZone={timeZone}
+          onTimeZoneChange={setTimeZone}
           onSlotSelect={setSelectedSlot}
         />
 
@@ -141,6 +180,7 @@ export default function BookingFlow({ eventTypeSlug }: BookingFlowProps) {
           <BookingForm
             eventType={eventType}
             selectedSlot={selectedSlot}
+            timeZone={timeZone}
             onSuccess={handleBookingSuccess}
           />
         ) : (

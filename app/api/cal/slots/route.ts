@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 const CAL_API_BASE = process.env.CAL_API_BASE_URL ?? "https://api.cal.com";
 
 export async function GET(request: NextRequest) {
-  const apiKey = process.env.CAL_API_KEY;
+  const apiKey = process.env.CAL_API_KEY?.trim();
   if (!apiKey) {
     return NextResponse.json(
       { error: "CAL_API_KEY is not configured" },
@@ -26,19 +26,17 @@ export async function GET(request: NextRequest) {
   }
 
   const url = new URL("/v1/slots", CAL_API_BASE);
+  url.searchParams.set("apiKey", apiKey);
   url.searchParams.set("eventTypeSlug", eventTypeSlug);
   url.searchParams.set("startTime", startTime);
   url.searchParams.set("endTime", endTime);
   url.searchParams.set("timeZone", timeZone);
   if (username) {
-    url.searchParams.set("username", username);
+    url.searchParams.set("usernameList", username);
   }
 
   try {
     const response = await fetch(url.toString(), {
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-      },
       cache: "no-store",
     });
     const data = await response.json();

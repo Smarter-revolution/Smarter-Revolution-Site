@@ -17,6 +17,7 @@ export type BookingQuestion = {
 
 export type MeetingTypeConfig = {
   slug: string;
+  calEventTypeSlug: string; // The actual slug in Cal.com
   title: string;
   description: string;
   durationMinutes: number;
@@ -28,11 +29,12 @@ export type MeetingTypeConfig = {
 export const meetingTypes: MeetingTypeConfig[] = [
   {
     slug: "ai-video-discovery",
+    calEventTypeSlug: "30min",
     title: "AI Video Production Discovery",
     description:
       "Explore Guided Video production options and scope the best path forward.",
     durationMinutes: 30,
-    hostUsername: "wolf",
+    hostUsername: "wolfkrammel",
     questions: [
       { id: "name", label: "Full Name", type: "text", required: true },
       { id: "email", label: "Email", type: "email", required: true },
@@ -74,10 +76,11 @@ export const meetingTypes: MeetingTypeConfig[] = [
   },
   {
     slug: "nextjs-discovery",
+    calEventTypeSlug: "30min",
     title: "Next.js Development Discovery",
     description: "Discuss modern web development or hub builds.",
     durationMinutes: 30,
-    hostUsername: "wolf",
+    hostUsername: "wolfkrammel",
     questions: [
       { id: "name", label: "Full Name", type: "text", required: true },
       { id: "email", label: "Email", type: "email", required: true },
@@ -118,10 +121,11 @@ export const meetingTypes: MeetingTypeConfig[] = [
   },
   {
     slug: "strategy-session",
+    calEventTypeSlug: "30min",
     title: "Free Strategy Session",
     description: "General AI transformation / business empowerment discussion.",
     durationMinutes: 30,
-    hostUsername: "wolf",
+    hostUsername: "wolfkrammel",
     questions: [
       { id: "name", label: "Full Name", type: "text", required: true },
       { id: "email", label: "Email", type: "email", required: true },
@@ -170,10 +174,11 @@ export const meetingTypes: MeetingTypeConfig[] = [
   },
   {
     slug: "coffee-wolf",
+    calEventTypeSlug: "15min",
     title: "Virtual Coffee with Wolf",
     description: "Informal conversation, existing relationships, networking.",
-    durationMinutes: 30,
-    hostUsername: "wolf",
+    durationMinutes: 15,
+    hostUsername: "wolfkrammel",
     questions: [
       { id: "name", label: "Full Name", type: "text", required: true },
       { id: "email", label: "Email", type: "email", required: true },
@@ -189,10 +194,11 @@ export const meetingTypes: MeetingTypeConfig[] = [
   },
   {
     slug: "coffee-mark",
+    calEventTypeSlug: "15min",
     title: "Virtual Coffee with Mark",
     description: "Informal conversation, existing relationships, networking.",
-    durationMinutes: 30,
-    hostUsername: "mark",
+    durationMinutes: 15,
+    hostUsername: "mark314",
     questions: [
       { id: "name", label: "Full Name", type: "text", required: true },
       { id: "email", label: "Email", type: "email", required: true },

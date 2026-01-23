@@ -20,6 +20,7 @@ const resolveEventTypeId = async (
   username?: string
 ) => {
   const url = new URL("/v1/event-types", CAL_API_BASE);
+  url.searchParams.set("apiKey", apiKey);
   if (teamSlug) {
     url.searchParams.set("teamSlug", teamSlug);
   }
@@ -28,9 +29,6 @@ const resolveEventTypeId = async (
   }
 
   const response = await fetch(url.toString(), {
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-    },
     cache: "no-store",
   });
 
@@ -49,7 +47,7 @@ const resolveEventTypeId = async (
 };
 
 export async function POST(request: NextRequest) {
-  const apiKey = process.env.CAL_API_KEY;
+  const apiKey = process.env.CAL_API_KEY?.trim();
   if (!apiKey) {
     return NextResponse.json(
       { error: "CAL_API_KEY is not configured" },
@@ -84,10 +82,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const calResponse = await fetch(`${CAL_API_BASE}/v1/bookings`, {
+    const bookingUrl = new URL("/v1/bookings", CAL_API_BASE);
+    bookingUrl.searchParams.set("apiKey", apiKey);
+
+    const calResponse = await fetch(bookingUrl.toString(), {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({

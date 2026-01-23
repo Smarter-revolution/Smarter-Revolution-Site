@@ -1,11 +1,12 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useState } from "react";
 import type { BookingQuestion, MeetingTypeConfig } from "@/lib/calBookingConfig";
 
 type BookingFormProps = {
   eventType: MeetingTypeConfig;
   selectedSlot: string;
+  timeZone: string;
   onSuccess: (booking: unknown) => void;
 };
 
@@ -23,6 +24,7 @@ const buildInitialResponses = (questions: BookingQuestion[]) =>
 export default function BookingForm({
   eventType,
   selectedSlot,
+  timeZone,
   onSuccess,
 }: BookingFormProps) {
   const [responses, setResponses] = useState<Record<string, ResponseValue>>(() =>
@@ -30,11 +32,6 @@ export default function BookingForm({
   );
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  const timeZone = useMemo(
-    () => Intl.DateTimeFormat().resolvedOptions().timeZone,
-    []
-  );
 
   const updateResponse = (id: string, value: ResponseValue) => {
     setResponses((prev) => ({ ...prev, [id]: value }));
@@ -48,7 +45,7 @@ export default function BookingForm({
     try {
       const payload = {
         eventTypeId: eventType.eventTypeId,
-        eventTypeSlug: eventType.slug,
+        eventTypeSlug: eventType.calEventTypeSlug,
         start: selectedSlot,
         responses,
         timeZone,

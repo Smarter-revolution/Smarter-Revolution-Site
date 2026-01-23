@@ -7,6 +7,8 @@ type SlotByDate = Record<string, string[]>;
 type AvailabilityCalendarProps = {
   eventTypeSlug: string;
   hostUsername?: string;
+  timeZone: string;
+  onTimeZoneChange: (timeZone: string) => void;
   onSlotSelect: (isoDateTime: string) => void;
 };
 
@@ -89,6 +91,8 @@ const normalizeSlots = (data: unknown): SlotByDate => {
 export default function AvailabilityCalendar({
   eventTypeSlug,
   hostUsername,
+  timeZone,
+  onTimeZoneChange,
   onSlotSelect,
 }: AvailabilityCalendarProps) {
   const [selectedDate, setSelectedDate] = useState(() => new Date());
@@ -96,10 +100,13 @@ export default function AvailabilityCalendar({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const timeZone = useMemo(
-    () => Intl.DateTimeFormat().resolvedOptions().timeZone,
-    []
-  );
+  const timeZones = useMemo(() => {
+    if (typeof Intl !== "undefined" && "supportedValuesOf" in Intl) {
+      return (Intl as typeof Intl & { supportedValuesOf: (type: string) => string[] })
+        .supportedValuesOf("timeZone");
+    }
+    return [timeZone];
+  }, [timeZone]);
 
   useEffect(() => {
     const loadSlots = async () => {
@@ -150,12 +157,26 @@ export default function AvailabilityCalendar({
           <h3 className="text-lg font-semibold text-white">Select a date</h3>
           <p className="text-sm text-gray-400">Timezone: {timeZone}</p>
         </div>
-        <input
-          type="date"
-          value={selectedKey}
-          onChange={(event) => setSelectedDate(new Date(event.target.value))}
-          className="rounded-md border border-white/10 bg-black/40 px-3 py-2 text-sm text-white"
-        />
+        <div className="flex flex-wrap items-center gap-3">
+          <select
+            value={timeZone}
+            onChange={(event) => onTimeZoneChange(event.target.value)}
+            className="rounded-md border border-white/10 bg-black/40 px-3 py-2 text-sm text-white"
+            aria-label="Select time zone"
+          >
+            {timeZones.map((zone) => (
+              <option key={zone} value={zone}>
+                {zone}
+              </option>
+            ))}
+          </select>
+          <input
+            type="date"
+            value={selectedKey}
+            onChange={(event) => setSelectedDate(new Date(event.target.value))}
+            className="rounded-md border border-white/10 bg-black/40 px-3 py-2 text-sm text-white"
+          />
+        </div>
       </div>
 
       {loading ? (
