@@ -444,18 +444,6 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Resources */}
-            <div>
-              <SectionHeader delay={0.2}>Resources</SectionHeader>
-              <ul className="space-y-3">
-                {footerLinks.resources.map((link, i) => (
-                  <AnimatedLink key={link.href} href={link.href} delay={0.3 + i * 0.05}>
-                    {link.name}
-                  </AnimatedLink>
-                ))}
-              </ul>
-            </div>
-
             {/* Company */}
             <div>
               <SectionHeader delay={0.25}>Company</SectionHeader>
@@ -495,6 +483,18 @@ export default function Footer() {
                   (213) 302-8260
                 </ContactInfo>
               </motion.div>
+            </div>
+
+            {/* Resources */}
+            <div>
+              <SectionHeader delay={0.2}>Resources</SectionHeader>
+              <ul className="space-y-3">
+                {footerLinks.resources.map((link, i) => (
+                  <AnimatedLink key={link.href} href={link.href} delay={0.3 + i * 0.05}>
+                    {link.name}
+                  </AnimatedLink>
+                ))}
+              </ul>
             </div>
           </div>
 
