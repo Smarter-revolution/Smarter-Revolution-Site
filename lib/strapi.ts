@@ -35,6 +35,10 @@ async function fetchStrapi<T>(
   query?: object,
   options?: RequestInit
 ): Promise<T> {
+  if (!STRAPI_URL) {
+    throw new Error('NEXT_PUBLIC_STRAPI_URL is not configured');
+  }
+
   const queryString = query ? `?${qs.stringify(query, { encodeValuesOnly: true })}` : '';
 
   const response = await fetch(`${STRAPI_URL}/api${endpoint}${queryString}`, {
