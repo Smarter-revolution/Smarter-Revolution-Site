@@ -4,40 +4,17 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import type { MenuItem } from "@/types/strapi";
 
 const navLinkBase =
   "text-sm font-medium px-3 py-2 rounded-md transition-all duration-200";
 
-// Navigation structure from Website 2026 specs
-const servicesItems = [
-  { name: "Video Production", href: "/video-production" },
-  { name: "Web Development", href: "/web-development" },
-  { name: "Guided Knowledge Hub", href: "/guided-knowledge-hub" },
-];
+interface NavbarProps {
+  mainMenu: MenuItem[];
+}
 
-const solutionsItems = [
-  { name: "Training & Onboarding", href: "/solutions/training-onboarding" },
-  { name: "Sales & Partner Enablement", href: "/solutions/sales-enablement" },
-  { name: "Customer Education", href: "/solutions/customer-education" },
-  { name: "Compliance & Documentation", href: "/solutions/compliance-documentation" },
-  { name: "Website & Platform Modernization", href: "/solutions/website-modernization" },
-  { name: "Custom Portals & Systems", href: "/solutions/custom-portals" },
-];
-
-const resourcesItems = [
-  { name: "Blog", href: "/blog" },
-];
-
-const aboutItems = [
-  { name: "About", href: "/about" },
-  { name: "Team", href: "/team" },
-];
-
-export default function Navbar() {
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [solutionsOpen, setSolutionsOpen] = useState(false);
-  const [resourcesOpen, setResourcesOpen] = useState(false);
-  const [aboutOpen, setAboutOpen] = useState(false);
+export default function Navbar({ mainMenu }: NavbarProps) {
+  const [openDropdown, setOpenDropdown] = useState<number | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const hamburgerRef = useRef<HTMLButtonElement>(null);
@@ -80,67 +57,112 @@ export default function Navbar() {
 
   const mobileMenuExpanded = mobileMenuOpen ? "true" : "false";
 
-  // Dropdown component for desktop
-  const DropdownMenu = ({ 
-    items, 
-    isOpen, 
-    setIsOpen, 
-    label,
-    isActive,
-  }: { 
-    items: { name: string; href: string }[]; 
-    isOpen: boolean; 
-    setIsOpen: (open: boolean) => void;
-    label: string;
-    isActive?: boolean;
-  }) => (
-    <div
-      className="relative group"
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
-    >
-      <button
-        type="button"
-        onClick={() => setIsOpen(!isOpen)}
-        className={`${navLinkBase} flex items-center gap-1 text-white hover:text-red-500 hover:bg-white/5 ${
-          isActive ? "text-red-500 bg-white/5" : ""
-        }`}
+  // Check if a menu item or any of its children is active
+  const isMenuItemActive = (item: MenuItem): boolean => {
+    if (item.url && item.url !== '#' && pathname === item.url) return true;
+    if (item.children?.some(child => pathname === child.url)) return true;
+    return false;
+  };
+
+  // Dropdown component for desktop - renders menu items with children
+  const DropdownMenu = ({
+    item,
+    isOpen,
+    onOpen,
+    onClose,
+  }: {
+    item: MenuItem;
+    isOpen: boolean;
+    onOpen: () => void;
+    onClose: () => void;
+  }) => {
+    const isActive = isMenuItemActive(item);
+
+    return (
+      <div
+        className="relative group"
+        onMouseEnter={onOpen}
+        onMouseLeave={onClose}
       >
-        {label}
-        <motion.span 
-          className="text-xs text-gray-400"
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
+        <button
+          type="button"
+          onClick={() => isOpen ? onClose() : onOpen()}
+          className={`${navLinkBase} flex items-center gap-1 text-white hover:text-red-500 hover:bg-white/5 ${
+            isActive ? "text-red-500 bg-white/5" : ""
+          }`}
         >
-          ▾
-        </motion.span>
-      </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div 
-            className="absolute left-0 top-full w-72 pt-2 z-50"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
+          {item.label}
+          <motion.span
+            className="text-xs text-gray-400"
+            animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="rounded-xl border border-white/10 bg-[#0a0a0a]/95 backdrop-blur-xl p-2 shadow-2xl shadow-black/50">
-              {items.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="block rounded-lg px-4 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-red-500 transition-all duration-200"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
+            ▾
+          </motion.span>
+        </button>
+        <AnimatePresence>
+          {isOpen && item.children && item.children.length > 0 && (
+            <motion.div
+              className="absolute left-0 top-full w-72 pt-2 z-50"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="rounded-xl border border-white/10 bg-[#0a0a0a]/95 backdrop-blur-xl p-2 shadow-2xl shadow-black/50">
+                {item.children.map((child) => (
+                  <Link
+                    key={child.id}
+                    href={child.url}
+                    target={child.openInNewTab ? "_blank" : undefined}
+                    rel={child.openInNewTab ? "noopener noreferrer" : undefined}
+                    className={`block rounded-lg px-4 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-red-500 transition-all duration-200 ${
+                      pathname === child.url ? "text-red-500 bg-white/5" : ""
+                    }`}
+                    onClick={onClose}
+                  >
+                    {child.label}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    );
+  };
+
+  // Render a single nav item - either a link or dropdown based on children
+  const renderNavItem = (item: MenuItem) => {
+    const hasChildren = item.children && item.children.length > 0;
+
+    if (hasChildren) {
+      return (
+        <DropdownMenu
+          key={item.id}
+          item={item}
+          isOpen={openDropdown === item.id}
+          onOpen={() => setOpenDropdown(item.id)}
+          onClose={() => setOpenDropdown(null)}
+        />
+      );
+    }
+
+    // Direct link without children
+    return (
+      <Link
+        key={item.id}
+        href={item.url}
+        target={item.openInNewTab ? "_blank" : undefined}
+        rel={item.openInNewTab ? "noopener noreferrer" : undefined}
+        className={`${navLinkBase} text-white hover:text-red-500 hover:bg-white/5 ${
+          pathname === item.url ? "text-red-500 bg-white/5" : ""
+        }`}
+      >
+        {item.label}
+      </Link>
+    );
+  };
 
   return (
     <>
@@ -157,63 +179,9 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Dynamically rendered from mainMenu */}
           <div className="hidden items-center space-x-1 lg:flex">
-            <Link
-              href="/"
-              className={`${navLinkBase} text-white hover:text-red-500 hover:bg-white/5 ${
-                pathname === "/" ? "text-red-500 bg-white/5" : ""
-              }`}
-            >
-              Home
-            </Link>
-
-            <DropdownMenu 
-              items={servicesItems} 
-              isOpen={servicesOpen} 
-              setIsOpen={setServicesOpen}
-              label="Services"
-            />
-
-            <DropdownMenu 
-              items={solutionsItems} 
-              isOpen={solutionsOpen} 
-              setIsOpen={setSolutionsOpen}
-              label="Solutions"
-            />
-
-            <DropdownMenu 
-              items={resourcesItems} 
-              isOpen={resourcesOpen} 
-              setIsOpen={setResourcesOpen}
-              label="Resources"
-            />
-
-            <DropdownMenu 
-              items={aboutItems} 
-              isOpen={aboutOpen} 
-              setIsOpen={setAboutOpen}
-              label="About"
-              isActive={pathname === "/about" || pathname === "/team"}
-            />
-
-            <Link
-              href="/blog"
-              className={`${navLinkBase} text-white hover:text-red-500 hover:bg-white/5 ${
-                pathname === "/blog" ? "text-red-500 bg-white/5" : ""
-              }`}
-            >
-              Blog
-            </Link>
-
-            <Link
-              href="/contact"
-              className={`${navLinkBase} text-white hover:text-red-500 hover:bg-white/5 ${
-                pathname === "/contact" ? "text-red-500 bg-white/5" : ""
-              }`}
-            >
-              Contact
-            </Link>
+            {mainMenu.map(renderNavItem)}
           </div>
 
           <div className="flex items-center gap-3">
@@ -282,6 +250,7 @@ export default function Navbar() {
         isOpen={mobileMenuOpen}
         onClose={closeMobileMenu}
         pathname={pathname}
+        mainMenu={mainMenu}
       />
     </>
   );
@@ -292,84 +261,109 @@ function MobileMenu({
   isOpen,
   onClose,
   pathname,
+  mainMenu,
 }: {
   isOpen: boolean;
   onClose: () => void;
   pathname: string | null;
+  mainMenu: MenuItem[];
 }) {
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
-  const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
-  const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
+  const [openDropdowns, setOpenDropdowns] = useState<Set<number>>(new Set());
 
-  // Close submenus when main menu closes
+  // Close all submenus when main menu closes
   useEffect(() => {
     if (!isOpen) {
-      setMobileServicesOpen(false);
-      setMobileSolutionsOpen(false);
-      setMobileResourcesOpen(false);
-      setMobileAboutOpen(false);
+      setOpenDropdowns(new Set());
     }
   }, [isOpen]);
 
-  const MobileDropdown = ({
-    label,
-    items,
-    isOpen,
-    setIsOpen,
-  }: {
-    label: string;
-    items: { name: string; href: string }[];
-    isOpen: boolean;
-    setIsOpen: (open: boolean) => void;
-  }) => (
-    <div className="space-y-1">
-      <button
-        type="button"
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium text-white hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px]"
-      >
-        <span>{label}</span>
-        <motion.svg
-          className="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </motion.svg>
-      </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden pl-4 space-y-1 border-l-2 border-red-600/30 ml-4"
+  const toggleDropdown = (id: number) => {
+    setOpenDropdowns((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  };
+
+  // Render a mobile menu item with optional children
+  const MobileMenuItem = ({ item }: { item: MenuItem }) => {
+    const hasChildren = item.children && item.children.length > 0;
+    const isDropdownOpen = openDropdowns.has(item.id);
+
+    if (hasChildren) {
+      return (
+        <div className="space-y-1">
+          <button
+            type="button"
+            onClick={() => toggleDropdown(item.id)}
+            className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium text-white hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px]"
           >
-            {items.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={onClose}
-                className="block px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px] flex items-center"
+            <span>{item.label}</span>
+            <motion.svg
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </motion.svg>
+          </button>
+          <AnimatePresence>
+            {isDropdownOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden pl-4 space-y-1 border-l-2 border-red-600/30 ml-4"
               >
-                {item.name}
-              </Link>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
+                {item.children!.map((child) => (
+                  <Link
+                    key={child.id}
+                    href={child.url}
+                    target={child.openInNewTab ? "_blank" : undefined}
+                    rel={child.openInNewTab ? "noopener noreferrer" : undefined}
+                    onClick={onClose}
+                    className={`block px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px] flex items-center ${
+                      pathname === child.url ? "text-red-500 bg-white/5" : ""
+                    }`}
+                  >
+                    {child.label}
+                  </Link>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      );
+    }
+
+    // Direct link without children
+    return (
+      <Link
+        href={item.url}
+        target={item.openInNewTab ? "_blank" : undefined}
+        rel={item.openInNewTab ? "noopener noreferrer" : undefined}
+        onClick={onClose}
+        className={`block px-4 py-3 rounded-lg text-base font-medium text-white hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px] flex items-center ${
+          pathname === item.url ? "bg-white/5 text-red-500" : ""
+        }`}
+      >
+        {item.label}
+      </Link>
+    );
+  };
 
   return (
     <AnimatePresence>
@@ -407,65 +401,11 @@ function MobileMenu({
               </button>
             </div>
 
-            {/* Navigation */}
+            {/* Navigation - Dynamically rendered from mainMenu */}
             <nav className="flex-1 overflow-y-auto p-4 space-y-2">
-              <Link
-                href="/"
-                onClick={onClose}
-                className={`block px-4 py-3 rounded-lg text-base font-medium text-white hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px] flex items-center ${
-                  pathname === "/" ? "bg-white/5 text-red-500" : ""
-                }`}
-              >
-                Home
-              </Link>
-
-              <MobileDropdown
-                label="Services"
-                items={servicesItems}
-                isOpen={mobileServicesOpen}
-                setIsOpen={setMobileServicesOpen}
-              />
-
-              <MobileDropdown
-                label="Solutions"
-                items={solutionsItems}
-                isOpen={mobileSolutionsOpen}
-                setIsOpen={setMobileSolutionsOpen}
-              />
-
-              <MobileDropdown
-                label="Resources"
-                items={resourcesItems}
-                isOpen={mobileResourcesOpen}
-                setIsOpen={setMobileResourcesOpen}
-              />
-
-              <MobileDropdown
-                label="About"
-                items={aboutItems}
-                isOpen={mobileAboutOpen}
-                setIsOpen={setMobileAboutOpen}
-              />
-
-              <Link
-                href="/blog"
-                onClick={onClose}
-                className={`block px-4 py-3 rounded-lg text-base font-medium text-white hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px] flex items-center ${
-                  pathname === "/blog" ? "bg-white/5 text-red-500" : ""
-                }`}
-              >
-                Blog
-              </Link>
-
-              <Link
-                href="/contact"
-                onClick={onClose}
-                className={`block px-4 py-3 rounded-lg text-base font-medium text-white hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px] flex items-center ${
-                  pathname === "/contact" ? "bg-white/5 text-red-500" : ""
-                }`}
-              >
-                Contact
-              </Link>
+              {mainMenu.map((item) => (
+                <MobileMenuItem key={item.id} item={item} />
+              ))}
 
               {/* CTA Button */}
               <div className="pt-4">
