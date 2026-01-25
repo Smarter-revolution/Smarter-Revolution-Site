@@ -350,7 +350,7 @@ export default function GuidedKnowledgeHubPage() {
           </ScrollReveal>
           
           <ScrollReveal delay={0.2}>
-            <GlowButton href="/contact" variant="primary" size="lg">
+            <GlowButton href="/book" variant="primary" size="lg">
               Schedule a Free Strategy Call
               <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

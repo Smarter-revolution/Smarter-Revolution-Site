@@ -430,7 +430,7 @@ export default function Contact() {
                   </div>
                   <h3 className="text-xl font-bold text-white mb-2">Prefer a Call?</h3>
                   <p className="text-gray-400 mb-4">Schedule a free strategy session with our team.</p>
-                  <GlowButton href="/contact" variant="outline" size="md">
+                  <GlowButton href="/book" variant="outline" size="md">
                     Book a Call
                   </GlowButton>
                 </AnimatedCard>

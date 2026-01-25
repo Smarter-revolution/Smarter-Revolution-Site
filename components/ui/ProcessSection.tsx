@@ -423,7 +423,7 @@ export default function ProcessSection() {
           animate={isInView && progress > 0.5 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          <Link href="/contact">
+          <Link href="/book">
             <motion.button
               className="relative px-8 py-4 text-lg font-semibold text-white rounded-xl overflow-hidden group"
               whileHover={{ scale: 1.02 }}

@@ -399,8 +399,8 @@ export default function Footer() {
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
                 <p className="text-xs text-gray-500 mb-2">Ready to transform your content?</p>
-                <Link 
-                  href="/contact"
+                <Link
+                  href="/book"
                   className="inline-flex items-center gap-2 text-sm font-medium text-red-500 hover:text-red-400 transition-colors group"
                 >
                   Get started today

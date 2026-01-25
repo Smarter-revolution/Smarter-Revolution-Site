@@ -204,7 +204,7 @@ export default function ComplianceDocumentationPage() {
             </p>
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
-            <GlowButton href="/contact" variant="primary" size="lg">
+            <GlowButton href="/book" variant="primary" size="lg">
               Schedule a Free Strategy Call
             </GlowButton>
           </ScrollReveal>

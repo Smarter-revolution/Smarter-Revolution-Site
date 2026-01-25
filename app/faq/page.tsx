@@ -62,7 +62,7 @@ export default function FaqPage() {
           <p className="text-gray-400 text-sm">
             Prefer to talk to a human?{" "}
             <Link
-              href="/contact"
+              href="/book"
               className="text-red-600 hover:text-red-500 transition-colors underline"
             >
               Book a call

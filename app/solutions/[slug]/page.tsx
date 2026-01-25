@@ -231,7 +231,7 @@ export default async function SolutionPage({
             Let&apos;s discuss how this solution can work for your organization.
           </p>
           <Link
-            href="/contact"
+            href="/book"
             className="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold hover:from-red-500 hover:to-red-600 transition-all shadow-lg shadow-red-900/30"
           >
             Schedule a Free Strategy Call

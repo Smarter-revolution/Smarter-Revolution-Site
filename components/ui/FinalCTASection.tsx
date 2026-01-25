@@ -652,7 +652,7 @@ export default function FinalCTASection() {
             stiffness: 100
           }}
         >
-          <SpectacularCTAButton href="/contact">
+          <SpectacularCTAButton href="/book">
             Schedule a Free Strategy Call
           </SpectacularCTAButton>
         </motion.div>
