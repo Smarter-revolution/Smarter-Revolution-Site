@@ -315,14 +315,12 @@ export default function Footer() {
       { name: "Website Modernization", href: "/solutions/website-modernization" },
       { name: "Custom Portals", href: "/solutions/custom-portals" },
     ],
-    resources: [
-      { name: "Blog", href: "/blog" },
-      { name: "Team", href: "/team" },
-    ],
     company: [
       { name: "About", href: "/about" },
       { name: "Careers", href: "/careers" },
       { name: "Contact", href: "/contact" },
+      { name: "Blog", href: "/blog" },
+      { name: "Team", href: "/team" },
     ],
   };
 
@@ -454,15 +452,18 @@ export default function Footer() {
                   </AnimatedLink>
                 ))}
               </ul>
+            </div>
 
-              {/* Contact Info */}
-              <motion.div 
-                className="mt-6 space-y-3"
+            {/* Information */}
+            <div>
+              <SectionHeader delay={0.2}>Information</SectionHeader>
+              <motion.div
+                className="space-y-3"
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
-                <ContactInfo 
+                <ContactInfo
                   href="mailto:info@smarterrevolution.com"
                   icon={
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -472,7 +473,7 @@ export default function Footer() {
                 >
                   info@smarterrevolution.com
                 </ContactInfo>
-                <ContactInfo 
+                <ContactInfo
                   href="tel:+12133028260"
                   icon={
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -483,18 +484,6 @@ export default function Footer() {
                   (213) 302-8260
                 </ContactInfo>
               </motion.div>
-            </div>
-
-            {/* Resources */}
-            <div>
-              <SectionHeader delay={0.2}>Resources</SectionHeader>
-              <ul className="space-y-3">
-                {footerLinks.resources.map((link, i) => (
-                  <AnimatedLink key={link.href} href={link.href} delay={0.3 + i * 0.05}>
-                    {link.name}
-                  </AnimatedLink>
-                ))}
-              </ul>
             </div>
           </div>
 
