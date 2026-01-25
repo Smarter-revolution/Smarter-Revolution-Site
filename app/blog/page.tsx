@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
-import { getBlogPosts } from '@/lib/strapi';
+// TODO: Re-enable Strapi integration once environment variables are configured
+// import { getBlogPosts } from '@/lib/strapi';
 import BlogListClient from './BlogListClient';
 
 export const metadata: Metadata = {
@@ -10,7 +11,10 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function BlogPage() {
-  const { data: posts } = await getBlogPosts({ pageSize: 100 });
+  // TODO: Re-enable Strapi integration once environment variables are configured
+  // Temporarily using empty array to allow build to succeed
+  // const { data: posts } = await getBlogPosts({ pageSize: 100 });
+  const posts: any[] = [];
 
   return <BlogListClient posts={posts} />;
 }

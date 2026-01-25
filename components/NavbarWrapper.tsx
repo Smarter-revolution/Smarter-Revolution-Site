@@ -1,4 +1,5 @@
-import { getNavigation } from '@/lib/strapi';
+// TODO: Re-enable Strapi integration once environment variables are configured
+// import { getNavigation } from '@/lib/strapi';
 import Navbar from './Navbar';
 import type { MenuItem } from '@/types/strapi';
 
@@ -62,17 +63,20 @@ const defaultNavigation = {
 };
 
 export default async function NavbarWrapper() {
-  let mainMenu: MenuItem[] = defaultNavigation.mainMenu;
+  // TODO: Re-enable Strapi integration once environment variables are configured
+  // Temporarily using default navigation to allow build to succeed
+  const mainMenu: MenuItem[] = defaultNavigation.mainMenu;
 
-  try {
-    const response = await getNavigation();
-    if (response?.data?.mainMenu && response.data.mainMenu.length > 0) {
-      mainMenu = response.data.mainMenu;
-    }
-  } catch (error) {
-    // Use default navigation if Strapi is unavailable
-    console.error('Failed to fetch navigation from Strapi:', error);
-  }
+  // Commented out Strapi call - will re-enable after configuring environment variables
+  // try {
+  //   const response = await getNavigation();
+  //   if (response?.data?.mainMenu && response.data.mainMenu.length > 0) {
+  //     mainMenu = response.data.mainMenu;
+  //   }
+  // } catch (error) {
+  //   // Use default navigation if Strapi is unavailable
+  //   console.error('Failed to fetch navigation from Strapi:', error);
+  // }
 
   return <Navbar mainMenu={mainMenu} />;
 }
