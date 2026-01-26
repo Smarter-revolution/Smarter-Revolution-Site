@@ -1,47 +1,30 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { 
-  GlowButton, 
-  SpotlightCard, 
+import {
+  GlowButton,
+  SpotlightCard,
   GridPattern,
   BlurText,
   ScrollReveal,
   GradientText,
   AnimatedCard,
-  Particles,
-  CustomSelect
+  Particles
 } from '@/components/ui';
 
-const companySizeOptions = [
-  { value: '1-50', label: '1-50 employees' },
-  { value: '51-200', label: '51-200 employees' },
-  { value: '201-500', label: '201-500 employees' },
-  { value: '500+', label: '500+ employees' },
-];
-
-const serviceOptions = [
-  { value: 'empower', label: 'Team Empowerment' },
-  { value: 'content', label: 'Content Production' },
-  { value: 'automate', label: 'Automation' },
-  { value: 'search', label: 'AI Search' },
-  { value: 'notsure', label: 'Not Sure Yet' },
-];
-
 export default function Contact() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     company: '',
-    companySize: '',
     phone: '',
-    service: '',
     message: '',
-    hearAbout: '',
   });
-  const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -60,24 +43,29 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    setIsSubmitting(false);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        companySize: '',
-        phone: '',
-        service: '',
-        message: '',
-        hearAbout: '',
+    setError(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-    }, 3000);
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit form');
+      }
+
+      // Redirect to thank you page on success
+      router.push(`/contact/thank-you?name=${encodeURIComponent(formData.name)}`);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -152,23 +140,16 @@ export default function Contact() {
                   Send us a <GradientText>Message</GradientText>
                 </h2>
                 
-                {submitted ? (
-                  <motion.div 
-                    className="bg-green-600/20 border border-green-500/50 text-white p-8 rounded-xl text-center"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
-                      <svg className="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <p className="font-semibold text-xl">Thank you!</p>
-                    <p className="text-gray-400 mt-2">We&apos;ll get back to you soon.</p>
-                  </motion.div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  {error && (
+                    <motion.div
+                      className="bg-red-600/20 border border-red-500/50 text-white p-4 rounded-xl"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                    >
+                      <p className="text-sm text-red-300">{error}</p>
+                    </motion.div>
+                  )}
                     <div>
                       <label htmlFor="name" className={labelStyles}>
                         Full Name <span className="text-red-500">*</span>
@@ -217,16 +198,6 @@ export default function Contact() {
                       />
                     </div>
 
-                    <CustomSelect
-                      id="companySize"
-                      name="companySize"
-                      label="Company Size"
-                      placeholder="Select company size"
-                      options={companySizeOptions}
-                      value={formData.companySize}
-                      onChange={(value) => setFormData({ ...formData, companySize: value })}
-                    />
-
                     <div>
                       <label htmlFor="phone" className={labelStyles}>
                         Phone Number
@@ -242,16 +213,6 @@ export default function Contact() {
                       />
                     </div>
 
-                    <CustomSelect
-                      id="service"
-                      name="service"
-                      label="What brings you here?"
-                      placeholder="Select an option"
-                      options={serviceOptions}
-                      value={formData.service}
-                      onChange={(value) => setFormData({ ...formData, service: value })}
-                    />
-
                     <div>
                       <label htmlFor="message" className={labelStyles}>
                         Message
@@ -264,21 +225,6 @@ export default function Contact() {
                         rows={5}
                         className={`${inputStyles} resize-none`}
                         placeholder="Tell us about your project..."
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="hearAbout" className={labelStyles}>
-                        How did you hear about us?
-                      </label>
-                      <input
-                        type="text"
-                        id="hearAbout"
-                        name="hearAbout"
-                        value={formData.hearAbout}
-                        onChange={handleChange}
-                        className={inputStyles}
-                        placeholder="Google, LinkedIn, Referral..."
                       />
                     </div>
 
@@ -312,8 +258,7 @@ export default function Contact() {
                         )}
                       </span>
                     </motion.button>
-                  </form>
-                )}
+                </form>
               </SpotlightCard>
             </ScrollReveal>
 
