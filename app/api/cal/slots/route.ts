@@ -130,19 +130,37 @@ const fetchSlotsForUser = async (
   url.searchParams.set("usernameList", username);
 
   try {
+    console.log(`[Slots API] Fetching from Cal.com for ${username}:`, {
+      eventTypeSlug,
+      startTime,
+      endTime,
+      timeZone,
+    });
+
     const response = await fetch(url.toString(), { cache: "no-store" });
     const data = await response.json();
+
+    console.log(`[Slots API] Cal.com response for ${username}:`, {
+      status: response.status,
+      ok: response.ok,
+      dataKeys: data ? Object.keys(data) : null,
+      rawData: JSON.stringify(data).substring(0, 500),
+    });
 
     if (!response.ok) {
       return {
         username,
         slots: [],
-        error: data?.error || `Failed to fetch slots for ${username}`,
+        error: data?.error || data?.message || `Failed to fetch slots for ${username}`,
       };
     }
 
-    return { username, slots: normalizeToArray(data) };
+    const normalizedSlots = normalizeToArray(data);
+    console.log(`[Slots API] Normalized ${normalizedSlots.length} slots for ${username}`);
+
+    return { username, slots: normalizedSlots };
   } catch (error) {
+    console.error(`[Slots API] Error fetching for ${username}:`, error);
     return {
       username,
       slots: [],
@@ -255,33 +273,32 @@ export async function GET(request: NextRequest) {
     })
   );
 
-  // Check for errors
+  // Check for API errors (not including 0 slots, which is valid)
   const errors = results.filter((r) => r.error);
   if (errors.length > 0) {
     console.warn("[Slots API] Some calendars failed:", errors);
-    // Continue with available results rather than failing entirely
-  }
-
-  // Get successful results
-  const successfulResults = results.filter((r) => !r.error && r.slots.length > 0);
-
-  if (successfulResults.length === 0) {
-    return NextResponse.json({
-      slots: {},
-      warning: "No availability found from any calendar",
-    });
-  }
-
-  // If we don't have all calendars, we can't reliably show combined availability
-  if (successfulResults.length < usernameList.length) {
-    console.warn(
-      `[Slots API] Only ${successfulResults.length}/${usernameList.length} calendars returned slots`
-    );
+    // If any calendar fails, we can't show combined availability
     return NextResponse.json({
       slots: {},
       warning: `Could not fetch availability for all participants`,
       details: errors.map((e) => ({ user: e.username, error: e.error })),
     });
+  }
+
+  // Get successful results (0 slots is valid - means person is busy)
+  const successfulResults = results.filter((r) => !r.error);
+
+  console.log("[Slots API] Slots per user:", successfulResults.map((r) => ({
+    user: r.username,
+    count: r.slots.length,
+  })));
+
+  // Check if any calendar has 0 slots
+  const emptyCalendars = successfulResults.filter((r) => r.slots.length === 0);
+  if (emptyCalendars.length > 0) {
+    console.log("[Slots API] Some calendars have no availability:",
+      emptyCalendars.map((r) => r.username));
+    // This is valid - intersection will be empty
   }
 
   // Calculate intersection
