@@ -2,6 +2,14 @@
 
 import { FormEvent, useState } from "react";
 import type { BookingQuestion, MeetingTypeConfig } from "@/lib/calBookingConfig";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/Select";
+import { Checkbox } from "@/components/ui/Checkbox";
 
 type BookingFormProps = {
   eventType: MeetingTypeConfig;
@@ -51,6 +59,11 @@ export default function BookingForm({
         timeZone,
         language: "en",
         username: eventType.hostUsername,
+        // Include hostUsernames for combined meetings
+        ...(eventType.hostUsernames &&
+          eventType.hostUsernames.length > 1 && {
+            hostUsernames: eventType.hostUsernames,
+          }),
       };
 
       const response = await fetch("/api/cal/book", {
@@ -113,62 +126,79 @@ export default function BookingForm({
 
           if (question.type === "select") {
             return (
-              <label key={question.id} className="space-y-2 text-sm">
-                <span className="text-gray-300">
+              <div key={question.id} className="space-y-2 text-sm">
+                <label className="text-gray-300">
                   {question.label}
                   {question.required ? " *" : ""}
-                </span>
-                <select
+                </label>
+                <Select
+                  value={(value as string) || undefined}
+                  onValueChange={(newValue) => updateResponse(question.id, newValue)}
                   required={question.required}
-                  value={value as string}
-                  onChange={(event) =>
-                    updateResponse(question.id, event.target.value)
-                  }
-                  className={inputBase}
                 >
-                  <option value="">Select an option</option>
-                  {question.options?.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </label>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {question.options?.map((option) => (
+                      <SelectItem key={option} value={option}>
+                        {option}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {/* Hidden input for form validation */}
+                {question.required && (
+                  <input
+                    type="hidden"
+                    required
+                    value={value as string}
+                    onChange={() => {}}
+                  />
+                )}
+              </div>
             );
           }
 
           if (question.type === "multiselect") {
+            const values = Array.isArray(value) ? value : [];
             return (
-              <fieldset key={question.id} className="space-y-2 text-sm">
-                <legend className="text-gray-300">
+              <fieldset key={question.id} className="space-y-3 text-sm">
+                <legend className="text-gray-300 mb-1">
                   {question.label}
                   {question.required ? " *" : ""}
                 </legend>
                 <div className="grid gap-2 sm:grid-cols-2">
                   {question.options?.map((option) => {
-                    const values = Array.isArray(value) ? value : [];
                     const checked = values.includes(option);
                     return (
                       <label
                         key={option}
-                        className="flex items-center gap-2 rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-xs text-gray-300"
+                        className="flex items-center gap-3 rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-gray-300 cursor-pointer transition-all duration-200 hover:border-white/20 hover:bg-black/60 has-[:checked]:border-red-500/30 has-[:checked]:bg-red-500/10"
                       >
-                        <input
-                          type="checkbox"
+                        <Checkbox
                           checked={checked}
-                          onChange={(event) => {
-                            const next = event.target.checked
+                          onCheckedChange={(isChecked) => {
+                            const next = isChecked
                               ? [...values, option]
                               : values.filter((item) => item !== option);
                             updateResponse(question.id, next);
                           }}
-                          className="accent-red-500"
                         />
-                        <span>{option}</span>
+                        <span className="flex-1">{option}</span>
                       </label>
                     );
                   })}
                 </div>
+                {/* Hidden input for form validation */}
+                {question.required && values.length === 0 && (
+                  <input
+                    type="hidden"
+                    required
+                    value=""
+                    onChange={() => {}}
+                  />
+                )}
               </fieldset>
             );
           }

@@ -236,6 +236,98 @@ body {
   }
 }
 
+/* Radix UI animations for Select component */
+@keyframes slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* Radix Select animations */
+[data-state="open"] > [data-radix-select-trigger-icon] {
+  transform: rotate(180deg);
+}
+
+.animate-in {
+  animation: scaleIn 200ms ease;
+}
+
+.animate-out {
+  animation: scaleOut 200ms ease;
+}
+
+.fade-in-0 {
+  animation: fadeIn 200ms ease;
+}
+
+.fade-out-0 {
+  animation: fadeOut 200ms ease;
+}
+
+.zoom-in-95 {
+  animation: scaleIn 200ms ease;
+}
+
+.zoom-out-95 {
+  animation: scaleOut 200ms ease;
+}
+
+.slide-in-from-top-2 {
+  animation: slideDownAndFade 200ms ease;
+}
+
+.slide-in-from-bottom-2 {
+  animation: slideUpAndFade 200ms ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
 @keyframes pulse-glow {
   0%, 100% {
     box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);

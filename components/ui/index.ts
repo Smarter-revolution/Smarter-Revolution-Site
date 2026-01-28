@@ -24,3 +24,17 @@ export { default as SocialProofSection } from './SocialProofSection';
 export { default as FinalCTASection } from './FinalCTASection';
 export { default as HeroBackground } from './HeroBackground';
 export { default as CustomSelect } from './CustomSelect';
+
+// Radix UI based components
+export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+} from './Select';
+export { Checkbox } from './Checkbox';
+export { Label } from './Label';

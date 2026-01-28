@@ -36,7 +36,17 @@ const normalizeSlug = (slug?: string) => {
   return segments[segments.length - 1] ?? "";
 };
 
-const getHostLabel = (username?: string) => {
+const getHostLabel = (username?: string, usernames?: string[]) => {
+  // Combined meeting with multiple hosts
+  if (usernames && usernames.length > 1) {
+    const labels = usernames.map((u) => {
+      if (u.toLowerCase().includes("wolf")) return "Wolf";
+      if (u.toLowerCase().includes("mark")) return "Mark";
+      return u;
+    });
+    return labels.join(" & ");
+  }
+  // Single host
   if (!username) return "Smarter Revolution";
   if (username.toLowerCase().includes("wolf")) return "Wolf";
   if (username.toLowerCase().includes("mark")) return "Mark";
@@ -124,7 +134,7 @@ export default function BookingFlow({ eventTypeSlug }: BookingFlowProps) {
     const searchParams = new URLSearchParams({
       eventType: eventType?.title ?? "",
       start: selectedSlot ?? "",
-      host: getHostLabel(eventType?.hostUsername),
+      host: getHostLabel(eventType?.hostUsername, eventType?.hostUsernames),
       duration: String(eventType?.durationMinutes ?? ""),
       timeZone,
     });
@@ -200,6 +210,8 @@ export default function BookingFlow({ eventTypeSlug }: BookingFlowProps) {
             <TimeSlots
               eventTypeSlug={eventType.calEventTypeSlug}
               hostUsername={eventType.hostUsername}
+              hostUsernames={eventType.hostUsernames}
+              hostEventConfigs={eventType.hostEventConfigs}
               selectedDate={selectedDate}
               timeZone={timeZone}
               onSlotSelect={setSelectedSlot}

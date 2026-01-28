@@ -15,13 +15,22 @@ export type BookingQuestion = {
   placeholder?: string;
 };
 
+// Per-host event type configuration for combined meetings
+export type HostEventConfig = {
+  username: string;
+  eventTypeSlug: string;
+  eventTypeId?: number;
+};
+
 export type MeetingTypeConfig = {
   slug: string;
-  calEventTypeSlug: string; // The actual slug in Cal.com
+  calEventTypeSlug: string; // The actual slug in Cal.com (for single host)
   title: string;
   description: string;
   durationMinutes: number;
-  hostUsername: string;
+  hostUsername: string; // Primary host
+  hostUsernames?: string[]; // For combined availability (multiple hosts)
+  hostEventConfigs?: HostEventConfig[]; // Per-host event config for combined meetings
   eventTypeId?: number;
   questions: BookingQuestion[];
 };
@@ -30,6 +39,7 @@ export const meetingTypes: MeetingTypeConfig[] = [
   {
     slug: "ai-video-discovery",
     calEventTypeSlug: "30min",
+    eventTypeId: 4497744,
     title: "AI Video Production Discovery",
     description:
       "Explore Guided Video production options and scope the best path forward.",
@@ -77,6 +87,7 @@ export const meetingTypes: MeetingTypeConfig[] = [
   {
     slug: "nextjs-discovery",
     calEventTypeSlug: "30min",
+    eventTypeId: 4497744,
     title: "Next.js Development Discovery",
     description: "Discuss modern web development or hub builds.",
     durationMinutes: 30,
@@ -122,6 +133,7 @@ export const meetingTypes: MeetingTypeConfig[] = [
   {
     slug: "strategy-session",
     calEventTypeSlug: "30min",
+    eventTypeId: 4497744,
     title: "Free Strategy Session",
     description: "General AI transformation / business empowerment discussion.",
     durationMinutes: 30,
@@ -175,6 +187,7 @@ export const meetingTypes: MeetingTypeConfig[] = [
   {
     slug: "coffee-wolf",
     calEventTypeSlug: "15min",
+    eventTypeId: 4497742,
     title: "Virtual Coffee with Wolf",
     description: "Informal conversation, existing relationships, networking.",
     durationMinutes: 15,
@@ -195,6 +208,7 @@ export const meetingTypes: MeetingTypeConfig[] = [
   {
     slug: "coffee-mark",
     calEventTypeSlug: "15min",
+    eventTypeId: 4484854,
     title: "Virtual Coffee with Mark",
     description: "Informal conversation, existing relationships, networking.",
     durationMinutes: 15,
@@ -209,6 +223,40 @@ export const meetingTypes: MeetingTypeConfig[] = [
         type: "textarea",
         placeholder:
           "No agenda required — just let me know if there's something specific...",
+      },
+    ],
+  },
+  {
+    slug: "discovery-wolf-mark",
+    calEventTypeSlug: "discovery-call-wolf", // Primary host's slug
+    eventTypeId: 4560261, // Wolf's 45min Discovery Call event type
+    title: "Discovery Call with Wolf & Mark",
+    description:
+      "Meet with both Wolf and Mark to discuss your project. Only times when both are available will be shown.",
+    durationMinutes: 45,
+    hostUsername: "wolfkrammel", // Primary host for booking
+    hostUsernames: ["wolfkrammel", "mark314"], // Combined availability
+    hostEventConfigs: [
+      { username: "wolfkrammel", eventTypeSlug: "discovery-call-wolf", eventTypeId: 4560261 },
+      { username: "mark314", eventTypeSlug: "discovery-call-45min", eventTypeId: 4560084 },
+    ],
+    questions: [
+      { id: "name", label: "Full Name", type: "text", required: true },
+      { id: "email", label: "Email", type: "email", required: true },
+      { id: "company", label: "Company Name", type: "text", required: true },
+      { id: "website", label: "Company Website", type: "url" },
+      {
+        id: "project_overview",
+        label: "Tell us about your project",
+        type: "textarea",
+        required: true,
+        placeholder: "What are you looking to accomplish?",
+      },
+      {
+        id: "timeline",
+        label: "Timeline",
+        type: "select",
+        options: ["ASAP", "1-3 months", "3-6 months", "Just exploring"],
       },
     ],
   },

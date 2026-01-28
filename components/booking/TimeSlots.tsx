@@ -2,9 +2,17 @@
 
 import { useEffect, useState, useCallback } from "react";
 
+// Per-host event type configuration
+type HostEventConfig = {
+  username: string;
+  eventTypeSlug: string;
+};
+
 type TimeSlotsProps = {
   eventTypeSlug: string;
   hostUsername?: string;
+  hostUsernames?: string[]; // For combined availability (multiple hosts)
+  hostEventConfigs?: HostEventConfig[]; // Per-host event slugs for combined meetings
   selectedDate: Date;
   timeZone: string;
   onSlotSelect: (isoDateTime: string) => void;
@@ -92,6 +100,8 @@ const normalizeSlots = (data: unknown): SlotByDate => {
 export default function TimeSlots({
   eventTypeSlug,
   hostUsername,
+  hostUsernames,
+  hostEventConfigs,
   selectedDate,
   timeZone,
   onSlotSelect,
@@ -111,14 +121,29 @@ export default function TimeSlots({
       const endTime = toIsoEndOfDay(end);
 
       const params = new URLSearchParams({
-        eventTypeSlug,
         startTime,
         endTime,
         timeZone,
       });
 
-      if (hostUsername) {
-        params.set("username", hostUsername);
+      // Use combined availability with per-host slugs if configured
+      if (hostEventConfigs && hostEventConfigs.length > 1) {
+        // Build per-user event slugs: "user1:slug1,user2:slug2"
+        const eventTypeSlugsParam = hostEventConfigs
+          .map((config) => `${config.username}:${config.eventTypeSlug}`)
+          .join(",");
+        params.set("eventTypeSlugs", eventTypeSlugsParam);
+        params.set("usernames", hostEventConfigs.map((c) => c.username).join(","));
+      } else if (hostUsernames && hostUsernames.length > 1) {
+        // Fallback: use same slug for all hosts
+        params.set("eventTypeSlug", eventTypeSlug);
+        params.set("usernames", hostUsernames.join(","));
+      } else {
+        // Single host
+        params.set("eventTypeSlug", eventTypeSlug);
+        if (hostUsername) {
+          params.set("username", hostUsername);
+        }
       }
 
       const response = await fetch(`/api/cal/slots?${params.toString()}`);
@@ -145,7 +170,7 @@ export default function TimeSlots({
     } finally {
       setLoading(false);
     }
-  }, [eventTypeSlug, hostUsername, selectedDate, timeZone, onAvailableDatesChange]);
+  }, [eventTypeSlug, hostUsername, hostUsernames, hostEventConfigs, selectedDate, timeZone, onAvailableDatesChange]);
 
   useEffect(() => {
     loadSlots();
