@@ -224,10 +224,11 @@ export async function POST(request: NextRequest) {
       timeZone: body.timeZone,
       language: body.language ?? "en",
       metadata: {
+        // Cal.com requires metadata values to be strings
         ...(isCombinedMeeting && {
-          combinedMeeting: true,
-          allHosts: body.hostUsernames,
-          secondaryHosts,
+          combinedMeeting: "true",
+          allHosts: body.hostUsernames?.join(",") ?? "",
+          secondaryHosts: secondaryHosts.join(","),
         }),
       },
     };
