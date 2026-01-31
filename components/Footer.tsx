@@ -322,6 +322,10 @@ export default function Footer() {
       { name: "Blog", href: "/blog" },
       { name: "Team", href: "/team" },
     ],
+    landingPages: [
+      { name: "For Operations Teams", href: "/lp-operations" },
+      { name: "For Executives", href: "/lp-executive" },
+    ],
   };
 
   return (
@@ -448,6 +452,11 @@ export default function Footer() {
               <ul className="space-y-3">
                 {footerLinks.company.map((link, i) => (
                   <AnimatedLink key={link.href} href={link.href} delay={0.35 + i * 0.05}>
+                    {link.name}
+                  </AnimatedLink>
+                ))}
+                {footerLinks.landingPages.map((link, i) => (
+                  <AnimatedLink key={link.href} href={link.href} delay={0.35 + (footerLinks.company.length + i) * 0.05}>
                     {link.name}
                   </AnimatedLink>
                 ))}

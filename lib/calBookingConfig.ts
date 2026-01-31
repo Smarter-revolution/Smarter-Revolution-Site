@@ -228,17 +228,18 @@ export const meetingTypes: MeetingTypeConfig[] = [
   },
   {
     slug: "discovery-wolf-mark",
-    calEventTypeSlug: "discovery-call-wolf", // Primary host's slug
-    eventTypeId: 4560261, // Wolf's 45min Discovery Call event type
+    calEventTypeSlug: "combined-booking-wolf-mark", // Team event slug
+    eventTypeId: 4588541, // Team event type ID
     title: "Discovery Call with Wolf & Mark",
     description:
       "Meet with both Wolf and Mark to discuss your project. Only times when both are available will be shown.",
     durationMinutes: 45,
-    hostUsername: "wolfkrammel", // Primary host for booking
-    hostUsernames: ["wolfkrammel", "mark314"], // Combined availability
+    hostUsername: "wolfkrammel", // Primary host for API key selection
+    hostUsernames: ["wolfkrammel", "mark314"], // For ActiveCampaign tags
+    // Note: hostEventConfigs not needed for team events - Cal.com handles availability automatically
     hostEventConfigs: [
-      { username: "wolfkrammel", eventTypeSlug: "discovery-call-wolf", eventTypeId: 4560261 },
-      { username: "mark314", eventTypeSlug: "discovery-call-45min", eventTypeId: 4560084 },
+      { username: "wolfkrammel", eventTypeSlug: "combined-booking-wolf-mark", eventTypeId: 4588541 },
+      { username: "mark314", eventTypeSlug: "combined-booking-wolf-mark", eventTypeId: 4588541 },
     ],
     questions: [
       { id: "name", label: "Full Name", type: "text", required: true },
