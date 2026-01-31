@@ -1,12 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import MeetingTypeSelector from '@/components/booking/MeetingTypeSelector';
+import BookingFlow from '@/components/booking/BookingFlow';
 
 export default function LandingPageOperations() {
-  const [showCalendar, setShowCalendar] = useState(false);
-
   return (
     <>
       <style jsx global>{`
@@ -202,8 +198,8 @@ export default function LandingPageOperations() {
           </p>
 
           {/* Integrated Calendar */}
-          <div style={{ maxWidth: '900px', margin: '0 auto 2rem' }}>
-            <MeetingTypeSelector />
+          <div style={{ maxWidth: '1200px', margin: '0 auto 2rem' }}>
+            <BookingFlow eventTypeSlug="strategy-session" />
           </div>
 
           <div style={{ marginTop: '2rem' }}>

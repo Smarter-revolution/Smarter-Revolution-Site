@@ -36,13 +36,16 @@ Both pages are now accessible from the site footer:
 
 The Cal.com booking calendar has been fully integrated into both landing pages:
 
-- **Component Used**: `MeetingTypeSelector` from [`/components/booking/MeetingTypeSelector.tsx`](../components/booking/MeetingTypeSelector.tsx)
+- **Component Used**: `BookingFlow` from [`/components/booking/BookingFlow.tsx`](../components/booking/BookingFlow.tsx)
+- **Meeting Type**: "Free Strategy Session" (30-minute call)
 - **Location**: Replaces the calendar placeholder in the CTA section (id="book")
 - **Functionality**:
-  - Shows available meeting types
-  - Allows users to select and book meetings
-  - Fully functional with existing Cal.com integration
-  - Works with both Wolf's and Mark's calendars
+  - ✅ **Shows real-time availability** - Fetches time slots from Cal.com
+  - ✅ **Interactive calendar** - Users can select dates and see available times
+  - ✅ **Timezone selector** - Automatically detects user timezone
+  - ✅ **Booking form** - Collects required information
+  - ✅ **Confirmation flow** - Redirects to confirmation page after booking
+  - Works with Wolf's Cal.com account for strategy sessions
 
 ### 4. ✅ Video Player Component
 
@@ -255,10 +258,12 @@ Both pages are fully functional and ready for production as soon as videos and i
 
 - [x] Pages created and integrated
 - [x] Footer links added
-- [x] Calendar integrated and functional
+- [x] **Calendar integrated and FULLY FUNCTIONAL** - Shows real availability from Cal.com
 - [x] Video player component ready
-- [ ] Videos to be added (awaiting content)
+- [ ] Videos to be added (awaiting content - Sunday/Monday)
 - [ ] Images to be added (if not already present)
 - [ ] Final production testing
+
+**✅ Calendar booking is working! Users can see availability and book appointments directly from the landing pages.**
 
 **Ready for video and image integration!**
