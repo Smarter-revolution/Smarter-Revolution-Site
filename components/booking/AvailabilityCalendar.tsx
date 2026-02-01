@@ -12,7 +12,14 @@ type AvailabilityCalendarProps = {
   onSlotSelect: (isoDateTime: string) => void;
 };
 
-const formatDateKey = (date: Date) => date.toISOString().split("T")[0];
+// Use local date components to format the date key (not UTC)
+// This ensures slots are grouped by the user's local date, not UTC date
+const formatDateKey = (date: Date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
 
 const toIsoStartOfDay = (date: Date) => {
   const start = new Date(date);
