@@ -103,20 +103,22 @@ export default function Navbar({ mainMenu }: NavbarProps) {
         <AnimatePresence>
           {isOpen && item.children && item.children.length > 0 && (
             <motion.div
-              className="absolute left-0 top-full w-72 pt-2 z-50"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
+              className="absolute left-0 top-full w-72 pt-3 z-50"
+              initial={{ opacity: 0, y: -5, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -5, scale: 0.95 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <div className="rounded-xl border border-white/10 bg-[#0a0a0a]/95 backdrop-blur-xl p-2 shadow-2xl shadow-black/50">
+              <div className="rounded-2xl border border-white/10 bg-[#0a0a0a]/90 backdrop-blur-2xl p-2 shadow-2xl shadow-black/60 ring-1 ring-white/5">
+                {/* Dropdown inner glow */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
                 {item.children.map((child) => (
                   <Link
                     key={child.id}
                     href={child.url}
                     target={child.openInNewTab ? "_blank" : undefined}
                     rel={child.openInNewTab ? "noopener noreferrer" : undefined}
-                    className={`block rounded-lg px-4 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-red-500 transition-all duration-200 ${
+                    className={`relative block rounded-xl px-4 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-red-500 transition-all duration-200 ${
                       pathname === child.url ? "text-red-500 bg-white/5" : ""
                     }`}
                     onClick={onClose}
@@ -166,86 +168,92 @@ export default function Navbar({ mainMenu }: NavbarProps) {
 
   return (
     <>
-      <motion.nav 
-        className="sticky top-0 z-40 border-b border-white/10 bg-[#0a0a0a]/80 backdrop-blur-xl"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center group">
-            <img
-              src="/LogosAsset/1rb.png"
-              alt="Smarter Revolution"
-              className="h-10 w-auto transition-opacity group-hover:opacity-80"
-            />
-          </Link>
+      {/* Floating Navbar Container */}
+      <div className="sticky top-0 z-40 w-full px-4 sm:px-6 lg:px-8 pt-4">
+        <motion.nav
+          className="mx-auto max-w-6xl rounded-2xl border border-white/10 bg-[#0a0a0a]/70 backdrop-blur-2xl shadow-2xl shadow-black/40"
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          {/* Inner glow effect */}
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
 
-          {/* Desktop Navigation - Dynamically rendered from mainMenu */}
-          <div className="hidden items-center space-x-1 lg:flex">
-            {mainMenu.map(renderNavItem)}
-          </div>
-
-          <div className="flex items-center gap-3">
-            <Link
-              href="/book"
-              className="hidden lg:inline-flex items-center gap-2 rounded-full bg-red-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-600/25 transition-all hover:bg-red-500 hover:shadow-red-500/30 hover:scale-105"
-            >
-              <span>Free Strategy Call</span>
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+          <div className="relative flex h-14 sm:h-16 items-center justify-between px-4 sm:px-6">
+            <Link href="/" className="flex items-center group">
+              <img
+                src="/LogosAsset/1rb.png"
+                alt="Smarter Revolution"
+                className="h-8 sm:h-10 w-auto transition-all duration-300 group-hover:opacity-80 group-hover:scale-105"
+              />
             </Link>
 
-            {/* Mobile Hamburger Button */}
-            <button
-              ref={hamburgerRef}
-              type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-white hover:text-red-500 hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-red-600 min-h-[44px] min-w-[44px] transition-colors"
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileMenuExpanded}
-              aria-controls="mobile-menu"
-            >
-              <motion.div
-                animate={mobileMenuOpen ? "open" : "closed"}
+            {/* Desktop Navigation - Dynamically rendered from mainMenu */}
+            <div className="hidden items-center space-x-1 lg:flex">
+              {mainMenu.map(renderNavItem)}
+            </div>
+
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Link
+                href="/book"
+                className="hidden lg:inline-flex items-center gap-2 rounded-full bg-red-600 px-4 xl:px-5 py-2 xl:py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-600/25 transition-all hover:bg-red-500 hover:shadow-red-500/40 hover:scale-105 active:scale-100"
               >
-                {mobileMenuOpen ? (
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 6h16M4 12h16M4 18h16"
-                    />
-                  </svg>
-                )}
-              </motion.div>
-            </button>
+                <span>Free Strategy Call</span>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+
+              {/* Mobile Hamburger Button */}
+              <button
+                ref={hamburgerRef}
+                type="button"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="lg:hidden inline-flex items-center justify-center p-2 rounded-xl text-white hover:text-red-500 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-transparent min-h-[44px] min-w-[44px] transition-all duration-200"
+                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={mobileMenuExpanded}
+                aria-controls="mobile-menu"
+              >
+                <motion.div
+                  animate={mobileMenuOpen ? "open" : "closed"}
+                >
+                  {mobileMenuOpen ? (
+                    <svg
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M4 6h16M4 12h16M4 18h16"
+                      />
+                    </svg>
+                  )}
+                </motion.div>
+              </button>
+            </div>
           </div>
-        </div>
-      </motion.nav>
+        </motion.nav>
+      </div>
 
       {/* Mobile Menu */}
       <MobileMenu
@@ -302,11 +310,11 @@ function MobileMenu({
           <button
             type="button"
             onClick={() => toggleDropdown(item.id)}
-            className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium text-white hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px]"
+            className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium text-white hover:text-red-500 hover:bg-white/10 transition-all duration-200 min-h-[44px]"
           >
             <span>{item.label}</span>
             <motion.svg
-              className="h-5 w-5"
+              className="h-5 w-5 text-gray-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -328,7 +336,7 @@ function MobileMenu({
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="overflow-hidden pl-4 space-y-1 border-l-2 border-red-600/30 ml-4"
+                className="overflow-hidden pl-3 space-y-1 border-l-2 border-red-600/40 ml-4"
               >
                 {item.children!.map((child) => (
                   <Link
@@ -337,8 +345,8 @@ function MobileMenu({
                     target={child.openInNewTab ? "_blank" : undefined}
                     rel={child.openInNewTab ? "noopener noreferrer" : undefined}
                     onClick={onClose}
-                    className={`block px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px] flex items-center ${
-                      pathname === child.url ? "text-red-500 bg-white/5" : ""
+                    className={`block px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:text-red-500 hover:bg-white/10 transition-all duration-200 min-h-[44px] flex items-center ${
+                      pathname === child.url ? "text-red-500 bg-white/10" : ""
                     }`}
                   >
                     {child.label}
@@ -358,8 +366,8 @@ function MobileMenu({
         target={item.openInNewTab ? "_blank" : undefined}
         rel={item.openInNewTab ? "noopener noreferrer" : undefined}
         onClick={onClose}
-        className={`block px-4 py-3 rounded-lg text-base font-medium text-white hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px] flex items-center ${
-          pathname === item.url ? "bg-white/5 text-red-500" : ""
+        className={`block px-4 py-3 rounded-xl text-base font-medium text-white hover:text-red-500 hover:bg-white/10 transition-all duration-200 min-h-[44px] flex items-center ${
+          pathname === item.url ? "bg-white/10 text-red-500" : ""
         }`}
       >
         {item.label}
@@ -373,29 +381,38 @@ function MobileMenu({
         <>
           {/* Overlay */}
           <motion.div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+            className="fixed inset-0 bg-black/70 backdrop-blur-md z-40 lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
           />
 
-          {/* Drawer */}
+          {/* Drawer - Floating style */}
           <motion.div
             id="mobile-menu"
-            className="fixed top-0 right-0 w-80 max-w-[85vw] h-screen bg-[#0a0a0a] border-l border-white/10 z-50 lg:hidden flex flex-col"
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed top-4 right-4 bottom-4 w-80 max-w-[calc(100vw-2rem)] rounded-2xl bg-[#0a0a0a]/95 border border-white/10 backdrop-blur-2xl shadow-2xl shadow-black/50 z-50 lg:hidden flex flex-col overflow-hidden"
+            initial={{ x: "110%", opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: "110%", opacity: 0 }}
+            transition={{ type: "spring", damping: 28, stiffness: 250 }}
           >
+            {/* Inner glow effect */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
+
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-white/10">
-              <h2 className="text-lg font-bold text-white">Menu</h2>
+            <div className="relative flex items-center justify-between p-4 border-b border-white/10">
+              <div className="flex items-center gap-3">
+                <img
+                  src="/LogosAsset/1rb.png"
+                  alt="Smarter Revolution"
+                  className="h-8 w-auto"
+                />
+              </div>
               <button
                 type="button"
                 onClick={onClose}
-                className="p-2 rounded-lg text-white hover:text-red-500 hover:bg-white/5 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                className="p-2 rounded-xl text-white hover:text-red-500 hover:bg-white/10 transition-all duration-200 min-h-[44px] min-w-[44px] flex items-center justify-center"
               >
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -404,7 +421,7 @@ function MobileMenu({
             </div>
 
             {/* Navigation - Dynamically rendered from mainMenu */}
-            <nav className="flex-1 overflow-y-auto p-4 space-y-2">
+            <nav className="relative flex-1 overflow-y-auto p-4 space-y-2">
               {mainMenu.map((item) => (
                 <MobileMenuItem key={item.id} item={item} />
               ))}
@@ -414,7 +431,7 @@ function MobileMenu({
                 <Link
                   href="/book"
                   onClick={onClose}
-                  className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-full bg-red-600 text-white text-base font-semibold hover:bg-red-500 transition-colors shadow-lg shadow-red-600/25"
+                  className="flex items-center justify-center gap-2 w-full px-4 py-3.5 rounded-xl bg-red-600 text-white text-base font-semibold hover:bg-red-500 transition-all duration-200 shadow-lg shadow-red-600/30 hover:shadow-red-500/40 hover:scale-[1.02] active:scale-100"
                 >
                   Free Strategy Call
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
