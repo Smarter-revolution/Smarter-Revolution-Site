@@ -1,8 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import BookingFlow from '@/components/booking/BookingFlow';
 
 export default function LandingPageOperations() {
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
   return (
     <>
       <style jsx global>{`
@@ -25,7 +28,7 @@ export default function LandingPageOperations() {
         {/* Navigation */}
         <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 3rem', maxWidth: '1400px', margin: '0 auto' }}>
           <div style={{ fontSize: '1.2rem', fontWeight: 700 }}>
-            Smarter <span style={{ color: 'var(--revolution-red)' }}>Revolution</span>
+            <img src="/LogosAsset/1rb.png" alt="Smarter Revolution" style={{ height: '40px' }} />
           </div>
           <a href="#book" style={{ background: 'var(--revolution-red)', color: 'white', padding: '0.65rem 1.25rem', borderRadius: '50px', textDecoration: 'none', fontWeight: 600, fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'transform 0.2s, box-shadow 0.2s' }}>
             Free Strategy Call <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -50,11 +53,37 @@ export default function LandingPageOperations() {
           </div>
           <div style={{ position: 'relative' }}>
             <div style={{ background: 'linear-gradient(135deg, var(--card-blue), #0F172A)', borderRadius: '16px', aspectRatio: '16/10', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255, 255, 255, 0.1)', overflow: 'hidden', position: 'relative' }}>
-              {/* Video Placeholder - will be replaced with actual video */}
-              <div style={{ width: '70px', height: '70px', background: 'var(--revolution-red)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'transform 0.2s, box-shadow 0.2s', zIndex: 1 }}>
-                <svg viewBox="0 0 24 24" style={{ width: '26px', height: '26px', fill: 'white', marginLeft: '4px' }}><path d="M8 5v14l11-7z"/></svg>
-              </div>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '1rem', zIndex: 1 }}>Overview Video • 2 min</p>
+              {/* Video - Open Source Placeholder (Pexels) - Replace with actual video later */}
+              {!isVideoPlaying ? (
+                <>
+                  <video
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  >
+                    <source src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" type="video/mp4" />
+                  </video>
+                  <div
+                    onClick={() => setIsVideoPlaying(true)}
+                    style={{ width: '70px', height: '70px', background: 'var(--revolution-red)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'transform 0.2s, box-shadow 0.2s', zIndex: 1 }}
+                  >
+                    <svg viewBox="0 0 24 24" style={{ width: '26px', height: '26px', fill: 'white', marginLeft: '4px' }}><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '1rem', zIndex: 1, background: 'rgba(0,0,0,0.5)', padding: '0.25rem 0.75rem', borderRadius: '4px' }}>Overview Video • 2 min</p>
+                </>
+              ) : (
+                <video
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                  autoPlay
+                  controls
+                  playsInline
+                >
+                  {/* Replace this URL with actual overview video */}
+                  <source src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" type="video/mp4" />
+                </video>
+              )}
             </div>
           </div>
         </section>
@@ -86,7 +115,8 @@ export default function LandingPageOperations() {
           {/* Feature 1: Visibility */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', marginBottom: '5rem' }}>
             <div style={{ background: 'linear-gradient(135deg, var(--card-dark), var(--card-blue))', borderRadius: '16px', aspectRatio: '4/3', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255, 255, 255, 0.08)', overflow: 'hidden' }}>
-              <img src="/images/analytics.png" alt="Real-time training completion dashboard" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
+              {/* Placeholder image - Replace with actual analytics dashboard image */}
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" alt="Real-time training completion dashboard" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
             </div>
             <div style={{ padding: '1rem' }}>
               <span style={{ display: 'inline-block', background: 'rgba(229, 57, 53, 0.15)', color: 'var(--revolution-red)', fontSize: '0.75rem', fontWeight: 600, padding: '0.4rem 0.8rem', borderRadius: '50px', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Visibility</span>
@@ -108,7 +138,8 @@ export default function LandingPageOperations() {
           {/* Feature 2: Onboarding */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', marginBottom: '5rem', direction: 'rtl' }}>
             <div style={{ background: 'linear-gradient(135deg, var(--card-dark), var(--card-blue))', borderRadius: '16px', aspectRatio: '4/3', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255, 255, 255, 0.08)', overflow: 'hidden' }}>
-              <img src="/images/infinitevideos.png" alt="Consistent training content library" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
+              {/* Placeholder image - Replace with actual training content library image */}
+              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" alt="Consistent training content library" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
             </div>
             <div style={{ padding: '1rem', direction: 'ltr' }}>
               <span style={{ display: 'inline-block', background: 'rgba(229, 57, 53, 0.15)', color: 'var(--revolution-red)', fontSize: '0.75rem', fontWeight: 600, padding: '0.4rem 0.8rem', borderRadius: '50px', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Onboarding</span>
@@ -146,7 +177,8 @@ export default function LandingPageOperations() {
           {/* Feature 3: Organization */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', marginBottom: '5rem' }}>
             <div style={{ background: 'linear-gradient(135deg, var(--card-dark), var(--card-blue))', borderRadius: '16px', aspectRatio: '4/3', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255, 255, 255, 0.08)', overflow: 'hidden' }}>
-              <img src="/images/contenthub.png" alt="Centralized training content hub" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
+              {/* Placeholder image - Replace with actual content hub image */}
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="Centralized training content hub" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
             </div>
             <div style={{ padding: '1rem' }}>
               <span style={{ display: 'inline-block', background: 'rgba(229, 57, 53, 0.15)', color: 'var(--revolution-red)', fontSize: '0.75rem', fontWeight: 600, padding: '0.4rem 0.8rem', borderRadius: '50px', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Organization</span>
@@ -168,7 +200,8 @@ export default function LandingPageOperations() {
           {/* Feature 4: Proof */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', marginBottom: '5rem', direction: 'rtl' }}>
             <div style={{ background: 'linear-gradient(135deg, var(--card-dark), var(--card-blue))', borderRadius: '16px', aspectRatio: '4/3', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255, 255, 255, 0.08)', overflow: 'hidden' }}>
-              <img src="/images/speed.png" alt="Timestamped completion records" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
+              {/* Placeholder image - Replace with actual compliance/timestamped records image */}
+              <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&h=600&fit=crop" alt="Timestamped completion records" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
             </div>
             <div style={{ padding: '1rem', direction: 'ltr' }}>
               <span style={{ display: 'inline-block', background: 'rgba(229, 57, 53, 0.15)', color: 'var(--revolution-red)', fontSize: '0.75rem', fontWeight: 600, padding: '0.4rem 0.8rem', borderRadius: '50px', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Protection</span>
