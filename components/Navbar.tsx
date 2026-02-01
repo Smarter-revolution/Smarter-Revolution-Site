@@ -173,10 +173,12 @@ export default function Navbar({ mainMenu }: NavbarProps) {
         transition={{ duration: 0.5 }}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center space-x-3 group">
-            <span className="text-xl font-bold tracking-tight text-white group-hover:text-red-500 transition-colors">
-              Smarter <span className="text-red-600">Revolution</span>
-            </span>
+          <Link href="/" className="flex items-center group">
+            <img
+              src="/LogosAsset/1rb.png"
+              alt="Smarter Revolution"
+              className="h-10 w-auto transition-opacity group-hover:opacity-80"
+            />
           </Link>
 
           {/* Desktop Navigation - Dynamically rendered from mainMenu */}
