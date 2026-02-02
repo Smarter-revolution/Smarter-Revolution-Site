@@ -182,7 +182,7 @@ export default function Navbar({ mainMenu }: NavbarProps) {
           <div className="relative flex h-14 sm:h-16 items-center justify-between px-4 sm:px-6">
             <Link href="/" className="flex items-center group">
               <img
-                src="/LogosAsset/1rb.png"
+                src="/LogosAsset/7-2.png"
                 alt="Smarter Revolution"
                 className="h-8 sm:h-10 w-auto transition-all duration-300 group-hover:opacity-80 group-hover:scale-105"
               />
@@ -404,7 +404,7 @@ function MobileMenu({
             <div className="relative flex items-center justify-between p-4 border-b border-white/10">
               <div className="flex items-center gap-3">
                 <img
-                  src="/LogosAsset/1rb.png"
+                  src="/LogosAsset/7-2.png"
                   alt="Smarter Revolution"
                   className="h-8 w-auto"
                 />
