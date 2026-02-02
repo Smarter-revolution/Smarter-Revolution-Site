@@ -160,15 +160,27 @@ export default function Home() {
       <section id="impact-container" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-[#111]">
         <div className="max-w-7xl mx-auto">
           {/* Section title */}
-          <div className="text-center mb-16">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
               Two ways we help you <GradientText>win.</GradientText>
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 md:gap-12">
             {/* Path 1: Video Production */}
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-10 group hover:border-red-500/30 transition-colors">
+            <motion.div
+              className="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-10 group hover:border-red-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(239,68,68,0.15)]"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -197,8 +209,8 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <Link 
-                href="/video-production" 
+              <Link
+                href="/video-production"
                 className="inline-flex items-center text-red-500 font-semibold hover:text-red-400 transition-colors group/link"
               >
                 Learn more about Video Production
@@ -206,10 +218,16 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
-            </div>
+            </motion.div>
 
             {/* Path 2: Web Development */}
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-10 group hover:border-red-500/30 transition-colors">
+            <motion.div
+              className="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-10 group hover:border-red-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(239,68,68,0.15)]"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
+            >
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
@@ -238,8 +256,8 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <Link 
-                href="/web-development" 
+              <Link
+                href="/web-development"
                 className="inline-flex items-center text-red-500 font-semibold hover:text-red-400 transition-colors group/link"
               >
                 Learn more about Web Development
@@ -247,7 +265,7 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
