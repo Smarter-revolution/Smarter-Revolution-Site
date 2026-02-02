@@ -25,16 +25,6 @@ export default function LandingPageOperations() {
       `}</style>
 
       <div style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif', backgroundColor: 'var(--bg-black)', color: 'var(--text-white)', lineHeight: '1.6' }}>
-        {/* Navigation */}
-        <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 3rem', maxWidth: '1400px', margin: '0 auto' }}>
-          <div style={{ fontSize: '1.2rem', fontWeight: 700 }}>
-            <img src="/LogosAsset/1rb.png" alt="Smarter Revolution" style={{ height: '40px' }} />
-          </div>
-          <a href="#book" style={{ background: 'var(--revolution-red)', color: 'white', padding: '0.65rem 1.25rem', borderRadius: '50px', textDecoration: 'none', fontWeight: 600, fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'transform 0.2s, box-shadow 0.2s' }}>
-            Free Strategy Call <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </nav>
-
         {/* Hero Section */}
         <section style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', padding: '3rem 3rem 4rem', maxWidth: '1400px', margin: '0 auto', minHeight: '70vh' }}>
           <div style={{ paddingRight: '1rem' }}>
