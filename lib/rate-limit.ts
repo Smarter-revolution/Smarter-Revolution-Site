@@ -48,8 +48,9 @@ async function getKVClient() {
 
   if (!kvClient) {
     try {
-      // Dynamic import to avoid errors when @vercel/kv is not installed
-      const { kv } = await import('@vercel/kv');
+      // Optional dependency: avoid bundler resolution when not installed
+      const requireFunc = eval('require') as (id: string) => { kv: typeof kvClient };
+      const { kv } = requireFunc('@vercel/kv');
       kvClient = kv;
     } catch {
       // @vercel/kv not installed, use in-memory fallback
