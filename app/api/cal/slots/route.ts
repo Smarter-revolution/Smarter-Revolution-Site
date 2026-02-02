@@ -1,17 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getCalApiKey } from "@/lib/cal-auth";
+import { checkRateLimit, RATE_LIMITS } from "@/lib/rate-limit";
 
 const CAL_API_BASE = process.env.CAL_API_BASE_URL ?? "https://api.cal.com";
 
 type SlotByDate = Record<string, string[]>;
-
-const getApiKeyForUser = (username?: string): string | undefined => {
-  // Mark's events use Mark's API key
-  if (username?.toLowerCase().includes("mark")) {
-    return process.env.CAL_API_KEY_MARK?.trim();
-  }
-  // Default to Wolf's API key
-  return process.env.CAL_API_KEY?.trim();
-};
 
 // Normalize Cal.com slot response to a flat array of ISO strings
 const normalizeToArray = (data: unknown): string[] => {
@@ -73,7 +66,6 @@ const groupByDate = (slots: string[]): SlotByDate => {
     grouped[dateKey] = grouped[dateKey] ?? [];
     grouped[dateKey].push(slot);
   });
-  // Sort slots within each date
   Object.keys(grouped).forEach((dateKey) => {
     grouped[dateKey].sort();
   });
@@ -94,12 +86,10 @@ const intersectSlots = (slotArrays: string[][]): string[] => {
   if (slotArrays.length === 0) return [];
   if (slotArrays.length === 1) return slotArrays[0];
 
-  // Normalize all slots to 15-minute intervals for comparison
   const normalizedArrays = slotArrays.map((arr) =>
     arr.map((slot) => roundToInterval(slot, 15))
   );
 
-  // Find slots that appear in ALL arrays
   const [first, ...rest] = normalizedArrays;
   const intersection = first.filter((slot) =>
     rest.every((arr) => arr.includes(slot))
@@ -116,9 +106,10 @@ const fetchSlotsForUser = async (
   endTime: string,
   timeZone: string
 ): Promise<{ username: string; slots: string[]; error?: string }> => {
-  const apiKey = getApiKeyForUser(username);
+  // SECURITY: Uses secure exact-match API key selection
+  const apiKey = getCalApiKey(username);
   if (!apiKey) {
-    return { username, slots: [], error: `No API key for ${username}` };
+    return { username, slots: [], error: "Calendar service not configured" };
   }
 
   const url = new URL("/v1/slots", CAL_API_BASE);
@@ -130,37 +121,21 @@ const fetchSlotsForUser = async (
   url.searchParams.set("usernameList", username);
 
   try {
-    console.log(`[Slots API] Fetching from Cal.com for ${username}:`, {
-      eventTypeSlug,
-      startTime,
-      endTime,
-      timeZone,
-    });
-
     const response = await fetch(url.toString(), { cache: "no-store" });
     const data = await response.json();
-
-    console.log(`[Slots API] Cal.com response for ${username}:`, {
-      status: response.status,
-      ok: response.ok,
-      dataKeys: data ? Object.keys(data) : null,
-      rawData: JSON.stringify(data).substring(0, 500),
-    });
 
     if (!response.ok) {
       return {
         username,
         slots: [],
-        error: data?.error || data?.message || `Failed to fetch slots for ${username}`,
+        error: data?.error || data?.message || "Failed to fetch availability",
       };
     }
 
     const normalizedSlots = normalizeToArray(data);
-    console.log(`[Slots API] Normalized ${normalizedSlots.length} slots for ${username}`);
-
     return { username, slots: normalizedSlots };
   } catch (error) {
-    console.error(`[Slots API] Error fetching for ${username}:`, error);
+    console.error("[Slots API] Error:", error instanceof Error ? error.message : "Unknown error");
     return {
       username,
       slots: [],
@@ -170,9 +145,7 @@ const fetchSlotsForUser = async (
 };
 
 // Parse per-user event type slugs from format: "user1:slug1,user2:slug2"
-const parseUserEventSlugs = (
-  eventTypeSlugs: string
-): Map<string, string> => {
+const parseUserEventSlugs = (eventTypeSlugs: string): Map<string, string> => {
   const map = new Map<string, string>();
   eventTypeSlugs.split(",").forEach((entry) => {
     const [user, slug] = entry.split(":").map((s) => s.trim());
@@ -184,14 +157,19 @@ const parseUserEventSlugs = (
 };
 
 export async function GET(request: NextRequest) {
+  // Apply rate limiting
+  const rateLimit = checkRateLimit(request, RATE_LIMITS.booking);
+  if (!rateLimit.success) {
+    return rateLimit.error;
+  }
+
   const { searchParams } = new URL(request.url);
   const eventTypeSlug = searchParams.get("eventTypeSlug");
   const startTime = searchParams.get("startTime");
   const endTime = searchParams.get("endTime");
   const timeZone = searchParams.get("timeZone");
   const username = searchParams.get("username");
-  const usernames = searchParams.get("usernames"); // Comma-separated for combined
-  // Per-user event type slugs: "wolfkrammel:discovery-call-wolf,mark314:discovery-call-45min"
+  const usernames = searchParams.get("usernames");
   const eventTypeSlugs = searchParams.get("eventTypeSlugs");
 
   if (!startTime || !endTime || !timeZone) {
@@ -201,30 +179,24 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  // Parse per-user event slugs if provided
   const userEventSlugs = eventTypeSlugs
     ? parseUserEventSlugs(eventTypeSlugs)
     : new Map<string, string>();
 
-  // Determine if this is a combined availability request
   const usernameList = usernames
     ? usernames.split(",").map((u) => u.trim()).filter(Boolean)
     : username
       ? [username]
       : [];
 
-  // If no usernames specified, use default (Wolf)
   if (usernameList.length === 0) {
     usernameList.push("wolfkrammel");
   }
 
-  // Helper to get event slug for a user
   const getEventSlugForUser = (user: string): string | null => {
-    // First check per-user slugs
     if (userEventSlugs.has(user)) {
       return userEventSlugs.get(user)!;
     }
-    // Fall back to single eventTypeSlug
     return eventTypeSlug;
   };
 
@@ -254,13 +226,10 @@ export async function GET(request: NextRequest) {
   }
 
   // Multiple users - fetch in parallel and intersect
-  console.log(`[Slots API] Combined availability request for: ${usernameList.join(", ")}`);
-
-  // Validate all users have event slugs
   const missingSlugUsers = usernameList.filter((u) => !getEventSlugForUser(u));
   if (missingSlugUsers.length > 0) {
     return NextResponse.json(
-      { error: `Missing eventTypeSlug for users: ${missingSlugUsers.join(", ")}` },
+      { error: "Missing eventTypeSlug for some users" },
       { status: 400 }
     );
   }
@@ -268,57 +237,27 @@ export async function GET(request: NextRequest) {
   const results = await Promise.all(
     usernameList.map((user) => {
       const slug = getEventSlugForUser(user)!;
-      console.log(`[Slots API] Fetching slots for ${user} with slug: ${slug}`);
       return fetchSlotsForUser(user, slug, startTime, endTime, timeZone);
     })
   );
 
-  // Check for API errors (not including 0 slots, which is valid)
   const errors = results.filter((r) => r.error);
   if (errors.length > 0) {
-    console.warn("[Slots API] Some calendars failed:", errors);
-    // If any calendar fails, we can't show combined availability
     return NextResponse.json({
       slots: {},
-      warning: `Could not fetch availability for all participants`,
-      details: errors.map((e) => ({ user: e.username, error: e.error })),
+      warning: "Could not fetch availability for all participants",
     });
   }
 
-  // Get successful results (0 slots is valid - means person is busy)
   const successfulResults = results.filter((r) => !r.error);
-
-  console.log("[Slots API] Slots per user:", successfulResults.map((r) => ({
-    user: r.username,
-    count: r.slots.length,
-  })));
-
-  // Check if any calendar has 0 slots
-  const emptyCalendars = successfulResults.filter((r) => r.slots.length === 0);
-  if (emptyCalendars.length > 0) {
-    console.log("[Slots API] Some calendars have no availability:",
-      emptyCalendars.map((r) => r.username));
-    // This is valid - intersection will be empty
-  }
-
-  // Calculate intersection
   const slotArrays = successfulResults.map((r) => r.slots);
   const intersectedSlots = intersectSlots(slotArrays);
-
-  console.log(
-    `[Slots API] Combined availability: ${intersectedSlots.length} mutual slots found`
-  );
 
   return NextResponse.json({
     slots: groupByDate(intersectedSlots),
     _meta: {
       combined: true,
       participants: usernameList,
-      slotsPerUser: results.map((r) => ({
-        username: r.username,
-        count: r.slots.length,
-        error: r.error,
-      })),
       mutualSlots: intersectedSlots.length,
     },
   });

@@ -30,16 +30,43 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# =============================================================================
+# ENVIRONMENT FILES - CRITICAL SECURITY
+# =============================================================================
+# All .env files MUST be ignored except .env.example
+.env
+.env.*
+.env.local
+.env.development
+.env.production
+.env.test
+.env.vercel
+.env.vercel.*
+!.env.example
 
-# vercel
+# Backup env files
+*.env.backup
+*.env.bak
+
+# =============================================================================
+# VERCEL
+# =============================================================================
 .vercel
 
-# typescript
+# =============================================================================
+# TYPESCRIPT
+# =============================================================================
 *.tsbuildinfo
 next-env.d.ts
 
-# blog data
+# =============================================================================
+# DATA & LOGS
+# =============================================================================
 /data
-.env*.local
+
+# Security-related files that should never be committed
+*.key
+*.pem
+*.crt
+secrets/
+credentials/

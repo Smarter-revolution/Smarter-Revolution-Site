@@ -1,13 +1,23 @@
 import { NextRequest } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import { FAQ_SYSTEM_PROMPT } from '@/lib/constants/faq-system-prompt';
+import { checkRateLimit, RATE_LIMITS } from '@/lib/rate-limit';
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
+// Maximum message length to prevent abuse
+const MAX_MESSAGE_LENGTH = 2000;
+
 export async function POST(request: NextRequest) {
   try {
+    // Apply rate limiting (20 requests per minute per IP)
+    const rateLimit = checkRateLimit(request, RATE_LIMITS.chat);
+    if (!rateLimit.success) {
+      return rateLimit.error;
+    }
+
     const body = await request.json();
     const { message } = body;
 
@@ -22,10 +32,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Validate message length to prevent token abuse
+    if (message.length > MAX_MESSAGE_LENGTH) {
+      return new Response(
+        JSON.stringify({ error: `Message must be ${MAX_MESSAGE_LENGTH} characters or less` }),
+        {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
     // Check if API key is configured
     if (!process.env.ANTHROPIC_API_KEY) {
+      console.error('ANTHROPIC_API_KEY environment variable is not configured');
       return new Response(
-        JSON.stringify({ error: 'Anthropic API key is not configured' }),
+        JSON.stringify({ error: 'Chat service is not configured' }),
         {
           status: 500,
           headers: { 'Content-Type': 'application/json' },
@@ -62,12 +84,11 @@ export async function POST(request: NextRequest) {
 
           controller.close();
         } catch (error) {
-          console.error('Error streaming from Claude API:', error);
-          const errorMessage =
-            error instanceof Error ? error.message : 'Unknown error occurred';
+          // Log error without exposing API details
+          console.error('Error streaming from Claude API:', error instanceof Error ? error.message : 'Unknown error');
           controller.enqueue(
             new TextEncoder().encode(
-              JSON.stringify({ error: `Claude API error: ${errorMessage}` })
+              JSON.stringify({ error: 'An error occurred while processing your request' })
             )
           );
           controller.close();
@@ -79,18 +100,15 @@ export async function POST(request: NextRequest) {
       headers: {
         'Content-Type': 'text/plain; charset=utf-8',
         'Cache-Control': 'no-cache',
-        Connection: 'keep-alive',
+        'Connection': 'keep-alive',
+        'X-RateLimit-Limit': String(RATE_LIMITS.chat.limit),
+        'X-RateLimit-Remaining': String(rateLimit.remaining),
       },
     });
   } catch (error) {
-    console.error('Error processing chat request:', error);
+    console.error('Error processing chat request:', error instanceof Error ? error.message : 'Unknown error');
     return new Response(
-      JSON.stringify({
-        error:
-          error instanceof Error
-            ? error.message
-            : 'Failed to process chat request',
-      }),
+      JSON.stringify({ error: 'Failed to process chat request' }),
       {
         status: 500,
         headers: { 'Content-Type': 'application/json' },
@@ -98,4 +116,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
