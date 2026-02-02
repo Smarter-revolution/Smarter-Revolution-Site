@@ -1,3 +1,5 @@
+import { logInfo, logError } from './logger';
+
 export type ActiveCampaignContact = {
   email: string;
   firstName: string;
@@ -14,14 +16,16 @@ export type ActiveCampaignResponse = {
   error?: string;
 };
 
-// Helper to log with timestamp for Vercel function logs
-const log = (message: string, data?: unknown) => {
-  const timestamp = new Date().toISOString();
-  if (data !== undefined) {
-    console.log(`[${timestamp}] [ActiveCampaign] ${message}`, JSON.stringify(data, null, 2));
-  } else {
-    console.log(`[${timestamp}] [ActiveCampaign] ${message}`);
-  }
+/**
+ * Secure logging wrapper for ActiveCampaign operations
+ * Uses the PII-redacting logger to prevent sensitive data exposure
+ */
+const log = (message: string, data?: Record<string, unknown>) => {
+  logInfo(`[ActiveCampaign] ${message}`, data);
+};
+
+const logErr = (message: string, data?: Record<string, unknown>, error?: Error) => {
+  logError(`[ActiveCampaign] ${message}`, data, error);
 };
 
 const getEnvVars = () => {
@@ -106,7 +110,7 @@ const addTagToContact = async (contactId: string, tagName: string) => {
     }
 
     if (!tagId) {
-      console.error(`Failed to find or create tag: ${tagName}`);
+      logErr(`Failed to find or create tag: ${tagName}`, { tagName });
       return;
     }
 
@@ -120,7 +124,7 @@ const addTagToContact = async (contactId: string, tagName: string) => {
       }),
     });
   } catch (error) {
-    console.error(`Error adding tag ${tagName}:`, error);
+    logErr(`Error adding tag ${tagName}`, { tagName }, error instanceof Error ? error : undefined);
   }
 };
 

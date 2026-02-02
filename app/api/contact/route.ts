@@ -1,14 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { syncContactToActiveCampaign, splitName } from "@/lib/activecampaign";
 import { checkRateLimit, RATE_LIMITS } from "@/lib/rate-limit";
-
-interface ContactPayload {
-  name: string;
-  email: string;
-  company: string;
-  phone?: string;
-  message?: string;
-}
+import { contactFormSchema, validateData } from "@/lib/validation";
+import { logError } from "@/lib/logger";
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,69 +12,25 @@ export async function POST(request: NextRequest) {
       return rateLimit.error;
     }
 
-    const body: ContactPayload = await request.json();
-    const { name, email, company, phone, message } = body;
+    const body = await request.json();
 
-    // Validate required fields
-    if (!name || !email || !company) {
+    // Validate input using Zod schema
+    const validation = validateData(contactFormSchema, body);
+    if (!validation.success) {
       return NextResponse.json(
-        { error: "Name, email, and company are required" },
+        { error: "Validation failed", details: validation.errors },
         { status: 400 }
       );
     }
 
-    // Validate field lengths to prevent abuse
-    if (name.length > 100) {
-      return NextResponse.json(
-        { error: "Name must be 100 characters or less" },
-        { status: 400 }
-      );
-    }
-
-    if (email.length > 254) {
-      return NextResponse.json(
-        { error: "Email must be 254 characters or less" },
-        { status: 400 }
-      );
-    }
-
-    if (company.length > 200) {
-      return NextResponse.json(
-        { error: "Company must be 200 characters or less" },
-        { status: 400 }
-      );
-    }
-
-    if (phone && phone.length > 30) {
-      return NextResponse.json(
-        { error: "Phone must be 30 characters or less" },
-        { status: 400 }
-      );
-    }
-
-    if (message && message.length > 5000) {
-      return NextResponse.json(
-        { error: "Message must be 5000 characters or less" },
-        { status: 400 }
-      );
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: "Invalid email format" },
-        { status: 400 }
-      );
-    }
-
+    const { name, email, company, phone, message } = validation.data;
     const { firstName, lastName } = splitName(name);
 
     const result = await syncContactToActiveCampaign({
       email,
       firstName,
       lastName,
-      phone,
+      phone: phone || undefined,
       company,
       message,
       tags: ["contact-form"],
@@ -99,8 +49,11 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    // Log error without exposing full details
-    console.error("Error processing contact:", error instanceof Error ? error.message : "Unknown error");
+    logError(
+      "Error processing contact submission",
+      {},
+      error instanceof Error ? error : new Error("Unknown error")
+    );
     return NextResponse.json(
       { error: "Failed to process contact submission" },
       { status: 500 }
