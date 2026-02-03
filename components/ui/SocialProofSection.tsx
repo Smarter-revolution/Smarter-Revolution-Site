@@ -362,16 +362,26 @@ export default function SocialProofSection() {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.5, 1, 1, 0.5]);
   
-  const testimonials = [
+  const testimonials: { quote: string; name: string; title: string }[] = [
     {
-      quote: "[Placeholder: Testimonial about video production speed, quality, or impact. Something like 'They delivered our entire training library in weeks, not months. The quality exceeded what we got from our previous agency at 3x the cost.']",
-      name: '[Name]',
-      title: '[Title], [Company]'
+      quote: 'Revenue up 240% in 8 months.',
+      name: 'Managing Partner',
+      title: '50-attorney law firm'
     },
     {
-      quote: "[Placeholder: Testimonial about web development, AI-readiness, or partnership experience. Something like 'Our new site isn't just faster—it's already ranking in AI search results. That's the difference between modern infrastructure and legacy systems.']",
-      name: '[Name]',
-      title: '[Title], [Company]'
+      quote: 'Employee handbook turned into a podcast series with 89% completion.',
+      name: 'COO',
+      title: 'Regional healthcare network'
+    },
+    {
+      quote: 'Sales cycles shortened 40% with a leaner team.',
+      name: 'CMO',
+      title: 'B2B project management platform'
+    },
+    {
+      quote: 'AI agents now handle 80% of customer questions instantly.',
+      name: 'Director of Customer Success',
+      title: 'Enterprise services team'
     }
   ];
   
@@ -482,7 +492,8 @@ export default function SocialProofSection() {
           <TrustMetric value={5} label="Years Experience" suffix="+" delay={1.1} />
         </motion.div>
         
-        {/* Logo strip */}
+        {/* Logo strip - temporarily hidden until real client logos are available */}
+        {/* Uncomment when real logos are ready:
         <motion.div
           className="mb-16"
           initial={{ opacity: 0 }}
@@ -492,41 +503,46 @@ export default function SocialProofSection() {
           <p className="text-center text-gray-500 text-sm mb-4">Trusted by innovative companies</p>
           <LogoStrip />
         </motion.div>
-        
-        {/* Testimonials */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <TestimonialCard
-              key={index}
-              {...testimonial}
-              index={index}
-              isActive={activeTestimonial === index}
-              onClick={() => setActiveTestimonial(index)}
-            />
-          ))}
-        </div>
-        
-        {/* Testimonial navigation dots */}
-        <motion.div
-          className="flex justify-center gap-3 mt-8"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 1 }}
-        >
-          {testimonials.map((_, index) => (
-            <motion.button
-              key={index}
-              className={`w-3 h-3 rounded-full transition-colors ${
-                activeTestimonial === index 
-                  ? 'bg-red-500' 
-                  : 'bg-gray-600 hover:bg-gray-500'
-              }`}
-              onClick={() => setActiveTestimonial(index)}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-            />
-          ))}
-        </motion.div>
+        */}
+
+        {/* Testimonials - only render when real testimonials are available */}
+        {testimonials.length > 0 && (
+          <>
+            <div className="grid md:grid-cols-2 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <TestimonialCard
+                  key={index}
+                  {...testimonial}
+                  index={index}
+                  isActive={activeTestimonial === index}
+                  onClick={() => setActiveTestimonial(index)}
+                />
+              ))}
+            </div>
+
+            {/* Testimonial navigation dots */}
+            <motion.div
+              className="flex justify-center gap-3 mt-8"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ delay: 1 }}
+            >
+              {testimonials.map((_, index) => (
+                <motion.button
+                  key={index}
+                  className={`w-3 h-3 rounded-full transition-colors ${
+                    activeTestimonial === index
+                      ? 'bg-red-500'
+                      : 'bg-gray-600 hover:bg-gray-500'
+                  }`}
+                  onClick={() => setActiveTestimonial(index)}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                />
+              ))}
+            </motion.div>
+          </>
+        )}
       </div>
     </section>
   );

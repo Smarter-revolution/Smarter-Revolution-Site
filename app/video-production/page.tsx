@@ -295,7 +295,20 @@ export default function VideoProductionPage() {
           </ScrollReveal>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {['Training Video Example', 'Explainer Example', 'Sales Video Example'].map((item, index) => (
+            {[
+              {
+                title: 'Training library in 10 days',
+                detail: 'From kickoff to launch without the 6-week agency cycle.'
+              },
+              {
+                title: '3-day turnaround demo',
+                detail: 'Professional quality, rapid iterations, no reshoots.'
+              },
+              {
+                title: 'Multilingual sales enablement',
+                detail: 'Consistent messaging, global reach, same presenter.'
+              }
+            ].map((item, index) => (
               <ScrollReveal key={index} delay={index * 0.1}>
                 <AnimatedCard className="aspect-video flex items-center justify-center">
                   <div className="text-center p-6">
@@ -305,7 +318,8 @@ export default function VideoProductionPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
-                    <p className="text-gray-500 text-sm">[{item}]</p>
+                    <p className="text-gray-200 text-sm font-semibold">{item.title}</p>
+                    <p className="text-gray-500 text-xs mt-2">{item.detail}</p>
                   </div>
                 </AnimatedCard>
               </ScrollReveal>

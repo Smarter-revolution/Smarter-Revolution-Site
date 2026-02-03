@@ -193,6 +193,45 @@ export default function WebsiteModernizationPage() {
         </div>
       </section>
 
+      {/* Proof Section */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-[#111]">
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Proof that <GradientText>modernization pays off.</GradientText>
+            </h2>
+          </ScrollReveal>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              {
+                quote: 'Sales cycles shortened 40% with a leaner team.',
+                author: 'CMO, B2B project management platform'
+              },
+              {
+                quote: 'Revenue up 240% in 8 months.',
+                author: 'Managing Partner, 50-attorney law firm'
+              },
+              {
+                quote: 'AI agents now handle 80% of customer questions instantly.',
+                author: 'Director of Customer Success, Enterprise services team'
+              },
+              {
+                quote: 'Employee handbook turned into a podcast series with 89% completion.',
+                author: 'COO, Regional healthcare network'
+              }
+            ].map((item, index) => (
+              <ScrollReveal key={index} delay={index * 0.08}>
+                <AnimatedCard className="p-6">
+                  <p className="text-gray-200 text-lg italic mb-4">"{item.quote}"</p>
+                  <p className="text-gray-500 text-sm">{item.author}</p>
+                </AnimatedCard>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0a0a0a] to-[#111] relative overflow-hidden">
         <div className="absolute inset-0">

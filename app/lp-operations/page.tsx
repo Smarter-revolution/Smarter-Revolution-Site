@@ -25,6 +25,17 @@ export default function LandingPageOperations() {
       `}</style>
 
       <div style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif', backgroundColor: 'var(--bg-black)', color: 'var(--text-white)', lineHeight: '1.6' }}>
+        {/* Simple Navigation */}
+        <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 3rem', maxWidth: '1400px', margin: '0 auto' }}>
+          <div style={{ fontSize: '1.2rem', fontWeight: 700 }}>
+            Smarter <span style={{ color: 'var(--revolution-red)' }}>Revolution</span>
+          </div>
+          <a href="#book" style={{ background: 'var(--revolution-red)', color: 'white', padding: '0.65rem 1.25rem', borderRadius: '50px', textDecoration: 'none', fontWeight: 600, fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'transform 0.2s, box-shadow 0.2s' }}>
+            Free Strategy Call
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </nav>
+
         {/* Hero Section */}
         <section style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', padding: '3rem 3rem 4rem', maxWidth: '1400px', margin: '0 auto', minHeight: '70vh' }}>
           <div style={{ paddingRight: '1rem' }}>
@@ -176,7 +187,7 @@ export default function LandingPageOperations() {
                 One place for <span style={{ color: 'var(--revolution-red)' }}>everything.</span>
               </h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.8', marginBottom: '1rem' }}>
-                "Where do I find the video on [X]?" If answering that question requires detective work, something's broken.
+                "Where do I find the lockout-tagout training?" If answering that question requires detective work, something's broken.
               </p>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.8', marginBottom: '0' }}>
                 Your team goes to one hub. They find what they need. They watch it. Done. No hunting through email threads. No asking three people for the same link. No wondering if they found the current version or the one from 2019.
