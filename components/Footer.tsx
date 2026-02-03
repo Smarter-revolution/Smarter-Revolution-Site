@@ -385,11 +385,29 @@ export default function Footer() {
                   }
                 />
                 <MagneticSocialButton
-                  href="https://twitter.com/smarterrevolution"
-                  label="Twitter"
+                  href="https://facebook.com/SmarterRevolution"
+                  label="Facebook"
+                  icon={
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M22 12.07C22 6.49 17.52 2 11.93 2C6.35 2 1.86 6.49 1.86 12.07C1.86 17.1 5.51 21.28 10.27 22v-7.03H7.9v-2.9h2.37V9.41c0-2.34 1.39-3.63 3.52-3.63 1.02 0 2.09.18 2.09.18v2.3h-1.18c-1.16 0-1.52.72-1.52 1.46v1.76h2.59l-.41 2.9h-2.18V22c4.76-.72 8.41-4.9 8.41-9.93z"/>
+                    </svg>
+                  }
+                />
+                <MagneticSocialButton
+                  href="https://x.com/SmarterRevolution"
+                  label="X"
                   icon={
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                  }
+                />
+                <MagneticSocialButton
+                  href="https://instagram.com/smarterrevolution"
+                  label="Instagram"
+                  icon={
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.66 0 3 1.34 3 3v10c0 1.66-1.34 3-3 3H7c-1.66 0-3-1.34-3-3V7c0-1.66 1.34-3 3-3h10zm-5 3.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm0 2a2.5 2.5 0 110 5 2.5 2.5 0 010-5zm4.75-.88a1.06 1.06 0 10-2.12 0 1.06 1.06 0 002.12 0z"/>
                     </svg>
                   }
                 />
