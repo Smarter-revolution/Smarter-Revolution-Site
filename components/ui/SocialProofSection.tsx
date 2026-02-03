@@ -147,7 +147,7 @@ function TestimonialCard({
   return (
     <motion.div
       ref={cardRef}
-      className="relative cursor-pointer"
+      className="relative cursor-pointer h-full"
       initial={{ opacity: 0, y: 50, rotateX: -15 }}
       animate={isInView ? { 
         opacity: 1, 
@@ -166,7 +166,7 @@ function TestimonialCard({
       style={{ perspective: '1000px' }}
     >
       <motion.div
-        className={`relative p-8 rounded-2xl border backdrop-blur-sm overflow-hidden transition-colors duration-300 ${
+        className={`relative p-8 rounded-2xl border backdrop-blur-sm overflow-hidden transition-colors duration-300 h-full flex flex-col min-h-[240px] ${
           isActive 
             ? 'bg-gradient-to-br from-gray-900 to-gray-950 border-red-500/30' 
             : 'bg-gradient-to-br from-gray-900/80 to-gray-950/80 border-gray-800'
@@ -209,7 +209,7 @@ function TestimonialCard({
         </motion.p>
         
         {/* Author info */}
-        <div className="flex items-center gap-4 relative z-10">
+        <div className="flex items-center gap-4 relative z-10 mt-auto">
           {/* Avatar placeholder with animated ring */}
           <div className="relative">
             <motion.div
