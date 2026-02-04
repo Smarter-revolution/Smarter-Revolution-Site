@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
@@ -60,18 +61,18 @@ function ThankYouContent() {
       </div>
 
       <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-        <a
+        <Link
           href="/"
           className="rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-red-500/60 hover:bg-red-500/10"
         >
           Back to home
-        </a>
-        <a
+        </Link>
+        <Link
           href="/book"
           className="rounded-full bg-red-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-red-500"
         >
           Schedule a call
-        </a>
+        </Link>
       </div>
     </div>
   );

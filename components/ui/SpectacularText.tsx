@@ -1,94 +1,13 @@
 'use client';
 
-import { motion, useAnimation, useInView, Variants } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
-
-// Glitch effect for individual characters
-function GlitchChar({ char, delay }: { char: string; delay: number }) {
-  const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?/~`';
-  const [displayChar, setDisplayChar] = useState(char);
-  const [isGlitching, setIsGlitching] = useState(true);
-  
-  useEffect(() => {
-    if (char === ' ') {
-      setDisplayChar(' ');
-      setIsGlitching(false);
-      return;
-    }
-    
-    const startDelay = setTimeout(() => {
-      let iterations = 0;
-      const maxIterations = 8;
-      
-      const interval = setInterval(() => {
-        if (iterations >= maxIterations) {
-          setDisplayChar(char);
-          setIsGlitching(false);
-          clearInterval(interval);
-          return;
-        }
-        
-        setDisplayChar(glitchChars[Math.floor(Math.random() * glitchChars.length)]);
-        iterations++;
-      }, 50);
-      
-      return () => clearInterval(interval);
-    }, delay * 1000);
-    
-    return () => clearTimeout(startDelay);
-  }, [char, delay]);
-  
-  return (
-    <span 
-      className={`inline-block ${isGlitching ? 'text-red-500' : ''}`}
-      style={{
-        textShadow: isGlitching 
-          ? '2px 0 #ff0000, -2px 0 #00ffff' 
-          : 'none',
-        transition: 'text-shadow 0.1s ease'
-      }}
-    >
-      {displayChar}
-    </span>
-  );
-}
-
-// Scramble text effect
-function ScrambleText({ 
-  text, 
-  className = '',
-  delay = 0,
-  duration = 1.5
-}: { 
-  text: string; 
-  className?: string;
-  delay?: number;
-  duration?: number;
-}) {
-  const chars = text.split('');
-  
-  return (
-    <span className={className}>
-      {chars.map((char, i) => (
-        <GlitchChar 
-          key={i} 
-          char={char} 
-          delay={delay + (i * (duration / chars.length))}
-        />
-      ))}
-    </span>
-  );
-}
 
 // Magnetic letters that react to mouse
 function MagneticLetter({ 
-  char, 
-  index,
-  totalChars
+  char
 }: { 
-  char: string; 
-  index: number;
-  totalChars: number;
+  char: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -167,7 +86,7 @@ function WaveText({
             delay: delay + i * 0.04,
           }}
         >
-          <MagneticLetter char={char} index={i} totalChars={chars.length} />
+          <MagneticLetter char={char} />
         </motion.span>
       ))}
     </span>
@@ -246,69 +165,6 @@ function AnimatedGradientText({
     >
       {children}
     </motion.span>
-  );
-}
-
-// Reveal text with mask
-function RevealText({
-  text,
-  className = '',
-  delay = 0
-}: {
-  text: string;
-  className?: string;
-  delay?: number;
-}) {
-  return (
-    <div className="relative overflow-hidden">
-      <motion.div
-        initial={{ y: '100%' }}
-        animate={{ y: 0 }}
-        transition={{
-          duration: 0.8,
-          delay,
-          ease: [0.6, 0.01, 0.05, 0.95]
-        }}
-      >
-        <span className={className}>{text}</span>
-      </motion.div>
-    </div>
-  );
-}
-
-// Split text with stagger
-function SplitRevealText({
-  text,
-  className = '',
-  delay = 0,
-  stagger = 0.1
-}: {
-  text: string;
-  className?: string;
-  delay?: number;
-  stagger?: number;
-}) {
-  const words = text.split(' ');
-  
-  return (
-    <span className={className}>
-      {words.map((word, i) => (
-        <span key={i} className="inline-block overflow-hidden mr-[0.25em]">
-          <motion.span
-            className="inline-block"
-            initial={{ y: '100%', rotateX: -80 }}
-            animate={{ y: 0, rotateX: 0 }}
-            transition={{
-              duration: 0.8,
-              delay: delay + i * stagger,
-              ease: [0.6, 0.01, 0.05, 0.95]
-            }}
-          >
-            {word}
-          </motion.span>
-        </span>
-      ))}
-    </span>
   );
 }
 

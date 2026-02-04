@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Service() {
   const services = [
     {
@@ -158,12 +160,12 @@ export default function Service() {
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
             Let's discuss how our AI-powered marketing services can transform your business
           </p>
-          <a
+          <Link
             href="/contact"
             className="inline-block bg-red-600 text-white px-10 py-4 rounded-lg font-semibold hover:bg-red-700 transition-colors shadow-lg text-lg"
           >
             Request a Free Consultation
-          </a>
+          </Link>
         </section>
       </div>
     </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import BookingFlow from '@/components/booking/BookingFlow';
 
 export default function LandingPageOperations() {
@@ -22,23 +23,102 @@ export default function LandingPageOperations() {
           --text-muted: #9CA3AF;
           --text-gray: #D1D5DB;
         }
+
+        .lp-page * {
+          box-sizing: border-box;
+        }
+
+        @media (max-width: 960px) {
+          .lp-nav {
+            padding: 1rem 1.5rem !important;
+            flex-wrap: wrap !important;
+            gap: 0.75rem !important;
+          }
+
+          .lp-hero {
+            grid-template-columns: 1fr !important;
+            padding: 2.5rem 1.5rem 3rem !important;
+            min-height: auto !important;
+          }
+
+          .lp-hero-content {
+            padding-right: 0 !important;
+          }
+
+          .lp-feature {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+            direction: ltr !important;
+          }
+
+          .lp-feature > div {
+            padding: 0 !important;
+          }
+
+          .lp-content {
+            padding: 2rem 1.5rem 4rem !important;
+          }
+
+          .lp-cta {
+            padding: 3rem 1.5rem !important;
+          }
+
+          .lp-booking {
+            padding: 4rem 1.5rem !important;
+          }
+
+          .lp-footer {
+            padding: 2rem 1.5rem !important;
+          }
+
+          .lp-stats {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            padding: 2rem !important;
+            gap: 1.5rem !important;
+            margin: 3rem 0 !important;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .lp-nav {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+          }
+
+          .lp-primary-cta {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+
+          .lp-hero h1 {
+            font-size: 1.6rem !important;
+          }
+
+          .lp-page h2 {
+            font-size: 1.35rem !important;
+          }
+
+          .lp-stats {
+            grid-template-columns: 1fr !important;
+          }
+        }
       `}</style>
 
-      <div style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif', backgroundColor: 'var(--bg-black)', color: 'var(--text-white)', lineHeight: '1.6' }}>
+      <div className="lp-page lp-operations" style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif', backgroundColor: 'var(--bg-black)', color: 'var(--text-white)', lineHeight: '1.6' }}>
         {/* Simple Navigation */}
-        <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 3rem', maxWidth: '1400px', margin: '0 auto' }}>
+        <nav className="lp-nav" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 3rem', maxWidth: '1400px', margin: '0 auto' }}>
           <div style={{ fontSize: '1.2rem', fontWeight: 700 }}>
             Smarter <span style={{ color: 'var(--revolution-red)' }}>Revolution</span>
           </div>
-          <a href="#book" style={{ background: 'var(--revolution-red)', color: 'white', padding: '0.65rem 1.25rem', borderRadius: '50px', textDecoration: 'none', fontWeight: 600, fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'transform 0.2s, box-shadow 0.2s' }}>
+          <a className="lp-primary-cta" href="#book" style={{ background: 'var(--revolution-red)', color: 'white', padding: '0.65rem 1.25rem', borderRadius: '50px', textDecoration: 'none', fontWeight: 600, fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'transform 0.2s, box-shadow 0.2s' }}>
             Free Strategy Call
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </nav>
 
         {/* Hero Section */}
-        <section style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', padding: '3rem 3rem 4rem', maxWidth: '1400px', margin: '0 auto', minHeight: '70vh' }}>
-          <div style={{ paddingRight: '1rem' }}>
+        <section className="lp-hero" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', padding: '3rem 3rem 4rem', maxWidth: '1400px', margin: '0 auto', minHeight: '70vh' }}>
+          <div className="lp-hero-content" style={{ paddingRight: '1rem' }}>
             <h1 style={{ fontSize: '2rem', fontWeight: 700, lineHeight: '1.3', marginBottom: '1.5rem' }}>
               AI-powered training videos your team will actually watch, retain, and apply.<br /><br />
               <span style={{ background: 'linear-gradient(90deg, var(--highlight-yellow), var(--highlight-orange), var(--revolution-red))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
@@ -52,7 +132,7 @@ export default function LandingPageOperations() {
               <span style={{ color: 'var(--revolution-red)' }}>▶</span> Watch 2 minutes. See the difference.
             </p>
           </div>
-          <div style={{ position: 'relative' }}>
+          <div className="lp-hero-media" style={{ position: 'relative' }}>
             <div style={{ background: 'linear-gradient(135deg, var(--card-blue), #0F172A)', borderRadius: '16px', aspectRatio: '16/10', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255, 255, 255, 0.1)', overflow: 'hidden', position: 'relative' }}>
               {/* Video - Open Source Placeholder (Pexels) - Replace with actual video later */}
               {!isVideoPlaying ? (
@@ -90,7 +170,7 @@ export default function LandingPageOperations() {
         </section>
 
         {/* Mid-page CTA */}
-        <section style={{ background: 'linear-gradient(135deg, var(--card-dark), var(--card-blue))', padding: '4rem 3rem', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+        <section className="lp-cta" style={{ background: 'linear-gradient(135deg, var(--card-dark), var(--card-blue))', padding: '4rem 3rem', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
           <div style={{ maxWidth: '700px', margin: '0 auto' }}>
             <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem' }}>
               Tired of training that <span style={{ background: 'linear-gradient(90deg, var(--highlight-orange), var(--revolution-red))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>can't be tracked?</span>
@@ -98,14 +178,14 @@ export default function LandingPageOperations() {
             <p style={{ color: 'var(--text-muted)', fontSize: '1rem', marginBottom: '1.5rem' }}>
               Book a free strategy session. We'll explore whether this actually solves your problems — or just creates new ones.
             </p>
-            <a href="#book" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'var(--revolution-red)', color: 'white', padding: '0.85rem 1.75rem', borderRadius: '50px', textDecoration: 'none', fontWeight: 600, fontSize: '0.95rem', transition: 'transform 0.2s, box-shadow 0.2s' }}>
+            <a className="lp-primary-cta" href="#book" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'var(--revolution-red)', color: 'white', padding: '0.85rem 1.75rem', borderRadius: '50px', textDecoration: 'none', fontWeight: 600, fontSize: '0.95rem', transition: 'transform 0.2s, box-shadow 0.2s' }}>
               Book Your Free Call <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
           </div>
         </section>
 
         {/* Content Section */}
-        <section style={{ maxWidth: '1400px', margin: '0 auto', padding: '2rem 3rem 5rem' }}>
+        <section className="lp-content" style={{ maxWidth: '1400px', margin: '0 auto', padding: '2rem 3rem 5rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem' }}>
               Training infrastructure <span style={{ background: 'linear-gradient(90deg, var(--highlight-orange), var(--revolution-red))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>that actually works</span>
@@ -114,10 +194,16 @@ export default function LandingPageOperations() {
           </div>
 
           {/* Feature 1: Visibility */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', marginBottom: '5rem' }}>
-            <div style={{ background: 'linear-gradient(135deg, var(--card-dark), var(--card-blue))', borderRadius: '16px', aspectRatio: '4/3', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255, 255, 255, 0.08)', overflow: 'hidden' }}>
+          <div className="lp-feature" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', marginBottom: '5rem' }}>
+            <div style={{ background: 'linear-gradient(135deg, var(--card-dark), var(--card-blue))', borderRadius: '16px', aspectRatio: '4/3', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255, 255, 255, 0.08)', overflow: 'hidden', position: 'relative' }}>
               {/* Placeholder image - Replace with actual analytics dashboard image */}
-              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" alt="Real-time training completion dashboard" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
+              <Image
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+                alt="Real-time training completion dashboard"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                style={{ objectFit: 'cover', borderRadius: '16px' }}
+              />
             </div>
             <div style={{ padding: '1rem' }}>
               <span style={{ display: 'inline-block', background: 'rgba(229, 57, 53, 0.15)', color: 'var(--revolution-red)', fontSize: '0.75rem', fontWeight: 600, padding: '0.4rem 0.8rem', borderRadius: '50px', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Visibility</span>
@@ -137,10 +223,16 @@ export default function LandingPageOperations() {
           </div>
 
           {/* Feature 2: Onboarding */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', marginBottom: '5rem', direction: 'rtl' }}>
-            <div style={{ background: 'linear-gradient(135deg, var(--card-dark), var(--card-blue))', borderRadius: '16px', aspectRatio: '4/3', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255, 255, 255, 0.08)', overflow: 'hidden' }}>
+          <div className="lp-feature" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', marginBottom: '5rem', direction: 'rtl' }}>
+            <div style={{ background: 'linear-gradient(135deg, var(--card-dark), var(--card-blue))', borderRadius: '16px', aspectRatio: '4/3', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255, 255, 255, 0.08)', overflow: 'hidden', position: 'relative' }}>
               {/* Placeholder image - Replace with actual training content library image */}
-              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" alt="Consistent training content library" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
+              <Image
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
+                alt="Consistent training content library"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                style={{ objectFit: 'cover', borderRadius: '16px' }}
+              />
             </div>
             <div style={{ padding: '1rem', direction: 'ltr' }}>
               <span style={{ display: 'inline-block', background: 'rgba(229, 57, 53, 0.15)', color: 'var(--revolution-red)', fontSize: '0.75rem', fontWeight: 600, padding: '0.4rem 0.8rem', borderRadius: '50px', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Onboarding</span>
@@ -160,7 +252,7 @@ export default function LandingPageOperations() {
           </div>
 
           {/* Stats */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem', margin: '5rem 0', padding: '3rem', background: 'linear-gradient(135deg, var(--card-dark), rgba(30, 41, 59, 0.5))', borderRadius: '20px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
+          <div className="lp-stats" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem', margin: '5rem 0', padding: '3rem', background: 'linear-gradient(135deg, var(--card-dark), rgba(30, 41, 59, 0.5))', borderRadius: '20px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '2.5rem', fontWeight: 800, background: 'linear-gradient(90deg, var(--highlight-yellow), var(--revolution-red))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', marginBottom: '0.5rem' }}>100%</div>
               <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Training consistency</div>
@@ -176,10 +268,16 @@ export default function LandingPageOperations() {
           </div>
 
           {/* Feature 3: Organization */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', marginBottom: '5rem' }}>
-            <div style={{ background: 'linear-gradient(135deg, var(--card-dark), var(--card-blue))', borderRadius: '16px', aspectRatio: '4/3', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255, 255, 255, 0.08)', overflow: 'hidden' }}>
+          <div className="lp-feature" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', marginBottom: '5rem' }}>
+            <div style={{ background: 'linear-gradient(135deg, var(--card-dark), var(--card-blue))', borderRadius: '16px', aspectRatio: '4/3', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255, 255, 255, 0.08)', overflow: 'hidden', position: 'relative' }}>
               {/* Placeholder image - Replace with actual content hub image */}
-              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="Centralized training content hub" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
+              <Image
+                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop"
+                alt="Centralized training content hub"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                style={{ objectFit: 'cover', borderRadius: '16px' }}
+              />
             </div>
             <div style={{ padding: '1rem' }}>
               <span style={{ display: 'inline-block', background: 'rgba(229, 57, 53, 0.15)', color: 'var(--revolution-red)', fontSize: '0.75rem', fontWeight: 600, padding: '0.4rem 0.8rem', borderRadius: '50px', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Organization</span>
@@ -199,10 +297,16 @@ export default function LandingPageOperations() {
           </div>
 
           {/* Feature 4: Proof */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', marginBottom: '5rem', direction: 'rtl' }}>
-            <div style={{ background: 'linear-gradient(135deg, var(--card-dark), var(--card-blue))', borderRadius: '16px', aspectRatio: '4/3', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255, 255, 255, 0.08)', overflow: 'hidden' }}>
+          <div className="lp-feature" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', marginBottom: '5rem', direction: 'rtl' }}>
+            <div style={{ background: 'linear-gradient(135deg, var(--card-dark), var(--card-blue))', borderRadius: '16px', aspectRatio: '4/3', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255, 255, 255, 0.08)', overflow: 'hidden', position: 'relative' }}>
               {/* Placeholder image - Replace with actual compliance/timestamped records image */}
-              <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&h=600&fit=crop" alt="Timestamped completion records" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
+              <Image
+                src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&h=600&fit=crop"
+                alt="Timestamped completion records"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                style={{ objectFit: 'cover', borderRadius: '16px' }}
+              />
             </div>
             <div style={{ padding: '1rem', direction: 'ltr' }}>
               <span style={{ display: 'inline-block', background: 'rgba(229, 57, 53, 0.15)', color: 'var(--revolution-red)', fontSize: '0.75rem', fontWeight: 600, padding: '0.4rem 0.8rem', borderRadius: '50px', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Protection</span>
@@ -223,7 +327,7 @@ export default function LandingPageOperations() {
         </section>
 
         {/* CTA Section with Calendar */}
-        <section id="book" style={{ background: 'linear-gradient(180deg, var(--bg-black) 0%, var(--bg-darker) 100%)', padding: '5rem 3rem', textAlign: 'center' }}>
+        <section id="book" className="lp-booking" style={{ background: 'linear-gradient(180deg, var(--bg-black) 0%, var(--bg-darker) 100%)', padding: '5rem 3rem', textAlign: 'center' }}>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '1rem' }}>
             Book a Free Strategy Session <span style={{ background: 'linear-gradient(90deg, var(--highlight-orange), var(--revolution-red))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>→</span>
           </h2>
@@ -243,7 +347,7 @@ export default function LandingPageOperations() {
         </section>
 
         {/* Footer Note */}
-        <div style={{ padding: '2.5rem 3rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)', textAlign: 'center' }}>
+        <div className="lp-footer" style={{ padding: '2.5rem 3rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)', textAlign: 'center' }}>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontStyle: 'italic', maxWidth: '650px', margin: '0 auto 1rem', lineHeight: '1.6' }}>
             Training that exists but can't be proven isn't training. It's liability. You already know this. Now there's a better way to fix it.
           </p>

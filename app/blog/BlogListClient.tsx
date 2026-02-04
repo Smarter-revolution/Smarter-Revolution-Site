@@ -1,9 +1,7 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   GridPattern,
   ScrollReveal,
@@ -31,15 +29,6 @@ interface BlogListClientProps {
 
 export default function BlogListClient({ posts }: BlogListClientProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Parallax effect for hero
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -63,8 +52,8 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
     : posts;
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#0a0a0a] overflow-hidden">
-      {/* Hero Section with Parallax */}
+    <div className="min-h-screen bg-[#0a0a0a] overflow-hidden">
+      {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0">
@@ -73,16 +62,9 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
           <div className="absolute inset-0 bg-gradient-to-b from-red-900/20 via-transparent to-[#0a0a0a]" />
         </div>
 
-        {/* Parallax Content */}
-        <motion.div
-          className="relative z-10 text-center max-w-4xl mx-auto"
-          style={{ y, opacity }}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+        {/* Hero Content */}
+        <div className="relative z-10 text-center max-w-4xl mx-auto">
+          <div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
               <BlurText text="The Revolution" className="text-white" />
               <span className="block mt-2">
@@ -92,23 +74,8 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
             <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto">
               Insights, strategies, and stories from the front lines of AI transformation.
             </p>
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <div className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-2">
-            <motion.div
-              className="w-1 h-2 bg-red-500 rounded-full"
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            />
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* Main Content */}
@@ -117,35 +84,28 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
           {/* Categories Filter */}
           <ScrollReveal>
             <div className="mb-12 flex flex-wrap justify-center gap-3">
-              <motion.button
+              <button
                 onClick={() => setActiveCategory(null)}
-                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-colors duration-150 ${
                   activeCategory === null
                     ? 'bg-red-600 text-white shadow-lg shadow-red-600/30'
                     : 'bg-white/5 border border-white/10 text-gray-300 hover:border-red-500/50 hover:text-white'
                 }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
               >
                 All Posts
-              </motion.button>
-              {categories.map((category, index) => (
-                <motion.button
+              </button>
+              {categories.map((category) => (
+                <button
                   key={category}
                   onClick={() => setActiveCategory(activeCategory === category ? null : category)}
-                  className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                  className={`px-5 py-2.5 rounded-full text-sm font-medium transition-colors duration-150 ${
                     activeCategory === category
                       ? 'bg-red-600 text-white shadow-lg shadow-red-600/30'
                       : 'bg-white/5 border border-white/10 text-gray-300 hover:border-red-500/50 hover:text-white'
                   }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05 }}
                 >
                   {category}
-                </motion.button>
+                </button>
               ))}
             </div>
           </ScrollReveal>
@@ -163,13 +123,12 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
                   {activeCategory ? `No posts in "${activeCategory}" category yet.` : 'Check back soon for new content.'}
                 </p>
                 {activeCategory && (
-                  <motion.button
+                  <button
                     onClick={() => setActiveCategory(null)}
                     className="mt-6 text-red-500 hover:text-red-400 font-medium"
-                    whileHover={{ x: -5 }}
                   >
                     ← View all posts
-                  </motion.button>
+                  </button>
                 )}
               </AnimatedCard>
             </ScrollReveal>
@@ -250,15 +209,12 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
                                 <p className="text-gray-500 text-sm">{formatDate(filteredPosts[0].publishedAt)}</p>
                               </div>
                             </div>
-                            <motion.span
-                              className="text-red-500 font-medium flex items-center gap-2"
-                              whileHover={{ x: 5 }}
-                            >
+                            <span className="text-red-500 font-medium flex items-center gap-2">
                               Read Article
                               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                               </svg>
-                            </motion.span>
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -337,22 +293,12 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
                           </div>
 
                           {/* Hover Footer */}
-                          <motion.div
-                            className="px-6 py-4 bg-red-600/10 border-t border-red-600/30 flex items-center justify-between"
-                            initial={{ opacity: 0.5 }}
-                            whileHover={{ opacity: 1 }}
-                          >
+                          <div className="px-6 py-4 bg-red-600/10 border-t border-red-600/30 flex items-center justify-between">
                             <span className="text-red-500 font-medium">Read More</span>
-                            <motion.svg
-                              className="w-5 h-5 text-red-500"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              whileHover={{ x: 5 }}
-                            >
+                            <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </motion.svg>
-                          </motion.div>
+                            </svg>
+                          </div>
                         </SpotlightCard>
                       </Link>
                     </ScrollReveal>
@@ -387,13 +333,9 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
                   placeholder="Enter your email"
                   className="flex-1 px-5 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-red-500 focus:ring-1 focus:ring-red-500 focus:outline-none transition-all"
                 />
-                <motion.button
-                  className="px-6 py-3 bg-red-600 text-white font-semibold rounded-xl hover:bg-red-500 transition-colors shadow-lg shadow-red-600/25"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
+                <button className="px-6 py-3 bg-red-600 text-white font-semibold rounded-xl hover:bg-red-500 transition-colors shadow-lg shadow-red-600/25">
                   Subscribe
-                </motion.button>
+                </button>
               </div>
               <p className="text-gray-500 text-sm mt-4">
                 No spam, unsubscribe anytime.

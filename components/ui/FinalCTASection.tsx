@@ -2,7 +2,6 @@
 
 import { motion, useScroll, useTransform, useInView, useMotionValue, useSpring } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import Link from 'next/link';
 
 // Seeded random for deterministic values
 function seededRandom(seed: number): number {

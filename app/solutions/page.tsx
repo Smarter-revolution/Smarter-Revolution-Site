@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const metadata = {
   title: "Solutions | Smarter Revolution",
   description:
@@ -351,12 +353,12 @@ export default function SolutionsPage() {
             </ul>
           </div>
           <div className="pt-4">
-            <a
+            <Link
               href="/strategy"
               className="inline-flex items-center justify-center rounded-full bg-sky-400 px-6 py-3 text-sm font-semibold text-slate-900 shadow-lg shadow-sky-500/30 transition hover:bg-sky-300"
             >
               Book Your Free Strategy Session – Find Your Starting Point
-            </a>
+            </Link>
           </div>
         </section>
       </div>

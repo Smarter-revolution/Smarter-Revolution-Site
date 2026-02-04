@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useRef, useState, useEffect, ReactNode } from 'react';
 
 // Seeded random for deterministic values
@@ -8,9 +8,6 @@ function seededRandom(seed: number): number {
   const x = Math.sin(seed * 9999) * 10000;
   return x - Math.floor(x);
 }
-
-// Global counter for unique seeds
-let particleSeedCounter = 0;
 
 // Soft dust particle - like sand being kicked up
 function SoftDustParticle({ 
@@ -481,14 +478,12 @@ interface ScrollImpactCardProps {
   children: ReactNode;
   className?: string;
   direction?: 'left' | 'right';
-  index?: number;
 }
 
 export default function ScrollImpactCard({
   children,
   className = '',
   direction = 'left',
-  index = 0,
 }: ScrollImpactCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [hasImpacted, setHasImpacted] = useState(false);

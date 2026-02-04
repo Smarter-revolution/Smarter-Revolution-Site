@@ -192,7 +192,7 @@ export default function FaqChat() {
               <div
                 className={`flex items-start gap-3 ${
                   message.role === "user" ? "justify-end" : "justify-start"
-                } animate-in fade-in slide-in-from-bottom-2 duration-300`}
+                }`}
               >
                 {message.role === "assistant" && (
                   <div className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">
@@ -223,11 +223,7 @@ export default function FaqChat() {
                       {message.content}
                     </p>
                   ) : (
-                    <div className="flex gap-1">
-                      <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-                      <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-                      <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"></div>
-                    </div>
+                    <p className="text-sm text-slate-500">...</p>
                   )}
                 </div>
                 {message.role === "user" && (
@@ -253,7 +249,7 @@ export default function FaqChat() {
               {message.role === "assistant" &&
                 showFormForMessage === index &&
                 formSubmitted !== index && (
-                  <div className="ml-11 mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <div className="ml-11 mt-2">
                     <form
                       onSubmit={(e) => handleFormSubmit(e, index)}
                       className="bg-white border border-slate-200 rounded-lg p-4 shadow-sm space-y-3"
@@ -332,7 +328,7 @@ export default function FaqChat() {
 
               {/* Success Message */}
               {message.role === "assistant" && formSubmitted === index && (
-                <div className="ml-11 mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                <div className="ml-11 mt-2">
                   <div className="bg-green-50 border border-green-200 rounded-lg p-3">
                     <p className="text-sm text-green-800">
                       Thanks! Our team will reach out within 24 hours.

@@ -1,8 +1,7 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   GlowButton,
   SpotlightCard,
@@ -25,20 +24,6 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  // Parallax effect
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: isMounted ? containerRef : undefined,
-    offset: ["start start", "end start"]
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,8 +66,8 @@ export default function Contact() {
   const labelStyles = "block text-sm font-medium text-gray-300 mb-2";
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#0a0a0a] overflow-hidden">
-      {/* Hero Section with Parallax */}
+    <div className="min-h-screen bg-[#0a0a0a] overflow-hidden">
+      {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0">
@@ -91,16 +76,8 @@ export default function Contact() {
           <div className="absolute inset-0 bg-gradient-to-b from-red-900/20 via-transparent to-[#0a0a0a]" />
         </div>
 
-        {/* Parallax Content */}
-        <motion.div 
-          className="relative z-10 text-center max-w-4xl mx-auto"
-          style={{ y, opacity }}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+        <div className="relative z-10 text-center max-w-4xl mx-auto">
+          <div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
               <BlurText text="Start Your" className="text-white" />
               <span className="block mt-2">
@@ -110,23 +87,8 @@ export default function Contact() {
             <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto">
               Whether you&apos;re ready to transform or just curious about what&apos;s possible, we&apos;re here to help.
             </p>
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div 
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <div className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-2">
-            <motion.div 
-              className="w-1 h-2 bg-red-500 rounded-full"
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            />
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* Main Content */}
@@ -142,13 +104,9 @@ export default function Contact() {
                 
                 <form onSubmit={handleSubmit} className="space-y-5">
                   {error && (
-                    <motion.div
-                      className="bg-red-600/20 border border-red-500/50 text-white p-4 rounded-xl"
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                    >
+                    <div className="bg-red-600/20 border border-red-500/50 text-white p-4 rounded-xl">
                       <p className="text-sm text-red-300">{error}</p>
-                    </motion.div>
+                    </div>
                   )}
                     <div>
                       <label htmlFor="name" className={labelStyles}>
@@ -228,26 +186,14 @@ export default function Contact() {
                       />
                     </div>
 
-                    <motion.button
+                    <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full mt-4 relative inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 overflow-hidden group px-8 py-4 text-lg bg-red-600 text-white hover:bg-red-500 shadow-lg shadow-red-600/25 hover:shadow-red-500/40 disabled:opacity-50 disabled:cursor-not-allowed"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      className="w-full mt-4 inline-flex items-center justify-center font-semibold rounded-xl transition-colors duration-150 px-8 py-4 text-lg bg-red-600 text-white hover:bg-red-500 shadow-lg shadow-red-600/25 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {/* Glow effect */}
-                      <span className="absolute inset-0 bg-gradient-to-r from-red-600/0 via-red-400/30 to-red-600/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                      
-                      <span className="relative z-10 flex items-center gap-2">
+                      <span className="flex items-center gap-2">
                         {isSubmitting ? (
-                          <>
-                            <motion.span
-                              className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
-                              animate={{ rotate: 360 }}
-                              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                            />
-                            Sending...
-                          </>
+                          <>Sending...</>
                         ) : (
                           <>
                             Send Message
@@ -257,7 +203,7 @@ export default function Contact() {
                           </>
                         )}
                       </span>
-                    </motion.button>
+                    </button>
                 </form>
               </SpotlightCard>
             </ScrollReveal>
@@ -270,10 +216,7 @@ export default function Contact() {
                     Contact <GradientText>Information</GradientText>
                   </h2>
                   <div className="space-y-6">
-                    <motion.div
-                      whileHover={{ x: 5 }}
-                      transition={{ duration: 0.2 }}
-                    >
+                    <div>
                       <h3 className="text-red-500 font-semibold mb-3 flex items-center gap-2">
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -291,12 +234,9 @@ export default function Contact() {
                           mark@smarterrevolution.com
                         </a>
                       </div>
-                    </motion.div>
+                    </div>
 
-                    <motion.div
-                      whileHover={{ x: 5 }}
-                      transition={{ duration: 0.2 }}
-                    >
+                    <div>
                       <h3 className="text-red-500 font-semibold mb-3 flex items-center gap-2">
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -306,12 +246,9 @@ export default function Contact() {
                       <a href="tel:+12133028260" className="text-gray-300 hover:text-red-500 transition-colors text-lg">
                         (213) 302-8260
                       </a>
-                    </motion.div>
+                    </div>
 
-                    <motion.div
-                      whileHover={{ x: 5 }}
-                      transition={{ duration: 0.2 }}
-                    >
+                    <div>
                       <h3 className="text-red-500 font-semibold mb-3 flex items-center gap-2">
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
@@ -326,7 +263,7 @@ export default function Contact() {
                           Wolf on LinkedIn
                         </a>
                       </div>
-                    </motion.div>
+                    </div>
                   </div>
                 </SpotlightCard>
               </ScrollReveal>
@@ -343,15 +280,10 @@ export default function Contact() {
                       '24/7 AI monitoring & support',
                       'Transparent reporting & analytics',
                       'Proven track record of success'
-                    ].map((item, index) => (
-                      <motion.li 
+                    ].map((item) => (
+                      <li 
                         key={item}
                         className="flex items-center gap-3 text-gray-300"
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
-                        whileHover={{ x: 5, color: '#fff' }}
                       >
                         <span className="w-6 h-6 rounded-full bg-red-600/20 flex items-center justify-center flex-shrink-0">
                           <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20">
@@ -359,7 +291,7 @@ export default function Contact() {
                           </svg>
                         </span>
                         {item}
-                      </motion.li>
+                      </li>
                     ))}
                   </ul>
                 </SpotlightCard>

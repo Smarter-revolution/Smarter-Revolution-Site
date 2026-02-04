@@ -44,7 +44,7 @@ const securityHeaders = [
       "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cal.com https://*.cal.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com data:",
-      "img-src 'self' data: blob: https://*.strapiapp.com https://*.cal.com",
+      "img-src 'self' data: blob: https://*.strapiapp.com https://*.cal.com https://images.unsplash.com https://i.ytimg.com",
       "connect-src 'self' https://api.anthropic.com https://*.cal.com https://*.strapiapp.com https://*.api-us1.com",
       "frame-src 'self' https://cal.com https://*.cal.com",
       "frame-ancestors 'none'",
@@ -64,6 +64,14 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: '*.media.strapiapp.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
       },
     ],
   },

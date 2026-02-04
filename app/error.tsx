@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect } from "react";
 
 type ErrorPageProps = {
@@ -32,12 +33,12 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
         >
           Retry
         </button>
-        <a
+        <Link
           href="/"
           className="rounded-full border border-white/15 bg-white/5 px-6 py-2 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/10"
         >
           Back to home
-        </a>
+        </Link>
       </div>
       {error.digest ? (
         <p className="mt-6 text-xs text-gray-600">Error ID: {error.digest}</p>

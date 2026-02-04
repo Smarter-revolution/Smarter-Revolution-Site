@@ -1,8 +1,8 @@
 'use client';
 
 import { useRef, useMemo, useState, useEffect, Suspense } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Float, OrbitControls, Sphere, Line } from '@react-three/drei';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, Line } from '@react-three/drei';
 import * as THREE from 'three';
 import type { Line2, LineMaterial } from 'three-stdlib';
 
@@ -14,14 +14,6 @@ interface NodeData {
   size: number;
   type: 'core' | 'primary' | 'secondary' | 'outer';
   connections: number[];
-}
-
-interface PulseData {
-  startNode: number;
-  endNode: number;
-  progress: number;
-  speed: number;
-  active: boolean;
 }
 
 // Generate brain-like node structure
@@ -251,8 +243,13 @@ function Pulse({
   exploded: number;
 }) {
   const meshRef = useRef<THREE.Mesh>(null);
-  const progress = useRef(Math.random());
-  const speed = useRef(0.3 + Math.random() * 0.4);
+  const progress = useRef(0);
+  const speed = useRef(0.3);
+
+  useEffect(() => {
+    progress.current = Math.random();
+    speed.current = 0.3 + Math.random() * 0.4;
+  }, []);
   
   useFrame((state, delta) => {
     if (meshRef.current && exploded < 0.3) {
@@ -287,22 +284,19 @@ function Pulse({
 // Main Neural Network Scene
 function NeuralNetworkScene({ 
   exploded, 
-  autoRotate = true,
-  interactionEnabled = true 
+  autoRotate = true
 }: { 
   exploded: number;
   autoRotate?: boolean;
-  interactionEnabled?: boolean;
 }) {
   const groupRef = useRef<THREE.Group>(null);
-  const { viewport } = useThree();
   
   const nodes = useMemo(() => generateBrainNodes(80, 1.8), []);
   
   // Generate connections data
   const connections = useMemo(() => {
     const conns: { start: THREE.Vector3; end: THREE.Vector3; type: NodeData['type'] }[] = [];
-    nodes.forEach((node, i) => {
+    nodes.forEach((node) => {
       node.connections.forEach(j => {
         conns.push({
           start: node.originalPosition,
@@ -470,7 +464,6 @@ export default function NeuralNetwork3D({
           <NeuralNetworkScene 
             exploded={internalExploded}
             autoRotate={autoRotate}
-            interactionEnabled={interactionEnabled}
           />
           {interactionEnabled && (
             <OrbitControls 

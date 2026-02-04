@@ -1,60 +1,32 @@
 'use client';
 
 import Link from "next/link";
-import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-// Animated background grid
 function AnimatedGrid() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Horizontal lines */}
       {[...Array(8)].map((_, i) => (
-        <motion.div
+        <div
           key={`h-${i}`}
           className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/10 to-transparent"
           style={{ top: `${(i + 1) * 12}%` }}
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ duration: 1.5, delay: i * 0.1 }}
         />
       ))}
-      
-      {/* Vertical lines */}
       {[...Array(12)].map((_, i) => (
-        <motion.div
+        <div
           key={`v-${i}`}
           className="absolute top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-red-500/5 to-transparent"
           style={{ left: `${(i + 1) * 8}%` }}
-          initial={{ scaleY: 0, opacity: 0 }}
-          animate={{ scaleY: 1, opacity: 1 }}
-          transition={{ duration: 1.5, delay: i * 0.05 }}
         />
       ))}
-      
-      {/* Glowing intersection points */}
       {[...Array(6)].map((_, i) => (
-        <motion.div
+        <div
           key={`glow-${i}`}
-          className="absolute w-1 h-1 rounded-full bg-red-500"
+          className="absolute w-1 h-1 rounded-full bg-red-500/40"
           style={{
             left: `${20 + (i % 3) * 30}%`,
             top: `${25 + Math.floor(i / 3) * 50}%`,
-          }}
-          animate={{
-            opacity: [0.2, 0.6, 0.2],
-            scale: [1, 1.5, 1],
-            boxShadow: [
-              '0 0 5px rgba(239, 68, 68, 0.3)',
-              '0 0 15px rgba(239, 68, 68, 0.6)',
-              '0 0 5px rgba(239, 68, 68, 0.3)',
-            ],
-          }}
-          transition={{
-            duration: 3,
-            delay: i * 0.5,
-            repeat: Infinity,
-            ease: 'easeInOut',
           }}
         />
       ))}
@@ -62,244 +34,118 @@ function AnimatedGrid() {
   );
 }
 
-// Animated logo with hover effect
-function AnimatedLogo() {
-  const [isHovered, setIsHovered] = useState(false);
-  
+function Logo() {
   return (
-    <Link 
-      href="/" 
-      className="inline-block group relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <motion.div
-        className="relative"
-        whileHover={{ scale: 1.02 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-      >
-        {/* Glow effect */}
-        <motion.div
-          className="absolute -inset-4 bg-red-500/20 rounded-xl blur-xl"
-          animate={{
-            opacity: isHovered ? 0.4 : 0,
-            scale: isHovered ? 1 : 0.8,
-          }}
-          transition={{ duration: 0.3 }}
-        />
-        
-        <h3 className="text-2xl font-bold relative z-10">
-          <motion.span 
-            className="text-white"
-            animate={{ color: isHovered ? '#ffffff' : '#ffffff' }}
-          >
-            Smarter{' '}
-          </motion.span>
-          <motion.span 
-            className="relative"
-            animate={{
-              color: isHovered ? '#f87171' : '#dc2626',
-            }}
-          >
-            Revolution
-            {/* Animated underline */}
-            <motion.span
-              className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-red-500 to-orange-500"
-              initial={{ width: 0 }}
-              animate={{ width: isHovered ? '100%' : 0 }}
-              transition={{ duration: 0.3 }}
-            />
-          </motion.span>
-        </h3>
-      </motion.div>
+    <Link href="/" className="inline-block">
+      <h3 className="text-2xl font-bold">
+        <span className="text-white">Smarter </span>
+        <span className="text-red-500">Revolution</span>
+      </h3>
     </Link>
   );
 }
 
-// Magnetic social button
-function MagneticSocialButton({ 
-  href, 
-  icon, 
-  label 
-}: { 
-  href: string; 
-  icon: React.ReactNode; 
+function SocialButton({
+  href,
+  icon,
+  label,
+}: {
+  href: string;
+  icon: React.ReactNode;
   label: string;
 }) {
-  const buttonRef = useRef<HTMLAnchorElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  
-  const springX = useSpring(x, { stiffness: 150, damping: 15 });
-  const springY = useSpring(y, { stiffness: 150, damping: 15 });
-  
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!buttonRef.current) return;
-    const rect = buttonRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    
-    x.set((e.clientX - centerX) * 0.3);
-    y.set((e.clientY - centerY) * 0.3);
-  };
-  
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-  
   return (
-    <motion.a
-      ref={buttonRef}
+    <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="relative w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 overflow-hidden group"
-      style={{ x: springX, y: springY }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
+      className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10"
       aria-label={label}
     >
-      {/* Hover gradient */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-red-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-      />
-      
-      {/* Icon */}
-      <motion.div 
-        className="relative z-10 group-hover:text-white transition-colors"
-        whileHover={{ rotate: [0, -10, 10, 0] }}
-        transition={{ duration: 0.5 }}
-      >
-        {icon}
-      </motion.div>
-      
-      {/* Shine effect */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"
-      />
-    </motion.a>
+      {icon}
+    </a>
   );
 }
 
-// Animated link with hover effect
-function AnimatedLink({ href, children, delay = 0 }: { href: string; children: React.ReactNode; delay?: number }) {
-  const ref = useRef<HTMLLIElement>(null);
-  const isInView = useInView(ref, { once: true });
-  
+function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <motion.li
-      ref={ref}
-      initial={{ opacity: 0, x: -10 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.4, delay }}
-    >
+    <li>
       <Link
         href={href}
-        className="group flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors duration-300"
+        className="flex items-center gap-2 text-sm text-gray-400 hover:text-white"
       >
-        <motion.span
-          className="w-0 h-px bg-red-500 group-hover:w-3 transition-all duration-300"
-        />
-        <span className="relative">
-          {children}
-          <span className="absolute bottom-0 left-0 w-0 h-px bg-red-500 group-hover:w-full transition-all duration-300" />
-        </span>
+        {children}
       </Link>
-    </motion.li>
+    </li>
   );
 }
 
-// Animated section header
-function SectionHeader({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
-  const ref = useRef<HTMLHeadingElement>(null);
-  const isInView = useInView(ref, { once: true });
-  
+function SectionHeader({ children }: { children: React.ReactNode }) {
   return (
-    <motion.h4
-      ref={ref}
-      className="text-sm font-semibold text-white mb-4 uppercase tracking-wider relative inline-block"
-      initial={{ opacity: 0, y: 10 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay }}
-    >
+    <h4 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider relative inline-block">
       {children}
-      <motion.span
-        className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-red-500 to-transparent"
-        initial={{ width: 0 }}
-        animate={isInView ? { width: '50%' } : {}}
-        transition={{ duration: 0.5, delay: delay + 0.3 }}
-      />
-    </motion.h4>
+      <span className="absolute -bottom-1 left-0 h-0.5 w-1/2 bg-gradient-to-r from-red-500 to-transparent" />
+    </h4>
   );
 }
 
-// Animated contact info
-function ContactInfo({ icon, href, children }: { icon: React.ReactNode; href: string; children: React.ReactNode }) {
+function ContactInfo({
+  icon,
+  href,
+  children,
+}: {
+  icon: React.ReactNode;
+  href: string;
+  children: React.ReactNode;
+}) {
   return (
-    <motion.a
+    <a
       href={href}
-      className="flex items-center gap-3 text-sm text-gray-400 hover:text-red-400 transition-colors group"
-      whileHover={{ x: 5 }}
+      className="flex items-center gap-3 text-sm text-gray-400 hover:text-red-400"
     >
-      <span className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-gray-500 group-hover:text-red-500 group-hover:bg-red-500/10 transition-all">
+      <span className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-gray-500">
         {icon}
       </span>
       {children}
-    </motion.a>
+    </a>
   );
 }
 
-// Back to top button
 function BackToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
-  
+
   useEffect(() => {
     const toggleVisibility = () => {
       setIsVisible(window.scrollY > 500);
     };
-    
+
     window.addEventListener('scroll', toggleVisibility);
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
-  
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  
+
+  if (!isVisible) {
+    return null;
+  }
+
   return (
-    <motion.button
+    <button
       onClick={scrollToTop}
       className="fixed bottom-8 right-8 w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-orange-600 text-white flex items-center justify-center shadow-lg shadow-red-500/25 z-50"
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ 
-        opacity: isVisible ? 1 : 0, 
-        scale: isVisible ? 1 : 0,
-        y: isVisible ? 0 : 20,
-      }}
-      whileHover={{ scale: 1.1, y: -2 }}
-      whileTap={{ scale: 0.95 }}
+      aria-label="Back to top"
     >
-      <motion.svg 
-        className="w-5 h-5" 
-        fill="none" 
-        viewBox="0 0 24 24" 
-        stroke="currentColor"
-        animate={{ y: [0, -3, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity }}
-      >
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-      </motion.svg>
-    </motion.button>
+      </svg>
+    </button>
   );
 }
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const footerRef = useRef<HTMLElement>(null);
-  const isInView = useInView(footerRef, { once: true, margin: '-100px' });
 
   const footerLinks = {
     services: [
@@ -330,62 +176,32 @@ export default function Footer() {
 
   return (
     <>
-      <footer 
-        ref={footerRef}
-        className="relative border-t border-white/10 bg-[#0a0a0a] overflow-hidden"
-      >
-        {/* Animated background */}
+      <footer className="relative border-t border-white/10 bg-[#0a0a0a] overflow-hidden">
         <AnimatedGrid />
-        
-        {/* Gradient overlays */}
+
         <div className="absolute inset-0 bg-gradient-to-t from-red-900/10 to-transparent pointer-events-none" />
-        <motion.div 
-          className="absolute top-0 left-1/4 w-96 h-96 bg-red-600/5 rounded-full blur-3xl"
-          animate={{
-            x: [0, 30, 0],
-            y: [0, -20, 0],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        
+
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-6">
-            {/* Brand Column */}
-            <motion.div 
-              className="lg:col-span-2"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
-            >
-              <AnimatedLogo />
-              
-              <motion.p 
-                className="mt-4 text-sm text-gray-400 leading-relaxed max-w-sm"
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
+            <div className="lg:col-span-2">
+              <Logo />
+
+              <p className="mt-4 text-sm text-gray-400 leading-relaxed max-w-sm">
                 AI-powered video, training, and web infrastructure. We help mid-market companies create faster, perform better, and get discovered everywhere.
-              </motion.p>
-              
-              {/* Social Links */}
-              <motion.div 
-                className="mt-6 flex items-center gap-4"
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
-                <MagneticSocialButton
-                  href="https://linkedin.com/company/smarterrevolution"
-                  label="LinkedIn"
+              </p>
+
+              <div className="mt-6 flex items-center gap-4">
+                <SocialButton
+                  href="https://www.youtube.com/@SmarterRevolution"
+                  label="YouTube"
                   icon={
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                      <path d="M23.498 6.186a3.01 3.01 0 00-2.118-2.13C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.38.556A3.01 3.01 0 00.502 6.186C0 8.066 0 12 0 12s0 3.934.502 5.814a3.01 3.01 0 002.118 2.13C4.495 20.5 12 20.5 12 20.5s7.505 0 9.38-.556a3.01 3.01 0 002.118-2.13C24 15.934 24 12 24 12s0-3.934-.502-5.814zM9.75 15.5v-7l6 3.5-6 3.5z"/>
                     </svg>
                   }
                 />
-                <MagneticSocialButton
-                  href="https://facebook.com/SmarterRevolution"
+                <SocialButton
+                  href="https://www.facebook.com/smarterrevolution/"
                   label="Facebook"
                   icon={
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -393,17 +209,8 @@ export default function Footer() {
                     </svg>
                   }
                 />
-                <MagneticSocialButton
-                  href="https://x.com/SmarterRevolution"
-                  label="X"
-                  icon={
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                    </svg>
-                  }
-                />
-                <MagneticSocialButton
-                  href="https://instagram.com/smarterrevolution"
+                <SocialButton
+                  href="https://www.instagram.com/smarterrevolution"
                   label="Instagram"
                   icon={
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -411,85 +218,81 @@ export default function Footer() {
                     </svg>
                   }
                 />
-              </motion.div>
-              
-              {/* Newsletter signup hint */}
-              <motion.div
-                className="mt-8 p-4 rounded-xl bg-white/5 border border-white/10"
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
+                <SocialButton
+                  href="https://www.linkedin.com/company/smarterrevolution"
+                  label="LinkedIn"
+                  icon={
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                  }
+                />
+                <SocialButton
+                  href="https://www.linkedin.com/in/wolfkrammel"
+                  label="Wolf Krammel on LinkedIn"
+                  icon={
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                  }
+                />
+              </div>
+
+              <div className="mt-8 p-4 rounded-xl bg-white/5 border border-white/10">
                 <p className="text-xs text-gray-500 mb-2">Ready to transform your content?</p>
                 <Link
                   href="/book"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-red-500 hover:text-red-400 transition-colors group"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-red-500 hover:text-red-400"
                 >
                   Get started today
-                  <motion.svg 
-                    className="w-4 h-4" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="currentColor"
-                    animate={{ x: [0, 3, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </motion.svg>
+                  </svg>
                 </Link>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
-            {/* Services */}
             <div>
-              <SectionHeader delay={0.1}>Services</SectionHeader>
+              <SectionHeader>Services</SectionHeader>
               <ul className="space-y-3">
-                {footerLinks.services.map((link, i) => (
-                  <AnimatedLink key={link.href} href={link.href} delay={0.2 + i * 0.05}>
+                {footerLinks.services.map((link) => (
+                  <FooterLink key={link.href} href={link.href}>
                     {link.name}
-                  </AnimatedLink>
+                  </FooterLink>
                 ))}
               </ul>
             </div>
 
-            {/* Solutions */}
             <div>
-              <SectionHeader delay={0.15}>Solutions</SectionHeader>
+              <SectionHeader>Solutions</SectionHeader>
               <ul className="space-y-3">
-                {footerLinks.solutions.map((link, i) => (
-                  <AnimatedLink key={link.href} href={link.href} delay={0.25 + i * 0.05}>
+                {footerLinks.solutions.map((link) => (
+                  <FooterLink key={link.href} href={link.href}>
                     {link.name}
-                  </AnimatedLink>
+                  </FooterLink>
                 ))}
               </ul>
             </div>
 
-            {/* Company */}
             <div>
-              <SectionHeader delay={0.25}>Company</SectionHeader>
+              <SectionHeader>Company</SectionHeader>
               <ul className="space-y-3">
-                {footerLinks.company.map((link, i) => (
-                  <AnimatedLink key={link.href} href={link.href} delay={0.35 + i * 0.05}>
+                {footerLinks.company.map((link) => (
+                  <FooterLink key={link.href} href={link.href}>
                     {link.name}
-                  </AnimatedLink>
+                  </FooterLink>
                 ))}
-                {footerLinks.landingPages.map((link, i) => (
-                  <AnimatedLink key={link.href} href={link.href} delay={0.35 + (footerLinks.company.length + i) * 0.05}>
+                {footerLinks.landingPages.map((link) => (
+                  <FooterLink key={link.href} href={link.href}>
                     {link.name}
-                  </AnimatedLink>
+                  </FooterLink>
                 ))}
               </ul>
             </div>
 
-            {/* Information */}
             <div>
-              <SectionHeader delay={0.2}>Information</SectionHeader>
-              <motion.div
-                className="space-y-3"
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.6, delay: 0.5 }}
-              >
+              <SectionHeader>Information</SectionHeader>
+              <div className="space-y-3">
                 <ContactInfo
                   href="mailto:info@smarterrevolution.com"
                   icon={
@@ -510,56 +313,32 @@ export default function Footer() {
                 >
                   (213) 302-8260
                 </ContactInfo>
-              </motion.div>
+              </div>
             </div>
           </div>
 
-          {/* Bottom Bar */}
-          <motion.div 
-            className="mt-12 pt-8 border-t border-white/10"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
+          <div className="mt-12 pt-8 border-t border-white/10">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <motion.p 
-                className="text-sm text-gray-500 flex items-center gap-2"
-                whileHover={{ color: '#9ca3af' }}
-              >
+              <p className="text-sm text-gray-500 flex items-center gap-2">
                 <span>©</span>
-                <motion.span
-                  animate={{ opacity: [0.5, 1, 0.5] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  {currentYear}
-                </motion.span>
+                <span>{currentYear}</span>
                 <span>Smarter Revolution. All rights reserved.</span>
-              </motion.p>
-              
+              </p>
+
               <div className="flex items-center gap-6">
-                <Link
-                  href="/privacy"
-                  className="text-sm text-gray-500 hover:text-red-500 transition-colors relative group"
-                >
+                <Link href="/privacy" className="text-sm text-gray-500 hover:text-red-500">
                   Privacy Policy
-                  <span className="absolute bottom-0 left-0 w-0 h-px bg-red-500 group-hover:w-full transition-all duration-300" />
                 </Link>
                 <span className="text-gray-700">•</span>
-                <Link
-                  href="/terms"
-                  className="text-sm text-gray-500 hover:text-red-500 transition-colors relative group"
-                >
+                <Link href="/terms" className="text-sm text-gray-500 hover:text-red-500">
                   Terms of Service
-                  <span className="absolute bottom-0 left-0 w-0 h-px bg-red-500 group-hover:w-full transition-all duration-300" />
                 </Link>
               </div>
             </div>
-            
-          </motion.div>
+          </div>
         </div>
       </footer>
-      
-      {/* Back to top button */}
+
       <BackToTopButton />
     </>
   );

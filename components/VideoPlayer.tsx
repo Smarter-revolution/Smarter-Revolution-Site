@@ -1,21 +1,29 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 
 interface VideoPlayerProps {
   videoUrl?: string;
   posterImage?: string;
+  posterImageFallback?: string;
   title?: string;
   duration?: string;
+  aspectRatio?: string;
+  className?: string;
 }
 
 export default function VideoPlayer({
   videoUrl = '',
   posterImage = '',
+  posterImageFallback = '',
   title = 'Overview Video',
-  duration = '2 min'
+  duration = '2 min',
+  aspectRatio = '16/9',
+  className = ''
 }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentPoster, setCurrentPoster] = useState(posterImage);
 
   const handlePlayClick = () => {
     setIsPlaying(true);
@@ -24,10 +32,10 @@ export default function VideoPlayer({
   // If no video URL is provided, show placeholder
   if (!videoUrl) {
     return (
-      <div style={{
+      <div className={className} style={{
         background: 'linear-gradient(135deg, var(--card-blue), #0F172A)',
         borderRadius: '16px',
-        aspectRatio: '16/10',
+        aspectRatio,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -80,27 +88,32 @@ export default function VideoPlayer({
   const embedUrl = getEmbedUrl(videoUrl);
 
   return (
-    <div style={{
+    <div className={className} style={{
       background: 'linear-gradient(135deg, var(--card-blue), #0F172A)',
       borderRadius: '16px',
-      aspectRatio: '16/10',
+      aspectRatio,
       border: '1px solid rgba(255, 255, 255, 0.1)',
       overflow: 'hidden',
       position: 'relative'
     }}>
       {!isPlaying && (
         <>
-          {posterImage && (
-            <img
-              src={posterImage}
+          {currentPoster && (
+            <Image
+              src={currentPoster}
               alt={title}
+              fill
+              sizes="100vw"
               style={{
-                width: '100%',
-                height: '100%',
                 objectFit: 'cover',
                 position: 'absolute',
                 top: 0,
                 left: 0
+              }}
+              onError={() => {
+                if (posterImageFallback && currentPoster !== posterImageFallback) {
+                  setCurrentPoster(posterImageFallback);
+                }
               }}
             />
           )}

@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { 
   GlowButton, 
   SpotlightCard, 
@@ -23,11 +21,7 @@ export default function WebsiteModernizationPage() {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <div>
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-600/30 bg-red-600/10 text-red-500 text-sm font-medium mb-6">
               Solutions / Website & Platform Modernization
             </span>
@@ -38,7 +32,7 @@ export default function WebsiteModernizationPage() {
             <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
               WordPress was fine for 2010. Modern business needs modern infrastructure: fast, secure, AI-ready, and actually designed for where the web is going.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 

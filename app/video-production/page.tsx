@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { 
   GlowButton, 
   SpotlightCard, 
@@ -11,6 +10,7 @@ import {
   GradientText,
   AnimatedCard
 } from '@/components/ui';
+import VideoPlayer from '@/components/VideoPlayer';
 
 export default function VideoProductionPage() {
   return (
@@ -23,12 +23,7 @@ export default function VideoProductionPage() {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
+          <div className="text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               <BlurText 
                 text="Traditional video production has a math problem." 
@@ -52,7 +47,7 @@ export default function VideoProductionPage() {
                 View Sample Work ↓
               </GlowButton>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -297,29 +292,40 @@ export default function VideoProductionPage() {
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                title: 'Training library in 10 days',
-                detail: 'From kickoff to launch without the 6-week agency cycle.'
+                title: 'PCC Long Complete Avatar',
+                videoId: 'NlOwawG5oIU',
+                posterImage: 'https://i.ytimg.com/vi/NlOwawG5oIU/maxresdefault.jpg',
+                posterFallback: 'https://i.ytimg.com/vi/NlOwawG5oIU/hqdefault.jpg'
               },
               {
-                title: '3-day turnaround demo',
-                detail: 'Professional quality, rapid iterations, no reshoots.'
+                title: "Grimaldi's Sauce Taste Test: Is It Worth It?",
+                videoId: 'xaFhg72bwU4',
+                posterImage: 'https://i.ytimg.com/vi/xaFhg72bwU4/maxresdefault.jpg',
+                posterFallback: 'https://i.ytimg.com/vi/xaFhg72bwU4/hqdefault.jpg'
               },
               {
-                title: 'Multilingual sales enablement',
-                detail: 'Consistent messaging, global reach, same presenter.'
+                title: 'Scale Your Ads: Cinema Quality, Zero Production Crew',
+                videoId: 'RfeO6-EhrCU',
+                posterImage: 'https://i.ytimg.com/vi/RfeO6-EhrCU/maxresdefault.jpg',
+                posterFallback: 'https://i.ytimg.com/vi/RfeO6-EhrCU/hqdefault.jpg'
               }
             ].map((item, index) => (
-              <ScrollReveal key={index} delay={index * 0.1}>
-                <AnimatedCard className="aspect-video flex items-center justify-center">
-                  <div className="text-center p-6">
-                    <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-4">
-                      <svg className="w-8 h-8 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-                    <p className="text-gray-200 text-sm font-semibold">{item.title}</p>
-                    <p className="text-gray-500 text-xs mt-2">{item.detail}</p>
+              <ScrollReveal key={item.videoId} delay={index * 0.1}>
+                <AnimatedCard className="overflow-hidden flex flex-col h-full">
+                  <VideoPlayer
+                    videoUrl={`https://www.youtube.com/watch?v=${item.videoId}`}
+                    posterImage={item.posterImage}
+                    posterImageFallback={item.posterFallback}
+                    title={item.title}
+                    duration="YouTube"
+                    aspectRatio="16/9"
+                    className="w-full flex-shrink-0"
+                  />
+                  <div className="p-4 h-[88px] overflow-hidden">
+                    <p className="text-gray-200 text-sm font-semibold leading-snug">
+                      {item.title}
+                    </p>
+                    <p className="text-gray-500 text-xs mt-2">Smarter Revolution • YouTube</p>
                   </div>
                 </AnimatedCard>
               </ScrollReveal>

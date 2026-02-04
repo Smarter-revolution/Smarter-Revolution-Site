@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { 
   GlowButton, 
   SpotlightCard, 
@@ -23,11 +21,7 @@ export default function CustomPortalsPage() {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <div>
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-600/30 bg-red-600/10 text-red-500 text-sm font-medium mb-6">
               Solutions / Custom Portals & Systems
             </span>
@@ -38,7 +32,7 @@ export default function CustomPortalsPage() {
             <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
               Sometimes your business needs something that doesn't exist yet. Custom portals, specialized workflows, unique systems—built for how your business actually works.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 

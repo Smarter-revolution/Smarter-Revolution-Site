@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import {
   GlowButton,
   GridPattern,
@@ -111,11 +110,7 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <div>
             <div className="mb-6">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-600/30 bg-red-600/10 text-red-500 text-sm font-medium tracking-wide">
                 AI-powered video, training, and web infrastructure
@@ -146,7 +141,7 @@ export default function Home() {
                 Schedule a Call
               </GlowButton>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -348,7 +343,7 @@ export default function Home() {
 
           <ScrollReveal className="mb-12">
             <div className="flex flex-wrap justify-center gap-4 md:gap-8 py-6 rounded-2xl bg-gray-900/30 border border-gray-800/50">
-              {trustMetrics.map((metric, index) => (
+              {trustMetrics.map((metric) => (
                 <div key={metric.label} className="text-center px-6 py-4">
                   <div className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500 mb-1">
                     {metric.value}

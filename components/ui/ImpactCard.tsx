@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useInView, useAnimation } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState, ReactNode } from 'react';
 
 // Seeded random for deterministic values

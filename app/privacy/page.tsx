@@ -1,7 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { GridPattern, BlurText, ScrollReveal, GradientText } from '@/components/ui';
+import { GridPattern, BlurText, ScrollReveal } from '@/components/ui';
 
 export default function PrivacyPolicyPage() {
   return (
@@ -14,16 +13,12 @@ export default function PrivacyPolicyPage() {
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
               <BlurText text="Privacy Policy" className="text-white" />
             </h1>
             <p className="text-gray-400">Last Updated: January 2026</p>
-          </motion.div>
+          </div>
         </div>
       </section>
 

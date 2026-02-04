@@ -19,21 +19,6 @@ function getAuthorJobTitle(author: string): string {
   return 'Content Creator';
 }
 
-// Helper function to format date to ISO string (full format for OpenGraph)
-function formatDateToISO(dateString: string): string {
-  // Parse the date string
-  const date = new Date(dateString);
-  if (!isNaN(date.getTime())) {
-    return date.toISOString();
-  }
-  // If parsing fails, try to construct from YYYY-MM-DD format
-  if (/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
-    const date = new Date(dateString + 'T00:00:00.000Z');
-    return date.toISOString();
-  }
-  return dateString;
-}
-
 // Helper function to format date to YYYY-MM-DD (for JSON-LD)
 function formatDateToYYYYMMDD(dateString: string): string {
   // If already in YYYY-MM-DD format, return as is

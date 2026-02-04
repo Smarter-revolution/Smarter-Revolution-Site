@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { 
   GlowButton, 
   SpotlightCard, 
@@ -23,11 +22,7 @@ export default function CustomerEducationPage() {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <div>
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-600/30 bg-red-600/10 text-red-500 text-sm font-medium mb-6">
               Solutions / Customer Education
             </span>
@@ -39,7 +34,7 @@ export default function CustomerEducationPage() {
               Your support team is drowning in tickets. Customers are churning because they never figured out how to use your product. 
               <span className="text-white"> There's a better way.</span>
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 

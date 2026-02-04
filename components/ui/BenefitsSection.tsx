@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform, useInView, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 
 // Seeded random for deterministic values
@@ -71,15 +71,13 @@ function BenefitCard({
   title,
   description,
   color,
-  index,
-  totalCards
+  index
 }: {
   emoji: string;
   title: string;
   description: string;
   color: string;
   index: number;
-  totalCards: number;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: '-50px' });
@@ -469,7 +467,6 @@ export default function BenefitsSection() {
               key={index}
               {...benefit}
               index={index}
-              totalCards={benefits.length}
             />
           ))}
         </div>

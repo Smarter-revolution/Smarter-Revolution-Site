@@ -1,118 +1,12 @@
 'use client';
 
-import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 
 // Seeded random for deterministic values
 function seededRandom(seed: number): number {
   const x = Math.sin(seed * 9999) * 10000;
   return x - Math.floor(x);
-}
-
-// Animated logo placeholder with morphing effect
-function AnimatedLogo({ 
-  index, 
-  isHovered,
-  onHover 
-}: { 
-  index: number;
-  isHovered: boolean;
-  onHover: (index: number | null) => void;
-}) {
-  const colors = ['#ef4444', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#8b5cf6'];
-  const color = colors[index % colors.length];
-  
-  return (
-    <motion.div
-      className="relative w-32 h-16 cursor-pointer"
-      onMouseEnter={() => onHover(index)}
-      onMouseLeave={() => onHover(null)}
-      whileHover={{ scale: 1.1 }}
-    >
-      {/* Glow effect on hover */}
-      <motion.div
-        className="absolute inset-0 rounded-xl blur-xl"
-        style={{ backgroundColor: color }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isHovered ? 0.3 : 0 }}
-        transition={{ duration: 0.3 }}
-      />
-      
-      {/* Logo container */}
-      <motion.div
-        className="relative w-full h-full rounded-xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700/50 flex items-center justify-center overflow-hidden backdrop-blur-sm"
-        animate={{
-          borderColor: isHovered ? color + '50' : 'rgba(55, 65, 81, 0.5)',
-        }}
-      >
-        {/* Animated shine effect */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-          initial={{ x: '-100%' }}
-          animate={{ x: isHovered ? '100%' : '-100%' }}
-          transition={{ duration: 0.6 }}
-        />
-        
-        {/* Placeholder logo */}
-        <motion.div
-          className="flex items-center gap-2"
-          animate={{
-            color: isHovered ? color : '#6b7280',
-          }}
-        >
-          <motion.div
-            className="w-6 h-6 rounded-md"
-            style={{ backgroundColor: color }}
-            animate={{
-              rotate: isHovered ? [0, 180, 360] : 0,
-              scale: isHovered ? [1, 1.2, 1] : 1,
-            }}
-            transition={{ duration: 0.5 }}
-          />
-          <span className="font-semibold text-sm">Client {index + 1}</span>
-        </motion.div>
-      </motion.div>
-    </motion.div>
-  );
-}
-
-// Infinite scrolling logo strip
-function LogoStrip() {
-  const [hoveredLogo, setHoveredLogo] = useState<number | null>(null);
-  const logos = Array.from({ length: 8 }, (_, i) => i);
-  
-  return (
-    <div className="relative overflow-hidden py-8">
-      {/* Gradient masks */}
-      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-      
-      {/* Scrolling container */}
-      <motion.div
-        className="flex gap-8"
-        animate={{
-          x: [0, -1024],
-        }}
-        transition={{
-          x: {
-            duration: 30,
-            repeat: Infinity,
-            ease: 'linear',
-          },
-        }}
-      >
-        {/* Double the logos for seamless loop */}
-        {[...logos, ...logos].map((logoIndex, i) => (
-          <AnimatedLogo
-            key={i}
-            index={logoIndex}
-            isHovered={hoveredLogo === i}
-            onHover={setHoveredLogo}
-          />
-        ))}
-      </motion.div>
-    </div>
-  );
 }
 
 // Testimonial card with dramatic reveal

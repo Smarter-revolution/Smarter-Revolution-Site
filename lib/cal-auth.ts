@@ -13,9 +13,6 @@ const VALID_CAL_USERS: Record<string, string> = {
   'mark314': 'CAL_API_KEY_MARK',
 };
 
-// Default user when no username is specified
-const DEFAULT_USER = 'wolfkrammel';
-
 /**
  * Get Cal.com API key for a specific user
  *

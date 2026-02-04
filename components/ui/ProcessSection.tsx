@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
+import { motion, useScroll, useSpring, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 
@@ -45,7 +45,6 @@ function StepCard({
   description, 
   icon,
   index,
-  isActive,
   progress
 }: { 
   step: string;
@@ -53,7 +52,6 @@ function StepCard({
   description: string;
   icon: React.ReactNode;
   index: number;
-  isActive: boolean;
   progress: number;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -409,7 +407,6 @@ export default function ProcessSection() {
                 key={index}
                 {...step}
                 index={index}
-                isActive={progress > (index + 1) * 0.25}
                 progress={progress}
               />
             ))}

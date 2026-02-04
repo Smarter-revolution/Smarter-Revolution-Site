@@ -1,8 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
   GridPattern, 
   ScrollReveal, 
@@ -13,25 +11,10 @@ import {
 } from '@/components/ui';
 
 export default function Team() {
-  const [isMounted, setIsMounted] = useState(false);
-  
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-  
-  // Parallax effect for hero
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: isMounted ? heroRef : undefined,
-    offset: ["start start", "end start"]
-  });
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
   return (
     <div className="min-h-screen bg-[#0a0a0a] overflow-hidden">
       {/* Hero Section with Parallax */}
-      <section ref={heroRef} className="relative min-h-[50vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section className="relative min-h-[50vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0">
           <GridPattern className="opacity-20" squares={[[1, 2], [4, 3], [7, 5], [2, 7]]} />
@@ -39,16 +22,9 @@ export default function Team() {
           <div className="absolute inset-0 bg-gradient-to-b from-red-900/20 via-transparent to-[#0a0a0a]" />
         </div>
 
-        {/* Parallax Content */}
-        <motion.div 
-          className="relative z-10 text-center max-w-4xl mx-auto"
-          style={{ y: heroY, opacity: heroOpacity }}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+        {/* Hero Content */}
+        <div className="relative z-10 text-center max-w-4xl mx-auto">
+          <div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
               <BlurText text="The Architects Behind the" className="text-white" />
               <span className="block mt-2">
@@ -58,23 +34,8 @@ export default function Team() {
             <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto">
               Three decades of digital evolution. One mission: empowering businesses through AI.
             </p>
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div 
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <div className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-2">
-            <motion.div 
-              className="w-1 h-2 bg-red-500 rounded-full"
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            />
           </div>
-        </motion.div>
+        </div>
       </section>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
@@ -87,11 +48,7 @@ export default function Team() {
                 {/* Header with Headshot */}
                 <div className="flex flex-col md:flex-row gap-6 mb-8">
                   {/* Headshot */}
-                  <motion.div 
-                    className="flex-shrink-0"
-                    whileHover={{ scale: 1.05, rotate: 2 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                  <div className="flex-shrink-0">
                     <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-red-600 mx-auto md:mx-0 shadow-lg shadow-red-600/25">
                       <Image
                         src="/images/pages/team/wolf_krammel.png"
@@ -102,7 +59,7 @@ export default function Team() {
                         priority
                       />
                     </div>
-                  </motion.div>
+                  </div>
                   
                   {/* Header Info */}
                   <div className="flex-1">
@@ -116,31 +73,28 @@ export default function Team() {
                       AI Automation Pioneer | Digital Transformation Strategist
                     </p>
                     <div className="flex flex-wrap gap-4 text-gray-400 text-sm">
-                      <motion.a 
+                      <a 
                         href="mailto:wolf@smarterrevolution.com" 
                         className="hover:text-red-500 transition-colors"
-                        whileHover={{ scale: 1.05 }}
                       >
                         wolf@smarterrevolution.com
-                      </motion.a>
+                      </a>
                       <span className="text-gray-600">|</span>
-                      <motion.a 
+                      <a 
                         href="tel:+12133028260" 
                         className="hover:text-red-500 transition-colors"
-                        whileHover={{ scale: 1.05 }}
                       >
                         (213) 302-8260
-                      </motion.a>
+                      </a>
                       <span className="text-gray-600">|</span>
-                      <motion.a 
+                      <a 
                         href="https://linkedin.com/in/krammel" 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="hover:text-red-500 transition-colors"
-                        whileHover={{ scale: 1.05 }}
                       >
                         LinkedIn
-                      </motion.a>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -152,14 +106,9 @@ export default function Team() {
                     <p>
                       Wolf&apos;s digital journey began in 1993 on the 34th floor of the Empire State Building, crafting websites when the web didn&apos;t even have background colors. As a self-taught developer at Ingrid Communications, he was building internet infrastructure for Fortune 500 companies before most businesses knew they needed a website.
                     </p>
-                    <motion.blockquote 
-                      className="italic text-gray-400 border-l-4 border-red-600 pl-4 my-6"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                    >
+                    <blockquote className="italic text-gray-400 border-l-4 border-red-600 pl-4 my-6">
                       &quot;I still remember a seminar attendee telling me, &apos;The internet is just a fad. It won&apos;t be around next year,&apos;&quot; Wolf recalls. &quot;That moment taught me something important: the biggest opportunities live in the gap between what skeptics dismiss and what visionaries embrace.&quot;
-                    </motion.blockquote>
+                    </blockquote>
                     <p>
                       Over three decades, Wolf has navigated every digital transformation: the dot-com boom, the rise of search, social media&apos;s explosion, mobile-first design, and now artificial intelligence. He&apos;s founded multiple ventures, including a digital marketing agency that evolved through every technological revolution, and even ventured into custom home construction in South Florida.
                     </p>
@@ -171,24 +120,20 @@ export default function Team() {
                   <div className="mt-8">
                     <h4 className="text-xl font-bold mb-4 text-red-500">Key Achievements:</h4>
                     <ul className="space-y-3 text-gray-300">
-                      {[
+                      {[ 
                         '30+ years pioneering digital transformation from early web to AI',
                         'Published author on AI business applications and technology integration',
                         'Developed the AI Business Accelerator framework used by SMBs nationwide',
                         'Healthcare background bringing unique perspective to business wellness',
                         'Cross-industry expertise spanning tech, healthcare, e-commerce, and hospitality'
                       ].map((item, index) => (
-                        <motion.li 
+                        <li 
                           key={index}
                           className="flex items-start gap-3"
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: index * 0.1 }}
                         >
                           <span className="w-2 h-2 rounded-full bg-red-600 mt-2 flex-shrink-0" />
                           {item}
-                        </motion.li>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -196,13 +141,7 @@ export default function Team() {
               </div>
 
               {/* Right Column - Info Image (Desktop only) */}
-              <motion.div 
-                className="hidden lg:block flex-shrink-0 lg:w-80 xl:w-96 self-start"
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
+              <div className="hidden lg:block flex-shrink-0 lg:w-80 xl:w-96 self-start">
                 <div className="relative w-full">
                   <Image
                     src="/images/pages/team/wolf-info2.png"
@@ -213,7 +152,7 @@ export default function Team() {
                     sizes="(max-width: 1024px) 100vw, 384px"
                   />
                 </div>
-              </motion.div>
+              </div>
             </div>
 
             {/* Mobile Info Image */}
@@ -241,11 +180,7 @@ export default function Team() {
                 {/* Header with Headshot */}
                 <div className="flex flex-col md:flex-row gap-6 mb-8">
                   {/* Headshot */}
-                  <motion.div 
-                    className="flex-shrink-0"
-                    whileHover={{ scale: 1.05, rotate: -2 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                  <div className="flex-shrink-0">
                     <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-red-600 mx-auto md:mx-0 shadow-lg shadow-red-600/25">
                       <Image
                         src="/images/pages/team/mark_alouf.png"
@@ -256,7 +191,7 @@ export default function Team() {
                         priority
                       />
                     </div>
-                  </motion.div>
+                  </div>
                   
                   {/* Header Info */}
                   <div className="flex-1">
@@ -270,13 +205,12 @@ export default function Team() {
                       Serial Entrepreneur | Technology Business Strategist
                     </p>
                     <div className="flex flex-wrap gap-4 text-gray-400 text-sm">
-                      <motion.a 
+                      <a 
                         href="mailto:mark@smarterrevolution.com" 
                         className="hover:text-red-500 transition-colors"
-                        whileHover={{ scale: 1.05 }}
                       >
                         mark@smarterrevolution.com
-                      </motion.a>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -302,24 +236,20 @@ export default function Team() {
                   <div className="mt-8">
                     <h4 className="text-xl font-bold mb-4 text-red-500">Key Achievements:</h4>
                     <ul className="space-y-3 text-gray-300">
-                      {[
+                      {[ 
                         'Co-founded and led P1 Technologies to successful acquisition',
                         'Built and managed distributed teams across multiple countries',
                         'Developed enterprise sales strategies for Fortune 500 and SMB markets',
                         'Pioneered CRM implementation and sales process automation',
                         'Deep expertise in podcasting, AI integration, and business development'
                       ].map((item, index) => (
-                        <motion.li 
+                        <li 
                           key={index}
                           className="flex items-start gap-3"
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: index * 0.1 }}
                         >
                           <span className="w-2 h-2 rounded-full bg-red-600 mt-2 flex-shrink-0" />
                           {item}
-                        </motion.li>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -327,13 +257,7 @@ export default function Team() {
               </div>
 
               {/* Right Column - Info Image (Desktop only) */}
-              <motion.div 
-                className="hidden lg:block flex-shrink-0 lg:w-80 xl:w-96 self-start"
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
+              <div className="hidden lg:block flex-shrink-0 lg:w-80 xl:w-96 self-start">
                 <div className="relative w-full">
                   <Image
                     src="/images/pages/team/mark-info2.png"
@@ -344,7 +268,7 @@ export default function Team() {
                     sizes="(max-width: 1024px) 100vw, 384px"
                   />
                 </div>
-              </motion.div>
+              </div>
             </div>
 
             {/* Mobile Info Image */}
@@ -392,23 +316,19 @@ export default function Team() {
               <div className="mt-8">
                 <h4 className="text-xl font-bold mb-4 text-red-500">Core Responsibilities:</h4>
                 <ul className="space-y-3 text-gray-300">
-                  {[
+                  {[ 
                     'Project management and client implementation coordination',
                     'Operations optimization and workflow management',
                     'Quality assurance across all deliverables',
                     'Team coordination and resource allocation'
                   ].map((item, index) => (
-                    <motion.li 
+                    <li 
                       key={index}
                       className="flex items-start gap-3"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
                     >
                       <span className="w-2 h-2 rounded-full bg-red-600 mt-2 flex-shrink-0" />
                       {item}
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -419,14 +339,9 @@ export default function Team() {
         {/* Team Philosophy */}
         <ScrollReveal delay={0.3}>
           <SpotlightCard className="p-8 md:p-12">
-            <motion.blockquote 
-              className="text-3xl md:text-4xl font-bold text-white mb-8 border-l-4 border-red-600 pl-6"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
+            <blockquote className="text-3xl md:text-4xl font-bold text-white mb-8 border-l-4 border-red-600 pl-6">
               &quot;We practice what we preach.&quot;
-            </motion.blockquote>
+            </blockquote>
             <div className="text-gray-300 leading-relaxed space-y-4 text-lg">
               <p>
                 Our small team operates with AI-powered efficiency that larger agencies can&apos;t match. We use the same tools, workflows, and strategies we implement for clients. Every system we recommend has been battle-tested in our own operations.
@@ -434,14 +349,9 @@ export default function Team() {
               <p>
                 This means you&apos;re not getting theoretical advice from consultants who&apos;ve never implemented. You&apos;re getting proven strategies from practitioners who use AI every single day to run a leaner, faster, more effective business.
               </p>
-              <motion.p 
-                className="text-2xl font-semibold text-red-500 mt-8"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-              >
+              <p className="text-2xl font-semibold text-red-500 mt-8">
                 When we say AI gives teams superpowers, we&apos;re speaking from experience.
-              </motion.p>
+              </p>
             </div>
           </SpotlightCard>
         </ScrollReveal>

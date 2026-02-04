@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { 
   GlowButton, 
   SpotlightCard, 
@@ -23,12 +21,7 @@ export default function AboutPage() {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
+          <div className="text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
               <BlurText 
                 text="We've been watching technology transform business for 30 years." 
@@ -43,7 +36,7 @@ export default function AboutPage() {
               Smarter Revolution exists to help mid-market companies navigate AI transformation—without the hype, 
               without the overwhelm, and without replacing the humans who make your business work.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 

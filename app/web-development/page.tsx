@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { 
   GlowButton, 
   SpotlightCard, 
@@ -23,12 +21,7 @@ export default function WebDevelopmentPage() {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
+          <div className="text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               <BlurText 
                 text="Your website was probably built for a world that" 
@@ -50,7 +43,7 @@ export default function WebDevelopmentPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </GlowButton>
-          </motion.div>
+          </div>
         </div>
       </section>
 
