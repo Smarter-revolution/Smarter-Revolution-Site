@@ -287,57 +287,8 @@ export default function Team() {
           </SpotlightCard>
         </ScrollReveal>
 
-        {/* SuperHero */}
-        <ScrollReveal delay={0.2}>
-          <SpotlightCard className="mb-16 p-8 md:p-12">
-            <div className="mb-6">
-              <h2 className="text-4xl font-bold mb-2 text-white">
-                <GradientText>SuperHero</GradientText>
-              </h2>
-              <p className="text-xl text-red-500 mb-4 font-semibold">
-                Operations Manager
-              </p>
-              <p className="text-lg text-gray-400 mb-4">
-                Operations Manager | Implementation Specialist
-              </p>
-            </div>
-
-            <div className="prose prose-lg max-w-none">
-              <h3 className="text-2xl font-bold mb-4 text-white">The Engine Behind the Revolution</h3>
-              <div className="text-gray-300 leading-relaxed space-y-4">
-                <p>
-                  SuperHero serves as the operational backbone of Smarter Revolution, ensuring that strategic vision translates into flawless execution. While the founders architect transformation strategies, SuperHero makes them real: managing implementations, coordinating projects, and keeping every moving part synchronized.
-                </p>
-                <p>
-                  In a company dedicated to AI automation, SuperHero embodies the human element that makes technology work. He bridges the gap between high-level strategy and day-to-day delivery, ensuring clients receive not just plans, but results.
-                </p>
-              </div>
-
-              <div className="mt-8">
-                <h4 className="text-xl font-bold mb-4 text-red-500">Core Responsibilities:</h4>
-                <ul className="space-y-3 text-gray-300">
-                  {[ 
-                    'Project management and client implementation coordination',
-                    'Operations optimization and workflow management',
-                    'Quality assurance across all deliverables',
-                    'Team coordination and resource allocation'
-                  ].map((item, index) => (
-                    <li 
-                      key={index}
-                      className="flex items-start gap-3"
-                    >
-                      <span className="w-2 h-2 rounded-full bg-red-600 mt-2 flex-shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </SpotlightCard>
-        </ScrollReveal>
-
         {/* Team Philosophy */}
-        <ScrollReveal delay={0.3}>
+        <ScrollReveal delay={0.2}>
           <SpotlightCard className="p-8 md:p-12">
             <blockquote className="text-3xl md:text-4xl font-bold text-white mb-8 border-l-4 border-red-600 pl-6">
               &quot;We practice what we preach.&quot;
