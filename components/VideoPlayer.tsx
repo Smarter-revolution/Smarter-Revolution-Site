@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useState } from 'react';
 
 interface VideoPlayerProps {
@@ -99,16 +98,17 @@ export default function VideoPlayer({
       {!isPlaying && (
         <>
           {currentPoster && (
-            <Image
+            <img
               src={currentPoster}
               alt={title}
-              fill
-              sizes="100vw"
+              loading="lazy"
               style={{
                 objectFit: 'cover',
                 position: 'absolute',
                 top: 0,
-                left: 0
+                left: 0,
+                width: '100%',
+                height: '100%'
               }}
               onError={() => {
                 if (posterImageFallback && currentPoster !== posterImageFallback) {

@@ -46,7 +46,7 @@ const securityHeaders = [
       "font-src 'self' https://fonts.gstatic.com data:",
       "img-src 'self' data: blob: https://*.strapiapp.com https://*.cal.com https://images.unsplash.com https://i.ytimg.com",
       "connect-src 'self' https://api.anthropic.com https://*.cal.com https://*.strapiapp.com https://*.api-us1.com",
-      "frame-src 'self' https://cal.com https://*.cal.com",
+      "frame-src 'self' https://cal.com https://*.cal.com https://www.youtube.com https://www.youtube-nocookie.com",
       "frame-ancestors 'none'",
       "base-uri 'self'",
       "form-action 'self'",
